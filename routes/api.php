@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'categories', 'controller' => CategoryController::class], function () {
+    Route::get('/', 'index');
+    Route::middleware('auth:sanctum', 'is_admin')->group(function () {
+        Route::post('/', 'store');
+        Route::put('/', 'update');
+        Route::delete('/', 'destroy');
+    });
+});
+
+Route::group(['prefix' => 'products', 'controller' => ProductController::class], function () {
+    Route::get('/', 'index');
+    Route::middleware('auth:sanctum', 'is_admin')->group(function () {
+        Route::post('/', 'store');
+        Route::put('/', 'update');
+        Route::delete('/', 'destroy');
+    });
 });
