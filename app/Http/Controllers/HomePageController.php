@@ -9,6 +9,6 @@ class HomePageController extends Controller
 {
     public function homePage()
     {
-        return Inertia::render('User.Home');
+        return Inertia::render('User/Home');
     }
 }
