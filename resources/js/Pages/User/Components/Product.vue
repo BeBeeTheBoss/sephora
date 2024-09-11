@@ -1,9 +1,9 @@
 <template>
     <div :class="cardClass" style="position:relative;cursor:pointer">
-        <IconBtn icon="fa-regular fa-heart"
-            style="color:#fe919d;position:absolute;background-color:#F5F3F3;top:0;right:0" />
+        <IconBtn icon="fa-regular fa-heart" class=""
+            style="background-color:rgba(255, 255, 255, 0.8);color:#fe919d;position:absolute;top:0;right:0;" />
         <img class="w-100 card-img-top" style="object-fit:cover;object-position:center;background-color:#F5F3F3"
-            src="https://mackweldon.com/cdn/shop/products/M01T12-TN_Front.png?v=1638913612" alt="">
+            src="https://i.pinimg.com/564x/58/9d/1f/589d1fc969e66291e1de0fd1428ef250.jpg" alt="">
         <div class="card-body">
             <span class="text-muted" style="font-size:12px">Shirt <font-awesome-icon class="ms-2 me-1"
                     icon="fa-solid fa-fire" style="font-size: 13px;color:#fe919d" />12</span>
@@ -44,5 +44,9 @@ isPhoneSize();
 <style scoped>
 .width {
     width: 300px;
+}
+
+.card-img-top {
+    background-color: rgba(255, 255, 255, 0.477);
 }
 </style>
