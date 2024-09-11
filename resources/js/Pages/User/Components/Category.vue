@@ -1,5 +1,8 @@
 <template>
-  <div class="rounded-3 border shadow d-flex row align-items-center mx-1" style="cursor: pointer;">
+  <div
+    class="rounded-3 border shadow d-flex row align-items-center mx-1"
+    style="cursor: pointer"
+  >
     <div class="col-4" style="margin-left: -12px">
       <img
         :src="image"
@@ -16,7 +19,9 @@
           {{ count }}
         </div>
       </div>
-      <div class="pt-1" style="color: #fe919d;font-size:15px">Show all <font-awesome-icon icon="fa-regular fa-eye" style="font-size: 15px"/></div>
+      <div class="pt-1 fw-bold" style="color: #fe919d; font-size: 13px">
+        Show all <font-awesome-icon icon="fa-regular fa-eye" style="font-size: 13px" />
+      </div>
     </div>
   </div>
 </template>
