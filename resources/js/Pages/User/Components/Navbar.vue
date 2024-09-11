@@ -1,11 +1,14 @@
 <template>
   <nav>
     <div class="d-flex justify-content-between align-items-center pt-3">
-      <div class="logo col-2 ps-4">Sephora</div>
+      <div class="logo col-2 ps-4 flex align-items-center">
+        <img src="https://iconape.com/wp-content/png_logo_vector/shopping-and-ecommerce-28.png" style="width:40px">
+        <span style="color:#fe919d">Sep</span>hora
+      </div>
       <div class="search col-8">
         <input type="search" name="" id="" placeholder="Explore products you want ..." />
       </div>
-      <div class="col-2 d-flex justify-content-center">
+      <div class="col-2 d-flex justify-content-end pe-4">
         <IconBtn icon="fa-regular fa-heart" count="9" />
         <IconBtn icon="fa-solid fa-cart-shopping" count="12" />
         <IconBtn icon="fa-regular fa-user" />
