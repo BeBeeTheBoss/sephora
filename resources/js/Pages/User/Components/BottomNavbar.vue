@@ -1,5 +1,5 @@
 <template>
-    <div class="button-container">
+    <div class="button-container border">
         <button class="button">
             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 1024 1024" stroke-width="0"
                 fill="currentColor" stroke="currentColor" class="icon">
@@ -43,7 +43,7 @@
 /* From Uiverse.io by akshat-patel28 */
 .button-container {
     display: flex;
-    background-color: #fe919d;
+    background-color: #fff;
     width: 100%;
     height: 56px;
     align-items: center;
@@ -64,7 +64,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
+    color: #fe919d;
     transition: all ease-in-out 0.3s;
     cursor: pointer;
 }

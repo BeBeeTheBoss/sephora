@@ -22,7 +22,7 @@
                 <IconBtn icon="fa-solid fa-cart-shopping" count="12" />
                 <IconBtn icon="fa-regular fa-user" />
             </div>
-            <div class="col-2 d-flex justify-content-end pe-0 d-lg-none d-md-none d-sm-block d-block">
+            <div class="col-2 d-flex justify-content-end pe-0 d-lg-none d-md-none d-sm-flex d-flex">
                 <IconBtn icon="fa-solid fa-bars" />
             </div>
         </div>
