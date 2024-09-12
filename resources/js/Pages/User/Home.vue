@@ -2,7 +2,7 @@
     <Layout>
         <div class="row w-100 d-flex justify-content-center mt-lg-4 mt-md-4 mt-sm-3 mt-3">
             <div class="col-lg-8 col-md-10 col-sm-12 col-12">
-                <Carousel class="d-lg-block d-md-block d-sm-none d-none ps-3" height="450px" />
+                <Carousel class="d-lg-block d-md-block d-sm-none d-none ps-5" height="450px" />
                 <Carousel class="d-lg-none d-md-none d-sm-block d-block" height="200px" style="margin-left: 15px" />
             </div>
             <div class="col-lg-4 col-md-10 col-sm-12 col-12 mt-lg-0 mt-md-3 mt-sm-3 mt-3">

@@ -1,7 +1,7 @@
 <template>
     <div :class="cardClass" style="position:relative;cursor:pointer">
         <IconBtn icon="fa-regular fa-heart" class=""
-            style="background-color:rgba(255, 255, 255, 0.8);color:#fe919d;position:absolute;top:0;right:0;" />
+            style="background-color:rgba(255, 255, 255, 0.8);color:#fe919d;position:absolute;top:3px;right:3px;" />
         <img class="w-100 card-img-top" style="object-fit:cover;object-position:center;background-color:#F5F3F3"
             src="https://i.pinimg.com/564x/58/9d/1f/589d1fc969e66291e1de0fd1428ef250.jpg" alt="">
         <div class="card-body">

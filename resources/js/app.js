@@ -13,9 +13,9 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 //font-awesome
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faHeart,faUser,faEye } from '@fortawesome/free-regular-svg-icons';
-import { faCartShopping,faAnglesRight,faArrowUpRightDots,faFire,faBasketShopping,faBoxOpen,faMagnifyingGlass,faChevronRight,faBars } from '@fortawesome/free-solid-svg-icons';
-library.add(faHeart,faUser,faCartShopping,faEye,faAnglesRight,faArrowUpRightDots,faFire,faBasketShopping,faBoxOpen,faMagnifyingGlass,faChevronRight,faBars);
+import { faUser,faEye,faBell,faHeart } from '@fortawesome/free-regular-svg-icons';
+import { faCartShopping,faAnglesRight,faArrowUpRightDots,faHome,faFire,faBasketShopping,faBoxOpen,faMagnifyingGlass,faChevronRight,faBars,faBagShopping } from '@fortawesome/free-solid-svg-icons';
+library.add(faHeart,faUser,faCartShopping,faEye,faAnglesRight,faArrowUpRightDots,faFire,faBasketShopping,faBoxOpen,faMagnifyingGlass,faChevronRight,faBars,faBagShopping,faBell,faHome);
 
 createInertiaApp({
     resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
