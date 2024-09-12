@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,4 +17,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(HomePageController::class)->group(function () {
     Route::get('/', 'homePage')->name('home');
+});
+
+Route::prefix('admin')->controller(AdminController::class)->group(function(){
+    Route::get('/dashboard', 'index')->name('index');
 });
