@@ -1,14 +1,43 @@
 <template>
     <div>
-        <Header />
+      <Header @toggleSidebar="toggleSidebar" />
+      <Sidebar :isCollapsed="isSidebarCollapsed" />
+
+      <div class="content" :class="{ 'sidebar-collapsed': isSidebarCollapsed }">
         <slot />
+      </div>
     </div>
 </template>
 
-<script setup>
-import Header from '../Components/Header.vue'
-</script>
+  <script>
+  import Header from '../Components/Header.vue';
+  import Sidebar from '../Components/SideBar.vue';
 
-<style lang="scss" scoped>
+  export default {
+    components: {
+      Header,
+      Sidebar
+    },
+    data() {
+      return {
+        isSidebarCollapsed: false
+      };
+    },
+    methods: {
+      toggleSidebar() {
+        this.isSidebarCollapsed = !this.isSidebarCollapsed;
+      }
+    }
+  };
+  </script>
 
-</style>
+  <style scoped>
+  .content {
+    margin-left: 250px;
+    padding: 20px;
+    transition: margin-left 0.3s;
+  }
+  .sidebar-collapsed .content {
+    margin-left: 80px;
+  }
+  </style>

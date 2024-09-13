@@ -1,13 +1,15 @@
 <template>
-   <Layout>
-    dashboard
-   </Layout>
+    <Layout>
+       
+    </Layout>
 </template>
 
 <script setup>
 import Layout from './Layouts/Layout.vue'
+
 </script>
 
 <style scoped>
 
 </style>
+

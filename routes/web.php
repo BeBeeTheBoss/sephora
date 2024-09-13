@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\HomePageController;
-use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomePageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,15 @@ Route::controller(HomePageController::class)->group(function () {
     Route::get('/', 'homePage')->name('home');
 });
 
-Route::prefix('admin')->controller(AdminController::class)->group(function(){
-    Route::get('/dashboard', 'index')->name('index');
-});
+Route::prefix('/admin')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('index');
+
+    //Categories
+    Route::group(['prefix' => 'categories', 'controller' => CategoryController::class, 'as' => 'categories.'], function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::put('/{id}/update', 'update')->name('update');
+    });
+})->name('admin');
