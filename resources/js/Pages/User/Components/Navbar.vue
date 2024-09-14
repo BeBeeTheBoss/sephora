@@ -50,8 +50,9 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-2 d-flex justify-content-end pe-0 d-lg-none d-md-none d-sm-flex d-flex">
-                <IconBtn icon="fa-solid fa-bars" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" />
+            <div class="col-2 d-flex justify-content-end pe-2 d-lg-none d-md-none d-sm-flex d-flex">
+                <IconBtn icon="fa-solid fa-bag-shopping" count="1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" />
+                <IconBtn icon="fa-regular fa-bell" count="3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" />
             </div>
         </div>
     </nav>

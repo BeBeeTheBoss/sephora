@@ -1,26 +1,38 @@
 <template>
-    <div class="container d-flex justify-center items-center" style="min-height:100vh;">
+    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="col-md-4 border border-danger rounded-3 p-3">
         <form @submit.prevent="submit">
-            <label for="">Create Category</label>
-            <div class="input-group">
+            <h4 class="text-center">Create Category</h4>
+            <div class="form-group mb-2">
+                <label for="name" class="form-label fw-bold">Name</label>
                 <input type="text" v-model="form.name" class="form-control">
-                <div v-if="form.errors.name" v-text="form.errors.name" class="text-danger"></div>
+                <div v-if="form.errors.name" class="text-danger">{{ form.errors.name }}</div>
             </div>
-            <button class="btn btn-primary">Submit</button>
+            <div class="form-group mb-2">
+                <label for="image" class="form-label fw-bold">Image</label>
+                <input type="file" class="form-control" @change="handleFileChange">
+            </div>
+            <button class="btn btn-primary float-end my-2">Submit</button>
         </form>
     </div>
+    </div>
+
 </template>
 
 <script setup>
 import { useForm } from '@inertiajs/vue3';
 
-
 const form = useForm({
-    name : ''
+    name : '',
+    image : null,
 })
 
+const handleFileChange = (e) => {
+    form.image = e.target.files[0];
+}
+
 const submit = () => {
-    form.post('store');
+    form.post('/admin/categories');
 }
 </script>
 

@@ -26,10 +26,12 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg'
         ]);
-        $this->categoryService->create($request->name);
-        return Inertia::render('Admin/Category/Index');
+
+        $this->categoryService->create($request);
+        return redirect()->route('categories.index');
     }
 
     public function edit(Request $request)
@@ -40,11 +42,16 @@ class CategoryController extends Controller
 
     public function update(Request $request)
     {
-
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg'
         ]);
         $this->categoryService->update($request);
-        return redirect('/admin/categories');
+        return redirect()->route('categories.index');
+    }
+
+    public function destroy(Request $request){
+        $this->categoryService->delete($request->id);
+        return back();
     }
 }

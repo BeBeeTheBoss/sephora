@@ -2,6 +2,7 @@
     <div class="poppins-medium">
         <Navbar />
         <slot />
+        <SpeedDial/>
         <BottomNavbar class="d-lg-none d-md-none d-sm-flex d-flex" />
         <Footer />
     </div>
@@ -11,7 +12,7 @@
 import Navbar from "../Components/Navbar.vue";
 import BottomNavbar from "../Components/BottomNavbar.vue";
 import Footer from "../Components/Footer.vue";
-import BottomNavbarVue from "../Components/BottomNavbar.vue";
+import SpeedDial from "../Components/SpeedDial.vue"
 </script>
 
 <style></style>
