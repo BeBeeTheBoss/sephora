@@ -22,7 +22,7 @@ Route::controller(HomePageController::class)->group(function () {
 
 Route::prefix('/admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('index');
-
+    
     //Categories
     Route::group(['prefix' => 'categories', 'controller' => CategoryController::class, 'as' => 'categories.'], function () {
         Route::get('/', 'index')->name('index');
