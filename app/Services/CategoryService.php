@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Category;
+use Illuminate\Support\Facades\File;
 
 class CategoryService
 {
@@ -16,7 +17,16 @@ class CategoryService
 
     public function create($request)
     {
-        return $this->model->create($request);
+        $categoryData = $request->only(['name','image']);
+        $category = $this->model->create($categoryData);
+        if ($request->file('image')) {
+            $catgoryImage = $request->file('image');
+            $categoryImageName = uniqid() . '_' . time() . '.' . $catgoryImage->getClientOriginalExtension();
+            $catgoryImage->storeAs('public/images', $categoryImageName);
+            $category->image = $categoryImageName;
+            $category->save();
+        }
+        return $category;
     }
 
     public function update($request)
@@ -27,9 +37,18 @@ class CategoryService
             return sendError(404, "Category not found");
         }
 
+        if($request->hasFile('image')){
+            if($category->image){
+                File::delete('storage/images/'. $category->image);
+            }
+            $catgoryImage = $request->file('image');
+            $categoryImageName = uniqid() . '_' . time() . '.' . $catgoryImage->getClientOriginalExtension();
+            $catgoryImage->storeAs('public/images', $categoryImageName);
+            $category->image = $categoryImageName;
+        }
+
         $category->name = $request->name;
         $category->save();
-
         return $category;
     }
 
