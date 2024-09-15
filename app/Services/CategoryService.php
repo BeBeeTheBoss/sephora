@@ -17,8 +17,10 @@ class CategoryService
 
     public function create($request)
     {
-        $categoryData = $request->only(['name','image']);
-        $category = $this->model->create($categoryData);
+
+        $category = $this->model->create([
+            'name' => $request->name,
+        ]);
         if ($request->file('image')) {
             $catgoryImage = $request->file('image');
             $categoryImageName = uniqid() . '_' . time() . '.' . $catgoryImage->getClientOriginalExtension();
@@ -37,9 +39,9 @@ class CategoryService
             return sendError(404, "Category not found");
         }
 
-        if($request->hasFile('image')){
-            if($category->image){
-                File::delete('storage/images/'. $category->image);
+        if ($request->hasFile('image')) {
+            if ($category->image) {
+                File::delete('storage/images/' . $category->image);
             }
             $catgoryImage = $request->file('image');
             $categoryImageName = uniqid() . '_' . time() . '.' . $catgoryImage->getClientOriginalExtension();
@@ -58,6 +60,7 @@ class CategoryService
         if (!$category) {
             return sendError(404, "Category not found");
         }
+        File::delete('storage/images/' . $category->image);
         $category->delete();
     }
 }

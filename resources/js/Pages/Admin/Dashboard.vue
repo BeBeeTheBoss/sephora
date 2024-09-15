@@ -1,6 +1,6 @@
 <template>
     <Layout>
-       
+       graph
     </Layout>
 </template>
 

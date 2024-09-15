@@ -44,13 +44,14 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg'
         ]);
+
         $this->categoryService->update($request);
         return redirect()->route('categories.index');
     }
 
-    public function destroy(Request $request){
+    public function destroy(Request $request)
+    {
         $this->categoryService->delete($request->id);
         return back();
     }

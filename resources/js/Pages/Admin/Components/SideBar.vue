@@ -2,26 +2,40 @@
     <div :class="['sidebar', { 'collapsed': isCollapsed }]">
       <ul class="nav flex-column">
         <li class="nav-item">
-          <Link class="nav-link active" href="#">
+          <Link class="nav-link active" href="/admin/dashboard">
             <i class="fas fa-home"></i> Dashboard
           </Link>
         </li>
-        <li class="nav-item">
-          <Link class="nav-link" href="admin/users">
-            <i class="fas fa-users"></i> Users
-          </Link>
-        </li>
+
         <li class="nav-item">
           <Link class="nav-link" href="/admin/categories">
             <i class="fas fa-users"></i> Categories
           </Link>
         </li>
+
+        <li class="nav-item">
+          <Link class="nav-link" href="/admin/orders">
+            <i class="fas fa-users"></i> Orders
+          </Link>
+        </li>
+        
         <li class="nav-item">
           <Link class="nav-link" href="/admin/products">
             <i class="fas fa-users"></i> Products
           </Link>
         </li>
 
+        <li class="nav-item">
+          <Link class="nav-link" href="/admin/products">
+            <i class="fas fa-users"></i> FeedBacks
+          </Link>
+        </li>
+
+        <li class="nav-item">
+          <Link class="nav-link" href="/admin/payments">
+            <i class="fas fa-users"></i> Payments
+          </Link>
+        </li>
       </ul>
     </div>
   </template>

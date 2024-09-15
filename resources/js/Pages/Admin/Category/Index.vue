@@ -13,7 +13,7 @@
        </thead>
        <tbody>
          <tr v-for="category in categories" :key="category.id">
-           <td></td>
+           <td>{{increaseCount}}</td>
            <td>
             <img :src="`/storage/images/${category.image}`" alt="" style="width:100px;">
            </td>
@@ -33,12 +33,18 @@
 
  <script setup>
  import Layout from '../Layouts/Layout.vue'
+ import {ref,computed} from 'vue'
  import {useForm} from '@inertiajs/vue3'
  const props = defineProps(['categories']);
 const form = useForm({})
  const deleteCategory = (id) => {
     form.post(`/admin/categories/${id}`);
  }
+ const count = ref(1);
+
+ const increaseCount = computed(() => {
+  return count.value++;
+ });
  </script>
 
  <style lang="scss" scoped>
