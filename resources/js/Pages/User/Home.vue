@@ -91,19 +91,21 @@
                     image="https://co.nice-cdn.com/upload/image/product/large/default/nui-cosmetics-natural-illusion-cream-piari-593932-en.webp" />
             </div>
         </div>
-        <div class="d-lg-none d-md-none d-sm-flex d-flex pb-3" style="overflow-x: scroll">
-            <CategoryCircle width="100px" image="https://cdn.britannica.com/35/222035-131-9FC95B31/makeup-cosmetics.jpg"
-                name="Make-up" />
-            <CategoryCircle width="100px" name="Lips-stick"
-                image="https://images.beautybay.com/eoaaqxyywn6o/REBE1339F_1.jpg_s3.lmb_w21vua/6662e9208386291e7fc58e4c77fa5970/REBE1339F_1.jpg" />
-            <CategoryCircle width="100px" name="Mockup" count="6"
-                image="https://www.freemockupworld.com/wp-content/uploads/2021/06/White-Cosmetics-Bottle-Mockup-01.jpg" />
-            <CategoryCircle width="100px" name="Skincare" count="34"
-                image="https://pixpine.com/wp-content/uploads/2024/05/free-cosmetic-packaging-mockup-1.jpg" />
-            <CategoryCircle width="100px" name="Perfume" count="9"
-                image="https://www.reneecosmetics.in/cdn/shop/files/renee-eau-de-parfum-bloom-renee-cosmetics-1.jpg?v=1716270797" />
-            <CategoryCircle width="100px" name="Highlighter" count="56"
-                image="https://co.nice-cdn.com/upload/image/product/large/default/nui-cosmetics-natural-illusion-cream-piari-593932-en.webp" />
+        <div class="d-lg-none d-md-none d-sm-block d-block">
+            <div class="pb-3" style="overflow-x: auto; white-space: nowrap">
+                <CategoryCircle class="d-inline-block"
+                    image="https://cdn.britannica.com/35/222035-131-9FC95B31/makeup-cosmetics.jpg" name="Make-up" />
+                <CategoryCircle class="d-inline-block" name="Lips-stick"
+                    image="https://images.beautybay.com/eoaaqxyywn6o/REBE1339F_1.jpg_s3.lmb_w21vua/6662e9208386291e7fc58e4c77fa5970/REBE1339F_1.jpg" />
+                <CategoryCircle class="d-inline-block" name="Mockup" count="6"
+                    image="https://www.freemockupworld.com/wp-content/uploads/2021/06/White-Cosmetics-Bottle-Mockup-01.jpg" />
+                <CategoryCircle class="d-inline-block" name="Skincare" count="34"
+                    image="https://pixpine.com/wp-content/uploads/2024/05/free-cosmetic-packaging-mockup-1.jpg" />
+                <CategoryCircle class="d-inline-block" name="Perfume" count="9"
+                    image="https://www.reneecosmetics.in/cdn/shop/files/renee-eau-de-parfum-bloom-renee-cosmetics-1.jpg?v=1716270797" />
+                <CategoryCircle class="d-inline-block" name="Highlighter" count="56"
+                    image="https://co.nice-cdn.com/upload/image/product/large/default/nui-cosmetics-natural-illusion-cream-piari-593932-en.webp" />
+            </div>
         </div>
         <div class="d-lg-flex d-md-flex d-sm-none d-none justify-content-between align-items-center px-lg-5 px-md-3 px-sm-2 px-2 mb-3"
             style="margin-top:-10px">
