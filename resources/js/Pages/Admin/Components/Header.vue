@@ -1,12 +1,17 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <button @click="$emit('toggleSidebar')" class="btn btn-outline-secondary me-3">
-          <i class="fas fa-bars"></i>
-        </button>
-        <a class="navbar-brand" href="#">Admin Panel</a>
+      <div class="container-fluid z-10">
+        <img src="https://iconape.com/wp-content/png_logo_vector/shopping-and-ecommerce-28.png"
+        style="width: 40px" />
+        <a class="navbar-brand" href="#" >
+            <div class="logo col-2 flex align-items-center"
+                style="font-size:25px">
+                <div class="font-bold" style="color: #fe919d">Sep</div>
+                <span class="text-white font-bold">hora</span>
+            </div>
+        </a>
 
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav ms-auto" >
           <li class="nav-item">
             <a class="nav-link" href="#"><i class="fas fa-user-circle"></i> Profile</a>
           </li>

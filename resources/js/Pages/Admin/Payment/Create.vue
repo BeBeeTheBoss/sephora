@@ -1,16 +1,18 @@
 <template>
     <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
-    <div class="col-md-4 border border-danger rounded-3 p-3">
-        <form @submit.prevent="submit">
-            <h4 class="text-center">Create Payment</h4>
-            <div class="form-group mb-2">
-                <label for="name" class="form-label fw-bold">Name</label>
-                <input type="text" v-model="form.name" class="form-control">
-                <div v-if="form.errors.name" class="text-danger">{{ form.errors.name }}</div>
-            </div>
-            <button class="btn btn-primary float-end my-2">Submit</button>
-        </form>
-    </div>
+        <div class="col-md-4 border border-danger rounded-3 p-3">
+            <form @submit.prevent="submit">
+                <h4 class="text-center">Create Payment</h4>
+                <v-row >
+                    <v-col cols="12" class="my-2">
+                        <v-textarea autofocus rows="1" v-model="form.name" variant="outlined" label="Name" hide-details
+                            required></v-textarea>
+                        <ErrorMessage :text="form.errors.name" />
+                    </v-col>
+                </v-row>
+                <button class="btn w-100 rounded-lg text-white my-3" style="background-color:#ff595e;">Submit</button>
+            </form>
+        </div>
     </div>
 
 </template>
@@ -19,7 +21,7 @@
 import { useForm } from '@inertiajs/vue3';
 
 const form = useForm({
-    name : '',
+    name: '',
 })
 
 const submit = () => {
@@ -27,6 +29,4 @@ const submit = () => {
 }
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

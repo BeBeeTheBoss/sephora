@@ -1,46 +1,66 @@
 <template>
-     <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
-    <div class="col-md-4 border border-danger rounded-3 p-3">
-        <form @submit.prevent="update(props.category.id)">
-            <h4 class="text-center">Edit Category</h4>
-            <div class="form-group mb-2">
-                <label for="name" class="form-label fw-bold">Name</label>
-                <input type="text" v-model="form.name" class="form-control">
-                <div v-if="form.errors.name" v-text="form.errors.name" class="text-danger"></div>
-            </div>
-            <div class="form-group mb-2">
-                <label for="image" class="form-label fw-bold">Image</label>
-                <input type="file" class="form-control" @change="handleChangeImage($event)">
-                <img :src="`/storage/images/${form.image}`" alt="" style="width:100px;" class="mt-4">
-                <div v-if="form.errors.image" v-text="form.errors.image" class="text-danger"></div>
-            </div>
-            <button class="btn btn-primary float-end my-2">Update</button>
-        </form>
-    </div>
-    </div>
-  </template>
+    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div class="col-md-6 border border-danger rounded-3 p-3">
+            <form @submit.prevent="update(form.id)">
+                <h4 class="text-center">Edit Category</h4>
+                <v-row>
+                    <v-col cols="12">
+                        <v-textarea autofocus rows="1" v-model="form.name" variant="outlined" label="Name" hide-details
+                            required></v-textarea>
+                        <ErrorMessage :text="form.errors.name" />
+                    </v-col>
 
-  <script setup>
-  import { useForm } from '@inertiajs/vue3';
+                    <v-col cols="12">
+                            <v-file-input chips prepend-icon="mdi-camera"
+                                @change="onFileChange" @input="form.image = $event.target.files[0]" variant="outlined"
+                                label="File" show-size clearable @click:clear="clearImage"></v-file-input>
+                            <ErrorMessage :text="form.errors.image" />
+                            <div class="preview flex justify-center">
+                                <v-img class="rounded-lg mb-4" :width="1" :height="500" cover v-if="formImageUrl"
+                                    :src="formImageUrl" />
+                                <v-img class="rounded-lg mb-4" :width="1" :height="500" cover v-else-if="form.image"
+                                    :src="form.image" />
+                            </div>
+                        </v-col>
+                </v-row>
 
-  const props = defineProps({
+                <button class="btn w-100 rounded-lg my-2 text-white" style="background-color:#ff595e;">Update</button>
+            </form>
+        </div>
+    </div>
+
+</template>
+<script setup>
+import { useForm } from '@inertiajs/vue3';
+import { ref } from 'vue';
+const props = defineProps({
     category: Object
-  });
+});
 
-  const form = useForm({
+console.log(props.category);
+
+const form = useForm({
+    id : props.category.id,
     name: props.category.name,
-    image : props.category.image,
-  });
+    image: props.category.image,
+});
 
-  const handleChangeImage = (e) => {
-    form.image = e.target.files[0];
-  }
+const formImageUrl = ref(null);
 
-  const update = (id) => {
+const onFileChange = (e) => {
+    const file = e.target.files[0];
+    formImageUrl.value = URL.createObjectURL(file);
+}
+const clearImage = () => {
+    formImageUrl.value = null;
+    form.image = null;
+}
+
+const update = (id) => {
     form.post(`/admin/categories/${id}/update`);
-  };
-  </script>
+};
+</script>
 
-  <style scoped>
-  /* You can add styles here if needed */
-  </style>
+<style scoped>
+/* You can add styles here if needed */
+</style>

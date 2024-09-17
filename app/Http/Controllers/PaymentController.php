@@ -12,13 +12,13 @@ class PaymentController extends Controller
 
     public function index()
     {
-        return Inertia::render('Admin/Payment/Index');
+        $payments = $this->model->get();
+        return Inertia::render('Admin/Payment/Index', ['payments' => $payments]);
     }
 
     public function create()
     {
-        $payments = $this->model->all();
-        return Inertia::render('Admin/Payment/Create', ['payments' => $payments]);
+        return Inertia::render('Admin/Payment/Create');
     }
 
     public function store(Request $request)

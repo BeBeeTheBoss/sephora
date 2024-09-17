@@ -16,7 +16,7 @@
        </thead>
        <tbody>
          <tr>
-           <td>{{ increaseCount }}</td>
+           <td></td>
          </tr>
        </tbody>
      </table>
@@ -26,14 +26,10 @@
 
  <script setup>
  import Layout from '../Layouts/Layout.vue'
- import {ref,computed} from 'vue'
+ import {ref} from 'vue'
  const props = defineProps(['orders']);
 
- const count = ref(1);
 
- const increaseCount = computed(() => {
-  return count.value++;
- });
  </script>
 
  <style lang="scss" scoped>

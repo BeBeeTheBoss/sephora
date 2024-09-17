@@ -1,7 +1,7 @@
 
 <template>
     <Layout>
-     <Link href="/admin/products/create"><button class="btn btn-primary mb-3 float-end">+ Add Product</button></Link>
+     <Link href="/admin/products/create"><button class="btn mb-3 float-end btn-sm text-white" style="background-color:#ED9077;">+ Add</button></Link>
      <table class="table table-bordered">
        <thead>
          <tr>
@@ -16,7 +16,7 @@
        </thead>
        <tbody>
          <tr>
-           <td>{{ increaseCount }}</td>
+           <td></td>
          </tr>
        </tbody>
      </table>

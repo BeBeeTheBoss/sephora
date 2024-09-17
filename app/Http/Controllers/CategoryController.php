@@ -37,6 +37,7 @@ class CategoryController extends Controller
     public function edit(Request $request)
     {
         $category = Category::find($request->id);
+        $category->image = asset('storage/images/' . $category->image);
         return Inertia::render('Admin/Category/Edit', ['category' => $category]);
     }
 

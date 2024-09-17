@@ -1,38 +1,39 @@
 <template>
+
     <div :class="['sidebar', { 'collapsed': isCollapsed }]">
       <ul class="nav flex-column">
         <li class="nav-item">
-          <Link class="nav-link active" href="/admin/dashboard">
+          <Link :class="isActive('/admin/dashboard')" href="/admin/dashboard">
             <i class="fas fa-home"></i> Dashboard
           </Link>
         </li>
 
         <li class="nav-item">
-          <Link class="nav-link" href="/admin/categories">
+          <Link :class="isActive('/admin/categories')" href="/admin/categories">
             <i class="fas fa-users"></i> Categories
           </Link>
         </li>
 
         <li class="nav-item">
-          <Link class="nav-link" href="/admin/orders">
+          <Link :class="isActive('/admin/orders')" href="/admin/orders">
             <i class="fas fa-users"></i> Orders
           </Link>
         </li>
-        
+
         <li class="nav-item">
-          <Link class="nav-link" href="/admin/products">
+          <Link :class="isActive('/admin/products')" href="/admin/products">
             <i class="fas fa-users"></i> Products
           </Link>
         </li>
 
         <li class="nav-item">
-          <Link class="nav-link" href="/admin/products">
+          <Link :class="isActive('/admin/dashboard')" href="/admin/products">
             <i class="fas fa-users"></i> FeedBacks
           </Link>
         </li>
 
         <li class="nav-item">
-          <Link class="nav-link" href="/admin/payments">
+          <Link :class="isActive('/admin/payments')" href="/admin/payments">
             <i class="fas fa-users"></i> Payments
           </Link>
         </li>
@@ -45,13 +46,19 @@
 
   export default {
     name: "Sidebar",
-    props: ['isCollapsed']
+    props: ['isCollapsed'],
+
+    methods: {
+    isActive(path) {
+      return window.location.pathname === path ? 'nav-link active' : 'nav-link';
+    }
+  }
   };
   </script>
 
   <style scoped>
   .sidebar {
-    background-color: #343a40;
+    background-color: black;
     color: #fff;
     width: 250px;
     transition: all 0.3s;
@@ -69,6 +76,6 @@
     padding: 10px 20px;
   }
   .nav-link.active {
-    background-color: #495057;
+    background-color: #06d6a0;
   }
   </style>
