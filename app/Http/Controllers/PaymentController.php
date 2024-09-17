@@ -30,4 +30,10 @@ class PaymentController extends Controller
         $this->model->create($data);
         return redirect()->route('payments.index');
     }
+
+    public function edit($id)
+    {
+        $payment = $this->model->find($id);
+        return Inertia::render('Admin/Payment/Edit', ['payment' => $payment]);
+    }
 }

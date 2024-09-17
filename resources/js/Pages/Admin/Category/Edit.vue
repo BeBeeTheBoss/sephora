@@ -16,9 +16,9 @@
                                 label="File" show-size clearable @click:clear="clearImage"></v-file-input>
                             <ErrorMessage :text="form.errors.image" />
                             <div class="preview flex justify-center">
-                                <v-img class="rounded-lg mb-4" :width="1" :height="500" cover v-if="formImageUrl"
+                                <v-img class="rounded-lg mb-4" :width="1" :height="300" cover v-if="formImageUrl"
                                     :src="formImageUrl" />
-                                <v-img class="rounded-lg mb-4" :width="1" :height="500" cover v-else-if="form.image"
+                                <v-img class="rounded-lg mb-4" :width="1" :height="300" cover v-else-if="form.image"
                                     :src="form.image" />
                             </div>
                         </v-col>

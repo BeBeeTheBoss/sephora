@@ -4,9 +4,16 @@
             <form @submit.prevent="submit">
                 <h4 class="text-center">Create Product</h4>
                 <v-row>
+
                     <v-col cols="12">
-                        <v-textarea autofocus rows="1" v-model="form.name" variant="outlined" label="Name" hide-details
-                        ></v-textarea>
+                        <v-select label="Select"
+                            :items="props.categories.map(category => category.name)"></v-select>
+                        <ErrorMessage :text="form.errors.category_id" />
+                    </v-col>
+
+                    <v-col cols="12">
+                        <v-textarea autofocus rows="1" v-model="form.name" variant="outlined" label="Name"
+                            hide-details></v-textarea>
                         <ErrorMessage :text="form.errors.name" />
                     </v-col>
 
@@ -28,9 +35,10 @@
                         <ErrorMessage :text="form.errors.discount_price" />
                     </v-col>
                     <v-col cols="12" v-for="(imageBox, index) in imagesBoxes" :key="index">
-                        <v-file-input :show-size="1000" color="deep-purple-accent-4" label="File input"
-                            @input="imageBox.image = $event.target.files[0]" placeholder="Select your files" chips
-                            prepend-icon="mdi-camera" variant="outlined" counter multiple></v-file-input>
+                        <v-file-input @change="onFileChange" :show-size="1000" color="deep-purple-accent-4"
+                            label="File input" @input="imageBox.image = $event.target.files[0]"
+                            placeholder="Select your files" chips prepend-icon="mdi-camera" variant="outlined" counter
+                            multiple @click:clear="clearImage"></v-file-input>
                     </v-col>
 
                     <v-col cols="12">
@@ -51,7 +59,12 @@
 import { ref } from 'vue';
 import { useForm } from "@inertiajs/vue3";
 
+const props = defineProps(['categories'])
+
+console.log(props.categories);
+
 const form = useForm({
+    category_id : "",
     name: "",
     description: "",
     price: "",
@@ -65,15 +78,25 @@ const imagesBoxes = ref([{
 
 const addImage = () => {
     imagesBoxes.value.push({
-        'file': null
+        'image': null
     });
 };
+
+const onFileChange = (e, index) => {
+    const file = e.target.files[0];
+    formImageUrl.value[index] = URL.createObjectURL(file);
+};
+
+const clearImage = (index) => {
+    formImageUrl.value[index] = null;
+    imagesBoxes.value[index].image = null;
+}
 
 
 const submit = () => {
     form.images = imagesBoxes.value.map(box => box.image);
 
-    form.post("/admin/categories");
+    form.post("/admin/products");
 };
 </script>
 

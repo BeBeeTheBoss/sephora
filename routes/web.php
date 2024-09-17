@@ -53,5 +53,7 @@ Route::prefix('/admin')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::post('/', 'store')->name('store');
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::post('/{id}/update', 'update')->name('update');
     });
 });

@@ -17,7 +17,7 @@
                             @click:clear="clearImage"></v-file-input>
 
                         <div class="preview flex justify-center">
-                            <v-img class="rounded-lg mb-4" :height="500" cover v-if="formImageUrl"
+                            <v-img class="rounded-lg mb-4" :height="300" cover v-if="formImageUrl"
                                 :src="formImageUrl" />
                         </div>
                     </v-col>
