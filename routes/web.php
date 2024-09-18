@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomePageController;
@@ -21,6 +22,10 @@ use App\Http\Controllers\ProductController;
 
 Route::controller(HomePageController::class)->group(function () {
     Route::get('/', 'homePage')->name('home');
+});
+
+Route::controller(CartController::class)->group(function () {
+    Route::get('/cart', 'cartPage')->name('cart');
 });
 
 Route::prefix('/admin')->group(function () {
