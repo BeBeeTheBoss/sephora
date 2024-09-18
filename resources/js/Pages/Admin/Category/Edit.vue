@@ -37,7 +37,7 @@ const props = defineProps({
     category: Object
 });
 
-console.log(props.category);
+
 
 const form = useForm({
     id : props.category.id,

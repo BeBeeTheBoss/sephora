@@ -27,7 +27,7 @@
         </li>
 
         <li class="nav-item">
-          <Link :class="isActive('/admin/dashboard')" href="/admin/products">
+          <Link :class="isActive('/admin/feedbacks')" href="/admin/products">
             <i class="fas fa-users"></i> FeedBacks
           </Link>
         </li>

@@ -4,10 +4,9 @@
             <form @submit.prevent="submit">
                 <h4 class="text-center">Create Product</h4>
                 <v-row>
-
                     <v-col cols="12">
-                        <v-select label="Select"
-                            :items="props.categories.map(category => category.name)"></v-select>
+                        <v-select label="Select Category" v-model="form.category_id" :items="props.categories"
+                            item-title="name" item-value="id" required></v-select>
                         <ErrorMessage :text="form.errors.category_id" />
                     </v-col>
 
@@ -35,36 +34,46 @@
                         <ErrorMessage :text="form.errors.discount_price" />
                     </v-col>
                     <v-col cols="12" v-for="(imageBox, index) in imagesBoxes" :key="index">
-                        <v-file-input @change="onFileChange" :show-size="1000" color="deep-purple-accent-4"
-                            label="File input" @input="imageBox.image = $event.target.files[0]"
-                            placeholder="Select your files" chips prepend-icon="mdi-camera" variant="outlined" counter
-                            multiple @click:clear="clearImage"></v-file-input>
+                        <v-file-input @change="onFileChange($event, index)" :show-size="1000"
+                            color="deep-purple-accent-4" label="File input" placeholder="Select your files" chips
+                            prepend-icon="mdi-camera" variant="outlined" counter multiple
+                            @click:clear="clearImage(index)"></v-file-input>
+
+                        <div class="preview flex justify-center">
+                            <v-img class="rounded-lg mb-4" :height="300" cover v-if="formImageUrl[index]"
+                                :src="formImageUrl[index]" />
+                        </div>
                     </v-col>
 
                     <v-col cols="12">
-                        <button type="btn"
+                        <button type="button"
                             class="my-3 ms-2 bg-red-500 inline-flex items-center px-5 py-3 border rounded-md font-semibold text-xs tracking-widest text-white transition ease-in-out duration-150"
-                            @click="addImage"><font-awesome-icon icon="fa-solid fa-plus" class="me-2" /> Add
-                            Image</button>
+                            @click="addImage">
+                            <font-awesome-icon icon="fa-solid fa-plus" class="me-2" />
+                            Add Image
+                        </button>
                     </v-col>
-
                 </v-row>
-                <button class="btn w-100 rounded-lg text-white my-2" style="background-color:#ff595e;">Submit</button>
+                <button class="btn w-100 rounded-lg text-white my-2" style="background-color: #ff595e">
+                    Submit
+                </button>
             </form>
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 
-const props = defineProps(['categories'])
+const props = defineProps({
+    categories : Object
+});
 
-console.log(props.categories);
+const formImageUrl = ref([]);
 
 const form = useForm({
-    category_id : "",
+    category_id: "",
     name: "",
     description: "",
     price: "",
@@ -72,30 +81,33 @@ const form = useForm({
     images: [],
 });
 
-const imagesBoxes = ref([{
-    'image': null,
-}]);
+const imagesBoxes = ref([
+    {
+        images: null,
+    },
+]);
 
 const addImage = () => {
     imagesBoxes.value.push({
-        'image': null
+        images: null,
     });
 };
 
 const onFileChange = (e, index) => {
     const file = e.target.files[0];
-    formImageUrl.value[index] = URL.createObjectURL(file);
+    if (file) {
+        formImageUrl.value[index] = URL.createObjectURL(file);
+        imagesBoxes.value[index].images = file;
+    }
 };
 
 const clearImage = (index) => {
     formImageUrl.value[index] = null;
-    imagesBoxes.value[index].image = null;
-}
-
+    imagesBoxes.value[index].images = null;
+};
 
 const submit = () => {
-    form.images = imagesBoxes.value.map(box => box.image);
-
+    form.images = imagesBoxes.value.map((box) => box.images);
     form.post("/admin/products");
 };
 </script>
