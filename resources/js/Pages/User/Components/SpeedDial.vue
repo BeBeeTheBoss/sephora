@@ -22,10 +22,56 @@
                     <v-btn text="Close Dialog" @click="isActive.value = false"></v-btn>
                 </v-card-actions> -->
                 <v-card-text>
+                    <div class="flex justify-between items-center mt-2 mb-4">
+                        <h5 class="fw-bold">My Shopping cart</h5>
+                        <IconBtn icon="fa-solid fa-xmark" @click="isActive.value = false" />
+                    </div>
+                    <div class="bg-[#fe919e4f] my-2 py-2 px-2 shadow-sm rounded flex items-center"
+                        style="position:relative;font-size:12px">
+                        <div class="col-1">
+                            <img src="https://via.placeholder.com/200" class="w-100">
+                        </div>
+                        <div class="col-3 text-center">
+                            Something
+                        </div>
+                        <div class="col-6 flex justify-center items-center">
+                            <IconBtn icon="fas fa-circle-plus" />
+                            <input type="text" class="form-control w-25">
+                            <IconBtn icon="fas fa-circle-minus" />
+                        </div>
+                        <div class="col-2 text-center">
+                            10000 MMK
+                        </div>
+                        <span class="translate-middle badge bg-danger" style="position:absolute;top:50%;right:-55px">
+                            <FontAwesomeIcon icon="fa-solid fa-trash-can" style="font-size:16px;cursor:pointer" />
+                        </span>
+                    </div>
+                    <div class="bg-[#fe919e4f] my-2 py-2 px-2 shadow-sm rounded flex items-center"
+                        style="position:relative;font-size:12px">
+                        <div class="col-1">
+                            <img src="https://via.placeholder.com/200" class="w-100">
+                        </div>
+                        <div class="col-3 text-center">
+                            Something
+                        </div>
+                        <div class="col-6 flex justify-center items-center">
+                            <IconBtn icon="fas fa-circle-plus" />
+                            <input type="text" class="form-control w-25">
+                            <IconBtn icon="fas fa-circle-minus" />
+                        </div>
+                        <div class="col-2 text-center">
+                            10000 MMK
+                        </div>
+                        <span class="translate-middle badge bg-danger" style="position:absolute;top:50%;right:-55px">
+                            <FontAwesomeIcon icon="fa-solid fa-trash-can" style="font-size:16px;cursor:pointer" />
+                        </span>
+                    </div>
+                    <div class="text-end">
+                        SubTotal : 420000 MMK
+                    </div>
                     <div class="w-100">
-                        <div class="flex justify-between items-center mt-2 mb-4">
+                        <div class="flex justify-between items-center mt-4 mb-3">
                             <h5 class="fw-bold">Summary</h5>
-                            <IconBtn icon="fa-solid fa-xmark" @click="isActive.value = false" />
                         </div>
                         <v-textarea color="#FE919D" rows="1" v-model="phone" label="Phone number"
                             variant="outlined"></v-textarea>

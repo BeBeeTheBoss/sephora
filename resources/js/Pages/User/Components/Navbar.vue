@@ -30,7 +30,9 @@
                     <!-- <span>Cart</span> -->
                 </div>
                 <div class="me-3 d-flex align-items-center navIcon" :class="isActive('/orders')" style="cursor:pointer">
+                    <Link href="/orders" style="color:black">
                     <IconBtn icon="fa-solid fa-bag-shopping" count="2" />
+                    </Link>
                     <!-- <span>Orders</span> -->
                 </div>
                 <div class="me-3 d-flex align-items-center navIcon" :class="isActive('/wish-lists')"

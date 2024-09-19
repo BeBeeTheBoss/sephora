@@ -1,6 +1,6 @@
 <template>
     <div class="button-container border">
-        <button class="button">
+        <button class="button" :class="isActive('/')">
             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 1024 1024" stroke-width="0"
                 fill="currentColor" stroke="currentColor" class="icon">
                 <path
@@ -8,17 +8,17 @@
                 </path>
             </svg>
         </button>
-        <button class="button">
+        <button class="button" :class="isActive('/search')">
             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" aria-hidden="true" viewBox="0 0 24 24"
                 stroke-width="2" fill="none" stroke="currentColor" class="icon">
                 <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linejoin="round" stroke-linecap="round">
                 </path>
             </svg>
         </button>
-        <button class="button">
+        <button class="button" :class="isActive('/wish_lists')">
             <IconBtn icon="fa-regular fa-heart" style="font-size: 10px;color:#fe919d" />
         </button>
-        <button class="button">
+        <button class="button" :class="isActive('/profile')">
             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="0"
                 fill="currentColor" stroke="currentColor" class="icon">
                 <path
@@ -31,6 +31,13 @@
 
 <script setup>
 import IconBtn from './IconBtn.vue';
+import { router } from '@inertiajs/vue3';
+
+const isActive = (path) => {
+
+    return router.page.url == path ? 'active' : "";
+}
+
 </script>
 
 <style scoped>
@@ -48,13 +55,15 @@ import IconBtn from './IconBtn.vue';
         rgba(245, 73, 144, 0.5) 5px 10px 15px; */
 }
 
+.active {
+    background-color: #fe919e44;
+}
+
 .button {
     outline: 0 !important;
-    border: 0 !important;
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;

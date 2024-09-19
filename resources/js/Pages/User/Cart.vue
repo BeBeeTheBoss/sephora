@@ -70,7 +70,7 @@
                             <div>Total</div>
                             <div>424000 MMK</div>
                         </div>
-                        <div class="mt-4">
+                        <div class="mt-4 pb-2">
                             <button class="w-100 bg-[#FE919D] text-white p-3 rounded-2">Checkout</button>
                         </div>
                     </div>
