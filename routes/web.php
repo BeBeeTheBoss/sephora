@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\OrderController;
@@ -23,6 +24,10 @@ use App\Http\Controllers\Admin\FeedbackController;
 
 Route::controller(HomePageController::class)->group(function () {
     Route::get('/', 'homePage')->name('home');
+});
+
+Route::controller(CartController::class)->group(function () {
+    Route::get('/cart', 'cartPage')->name('cart');
 });
 
 Route::prefix('/admin')->group(function () {

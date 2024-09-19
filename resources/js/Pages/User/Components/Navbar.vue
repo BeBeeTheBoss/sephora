@@ -17,19 +17,24 @@
             </div>
             <div class="col-5 d-flex justify-content-end pe-0 d-lg-flex d-md-flex d-sm-none d-none"
                 style="position:absolute;left:50%;transform:translate(-76%,0)">
-                <div class="me-3 d-flex align-items-center navIcon navIconActive" style="cursor:pointer">
+                <div class="me-3 d-flex align-items-center navIcon" :class="isActive('/')" style="cursor:pointer">
+                    <Link href="/" style="color:black">
                     <IconBtn icon="fa-solid fa-home" />
+                    </Link>
                     <!-- <span>Orders</span> -->
                 </div>
-                <div class="me-3 d-flex align-items-center navIcon" style="cursor:pointer">
+                <div class="me-3 d-flex align-items-center navIcon" :class="isActive('/cart')" style="cursor:pointer">
+                    <Link href="/cart" style="color:black">
+                    <IconBtn icon="fa-solid fa-cart-shopping" count="12" />
+                    </Link>
+                    <!-- <span>Cart</span> -->
+                </div>
+                <div class="me-3 d-flex align-items-center navIcon" :class="isActive('/orders')" style="cursor:pointer">
                     <IconBtn icon="fa-solid fa-bag-shopping" count="2" />
                     <!-- <span>Orders</span> -->
                 </div>
-                <div class="me-3 d-flex align-items-center navIcon" style="cursor:pointer">
-                    <IconBtn icon="fa-solid fa-cart-shopping" count="12" />
-                    <!-- <span>Cart</span> -->
-                </div>
-                <div class="me-3 d-flex align-items-center navIcon" style="cursor:pointer">
+                <div class="me-3 d-flex align-items-center navIcon" :class="isActive('/wish-lists')"
+                    style="cursor:pointer">
                     <IconBtn icon="fa-regular fa-heart" count="9" />
                     <!-- <span>Wishlists</span> -->
                 </div>
@@ -51,8 +56,10 @@
                 </div>
             </div>
             <div class="col-2 d-flex justify-content-end pe-2 d-lg-none d-md-none d-sm-flex d-flex">
-                <IconBtn icon="fa-solid fa-bag-shopping" count="1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" />
-                <IconBtn icon="fa-regular fa-bell" count="3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" />
+                <IconBtn icon="fa-solid fa-bag-shopping" count="1" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasExample" />
+                <IconBtn icon="fa-regular fa-bell" count="3" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasExample" />
             </div>
         </div>
     </nav>
@@ -72,6 +79,14 @@
 import IconBtn from "./IconBtn.vue";
 import ProfileIcon from "./ProfileIcon.vue";
 import Search from "./Search.vue";
+import { router, Link } from "@inertiajs/vue3";
+
+const isActive = (path) => {
+
+    return router.page.url == path ? 'navIconActive' : "";
+
+}
+
 </script>
 
 <style scoped>
