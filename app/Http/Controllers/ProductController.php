@@ -17,7 +17,7 @@ class ProductController extends Controller
         $products = $this->product->with('category', 'images')->get();
         foreach ($products as $product) {
             foreach ($product->images as $image) {
-               $image->image = asset('storage/images/' . $image->image);
+                $image->image = asset('storage/images/' . $image->image);
             }
         }
         return Inertia::render('Admin/Product/Index', ['products' => $products]);
@@ -52,6 +52,11 @@ class ProductController extends Controller
         $product->save();
         $categories = Category::get();
         return Inertia::render('Admin/Product/Edit', ['product' => $product, 'categories' => $categories]);
+    }
+
+    public function update(Request $request)
+    {
+        dd($request->all());
     }
 
     public function destroy($id)
