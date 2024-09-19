@@ -1,7 +1,7 @@
 
 <template>
     <Layout>
-     <Link href="/admin/categories/create"><button class="btn mb-3 float-end btn-sm text-white" style="background-color:#ED9077;">+ Add</button></Link>
+     <Link :href="$route('categories.create')"><button class="btn mb-3 float-end btn-sm text-white" style="background-color:#ED9077;">+ Add</button></Link>
      <table class="table table-bordered">
        <thead>
          <tr>
@@ -15,7 +15,8 @@
          <tr v-for="(category,index) in categories" :key="category.id">
            <td>{{index+1}}</td>
            <td>
-            <img :src="`/storage/images/${category.image}`" alt="" style="width:120px;height:100px;">
+            <img v-if="category.image" :src="category.image" alt="" style="width:120px;height:100px;">
+            <div v-else>-</div>
            </td>
            <td>{{category.name}}</td>
            <td>
@@ -33,14 +34,17 @@
 
  <script setup>
  import Layout from '../Layouts/Layout.vue'
- import {ref} from 'vue'
  import {useForm} from '@inertiajs/vue3'
- const props = defineProps(['categories']);
+ import {del} from '../../Composables/httpMethod.js'
+ const props = defineProps({
+    categories : Array
+ });
 const form = useForm({})
+
  const deleteCategory = (id) => {
-    form.post(`/admin/categories/${id}`);
+    del(form,route('categories.destroy',id))
  }
- const count = ref(1);
+
 
  </script>
 

@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Inertia\Inertia;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Services\CategoryService;
-use App\Models\Category;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
@@ -15,6 +17,11 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = $this->categoryService->get();
+        if($categories){
+            foreach($categories as $category){
+                $category->image = $category->image ? asset('storage/images/'. $category->image) : null;
+            }
+        }
         return Inertia::render('Admin/Category/Index', ['categories' => $categories]);
     }
 
@@ -26,12 +33,12 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:categories',
             'image' => 'nullable|image|mimes:jpeg,png,jpg'
         ]);
 
         $this->categoryService->create($request);
-        return redirect()->route('categories.index');
+        return to_route('categories.index');
     }
 
     public function edit(Request $request)
@@ -44,11 +51,12 @@ class CategoryController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:categories',
         ]);
 
         $this->categoryService->update($request);
-        return redirect()->route('categories.index');
+        Session::flash('success', 'Update Category Success');
+        return to_route('categories.index');
     }
 
     public function destroy(Request $request)

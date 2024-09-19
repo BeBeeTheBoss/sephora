@@ -6,14 +6,14 @@
         <a class="navbar-brand" href="#" >
             <div class="logo col-2 flex align-items-center"
                 style="font-size:25px">
-                <div class="font-bold" style="color: #fe919d">Sep</div>
+                <div class="font-bold" style="color: #ff006e">Sep</div>
                 <span class="text-white font-bold">hora</span>
             </div>
         </a>
 
         <ul class="navbar-nav ms-auto" >
           <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-user-circle"></i> Profile</a>
+            <Link class="nav-link" :href="$route('profile')" ><i class="fas fa-user-circle"></i> Profile</Link>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
@@ -23,7 +23,8 @@
     </nav>
   </template>
 
-  <script>
+  <script setup>
+  import { Link } from '@inertiajs/vue3';
   </script>
 
   <style scoped>

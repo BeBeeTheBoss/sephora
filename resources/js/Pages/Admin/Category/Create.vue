@@ -6,8 +6,13 @@
                 <v-row>
                     <v-col cols="12">
                         <v-textarea autofocus rows="1" v-model="form.name" variant="outlined" label="Name" hide-details
-                            required></v-textarea>
-                        <ErrorMessage :text="form.errors.name" />
+                            ></v-textarea>
+                            <div
+                            v-if="form.errors.name"
+                            class="text-sm mt-2 text-red-400"
+                        >
+                            {{ form.errors.name }}
+                        </div>
                     </v-col>
 
                     <v-col cols="12">
@@ -34,11 +39,13 @@
 <script setup>
 import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
+import { post } from '../../Composables/httpMethod.js';
 
 const form = useForm({
     name: '',
     image: null,
 })
+
 const formImageUrl = ref(null);
 
 const onFileChange = (e) => {
@@ -50,7 +57,7 @@ const clearImage = () => {
     form.image = null;
 }
 const submit = () => {
-    form.post('/admin/categories');
+    post(form, route("categories.store"));
 }
 </script>
 

@@ -3,37 +3,37 @@
     <div :class="['sidebar', { 'collapsed': isCollapsed }]">
       <ul class="nav flex-column">
         <li class="nav-item">
-          <Link :class="isActive('/admin/dashboard')" href="/admin/dashboard">
+          <Link :class="isActive('/admin/dashboard')" :href="$route('dashboard')">
             <i class="fas fa-home"></i> Dashboard
           </Link>
         </li>
 
         <li class="nav-item">
-          <Link :class="isActive('/admin/categories')" href="/admin/categories">
+          <Link :class="isActive('/admin/categories')" :href="$route('categories.index')">
             <i class="fas fa-users"></i> Categories
           </Link>
         </li>
 
         <li class="nav-item">
-          <Link :class="isActive('/admin/orders')" href="/admin/orders">
+          <Link :class="isActive('/admin/orders')" :href="$route('orders.index')">
             <i class="fas fa-users"></i> Orders
           </Link>
         </li>
 
         <li class="nav-item">
-          <Link :class="isActive('/admin/products')" href="/admin/products">
+          <Link :class="isActive('/admin/products')" :href="$route('products.index')">
             <i class="fas fa-users"></i> Products
           </Link>
         </li>
 
         <li class="nav-item">
-          <Link :class="isActive('/admin/feedbacks')" href="/admin/products">
+          <Link :class="isActive('/admin/feedbacks')" :href="$route('feedback')">
             <i class="fas fa-users"></i> FeedBacks
           </Link>
         </li>
 
         <li class="nav-item">
-          <Link :class="isActive('/admin/payments')" href="/admin/payments">
+          <Link :class="isActive('/admin/payments')" :href="$route('payments.index')">
             <i class="fas fa-users"></i> Payments
           </Link>
         </li>

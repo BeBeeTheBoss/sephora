@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <Link href="/admin/payments/create"><button class="btn mb-3 float-end text-white btn-sm" style="background-color:#ED9077;">+ Add</button></Link>
+        <Link :href="$route('payments.create')"><button class="btn mb-3 float-end text-white btn-sm" style="background-color:#ff006e;">+ Add</button></Link>
 
         <table class="table table-bordered">
             <thead>
@@ -34,13 +34,12 @@
 
 <script setup>
 import Layout from '../Layouts/Layout.vue'
-import { ref } from 'vue'
+import { useForm } from '@inertiajs/vue3';
+import {del} from '../../Composables/httpMethod.js'
 const props = defineProps(['payments']);
-
-const count = ref(1);
-
+const form = useForm({})
 const deletePayment = (id) => {
-    form.post(`/admin/payments/${id}/delete`);
+    del(form,route('payments.destroy', id));
 }
 </script>
 
