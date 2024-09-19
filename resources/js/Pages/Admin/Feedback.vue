@@ -5,7 +5,7 @@
             <div class="col-md-6">
                 <div class="card" style="border:2px solid #ff006e;">
                     <div class="card-header bg-white border-none d-flex">
-                        <img class="rounded-circle me-3" src="../../../images/feedback.png" alt="" style="width:70px;">
+                        <img class="rounded-circle me-3" src="../../images/feedback.png" alt="" style="width:70px;">
                         <div class="">
                             <h3 class="fs-6">Min Thu Kha</h3>
                             <span style="font-size:14px;">29 Aug 2017</span>
@@ -20,7 +20,7 @@
             <div class="col-md-6">
                 <div class="card" style="border:2px solid #ff006e;">
                     <div class="card-header bg-white border-none d-flex">
-                        <img class="rounded-circle me-3" src="../../../images/feedback.png" alt="" style="width:70px;">
+                        <img class="rounded-circle me-3" src="../../images/feedback.png" alt="" style="width:70px;">
                         <div class="">
                             <h3 class="fs-6">Min Thu Kha</h3>
                             <span style="font-size:14px;">29 Aug 2017</span>
@@ -39,6 +39,4 @@
 
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
