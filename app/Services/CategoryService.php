@@ -17,7 +17,6 @@ class CategoryService
 
     public function create($request)
     {
-
         $category = $this->model->create([
             'name' => $request->name,
         ]);
@@ -39,7 +38,7 @@ class CategoryService
             return sendError(404, "Category not found");
         }
 
-        if ($request->hasFile('image')) {
+        if ($request->file('image')) {
             if ($category->image) {
                 File::delete('storage/images/' . $category->image);
             }
@@ -62,5 +61,6 @@ class CategoryService
         }
         File::delete('storage/images/' . $category->image);
         $category->delete();
+        return back();
     }
 }

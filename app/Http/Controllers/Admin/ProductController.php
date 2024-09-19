@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Category;
-use App\Models\Product;
-use App\Services\ProductService;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Product;
+use App\Models\Category;
+use Illuminate\Http\Request;
+use App\Services\ProductService;
+use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {

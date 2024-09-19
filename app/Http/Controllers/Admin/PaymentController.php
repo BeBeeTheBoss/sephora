@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use Inertia\Inertia;
 use App\Models\Payment;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
+use App\Http\Controllers\Controller;
 
 class PaymentController extends Controller
 {
@@ -28,12 +29,26 @@ class PaymentController extends Controller
         ]);
 
         $this->model->create($data);
-        return redirect()->route('payments.index');
+        return to_route('payments.index');
     }
 
     public function edit($id)
     {
         $payment = $this->model->find($id);
         return Inertia::render('Admin/Payment/Edit', ['payment' => $payment]);
+    }
+
+    public function update(Request $request){
+        $data = $request->validate([
+            'name' => 'required'
+        ]);
+
+        $this->model->find($request->id)->update($data);
+        return to_route('payments.index');
+    }
+
+    public function destroy($id){
+        $this->model->find($id)->delete();
+        return back();
     }
 }

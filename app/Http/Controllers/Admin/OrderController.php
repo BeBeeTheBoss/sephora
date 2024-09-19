@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use Inertia\Inertia;
 use App\Models\Order;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
+use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
@@ -13,6 +14,7 @@ class OrderController extends Controller
 
     public function index()
     {
-        return Inertia::render('Admin/Order/Index');
+        $orders = $this->model->get();
+        return Inertia::render('Admin/Order/Index',['orders' => $orders]);
     }
 }

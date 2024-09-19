@@ -1,7 +1,7 @@
 <template>
     <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
         <div class="col-md-4 border border-danger rounded-3 p-3">
-            <form @submit.prevent="update">
+            <form @submit.prevent="updatePayment">
                 <h4 class="text-center">Edit Payment</h4>
                 <v-row >
                     <v-col cols="12" class="my-2">
@@ -19,7 +19,7 @@
 
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-
+import {update} from '../../Composables/httpMethod.js'
 const props = defineProps({
     payment : Object
 })
@@ -29,8 +29,8 @@ const form = useForm({
     name: props.payment.name,
 })
 
-const update = () => {
-    form.post('/admin/payments');
+const updatePayment = () => {
+    update(form,route('payments.update', props.payment.id));
 }
 </script>
 

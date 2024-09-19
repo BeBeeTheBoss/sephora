@@ -1,12 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomePageController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\FeedbackController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +26,12 @@ Route::controller(HomePageController::class)->group(function () {
     Route::get('/', 'homePage')->name('home');
 });
 
+Route::controller(CartController::class)->group(function () {
+    Route::get('/cart', 'cartPage')->name('cart');
+});
+
 Route::prefix('/admin')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('index');
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
     //Categories
     Route::group(['prefix' => 'categories', 'controller' => CategoryController::class, 'as' => 'categories.'], function () {
@@ -33,7 +40,7 @@ Route::prefix('/admin')->group(function () {
         Route::post('/', 'store')->name('store');
         Route::get('/{id}/edit', 'edit')->name('edit');
         Route::post('/{id}/update', 'update')->name('update');
-        Route::post('/{id}', 'destroy')->name('destroy');
+        Route::post('/{id}/delete', 'destroy')->name('destroy');
     });
 
     //Products
@@ -42,8 +49,8 @@ Route::prefix('/admin')->group(function () {
         Route::get('/create', 'create')->name('create');
         Route::post('/', 'store')->name('store');
         Route::get('/{id}/edit', 'edit')->name('edit');
-        Route::post('/{id}/update', 'update')->name('update');
-        Route::post('/{id}/delete', 'destroy')->name('destroy');
+        Route::put('/{id}/update', 'update')->name('update');
+        Route::delete('/{id}/delete', 'destroy')->name('destroy');
     });
 
     //Orders
@@ -58,5 +65,16 @@ Route::prefix('/admin')->group(function () {
         Route::post('/', 'store')->name('store');
         Route::get('/{id}/edit', 'edit')->name('edit');
         Route::post('/{id}/update', 'update')->name('update');
+        Route::post('/{id}/delete', 'destroy')->name('destroy');
+    });
+
+    //Feedbacks
+    Route::controller(FeedBackController::class)->group(function(){
+        Route::get('/feedback', 'feedback')->name('feedback');
+    });
+
+    //Profile
+    Route::controller(ProfileController::class)->group(function(){
+        Route::get('/profile', 'profile')->name('profile');
     });
 });

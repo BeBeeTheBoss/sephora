@@ -1,5 +1,6 @@
 <template>
-    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <Layout>
+    <div class="container d-flex justify-content-center align-items-center" style="height: 80vh;">
         <div class="col-md-4 border border-danger rounded-3 p-3">
             <form @submit.prevent="submit">
                 <h4 class="text-center">Create Payment</h4>
@@ -14,18 +15,20 @@
             </form>
         </div>
     </div>
+</Layout>
 
 </template>
 
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-
+import Layout from '../Layouts/Layout.vue'
+import { post } from '../../Composables/httpMethod.js';
 const form = useForm({
     name: '',
 })
 
 const submit = () => {
-    form.post('/admin/payments');
+    post(form,route('payments.store'));
 }
 </script>
 
