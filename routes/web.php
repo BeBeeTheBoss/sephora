@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FeedbackController;
+use App\Http\Controllers\OrderController as UserOrderController;
+use App\Http\Controllers\ProductController as UserProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,14 @@ Route::controller(HomePageController::class)->group(function () {
 
 Route::controller(CartController::class)->group(function () {
     Route::get('/cart', 'cartPage')->name('cart');
+});
+
+Route::group(['prefix' => '/product', 'controller' => UserProductController::class, 'as' => 'products.'], function () {
+    Route::get('/details', 'productDetails')->name('productDetails');
+});
+
+Route::group(['prefix' => '/orders', 'controller' => UserOrderController::class, 'as' => 'orders.'], function () {
+    Route::get('/', 'orderPage')->name('orderPage');
 });
 
 Route::prefix('/admin')->group(function () {
@@ -69,12 +79,12 @@ Route::prefix('/admin')->group(function () {
     });
 
     //Feedbacks
-    Route::controller(FeedBackController::class)->group(function(){
+    Route::controller(FeedBackController::class)->group(function () {
         Route::get('/feedback', 'feedback')->name('feedback');
     });
 
     //Profile
-    Route::controller(ProfileController::class)->group(function(){
+    Route::controller(ProfileController::class)->group(function () {
         Route::get('/profile', 'profile')->name('profile');
     });
 });

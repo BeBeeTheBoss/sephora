@@ -1,4 +1,5 @@
 <template>
+    <Layout>
     <div class="container">
         <h3 class="text-center mt-3 text-[#ff006e]">FeedBacks</h3>
         <div class="row mt-5">
@@ -33,10 +34,11 @@
             </div>
         </div>
     </div>
+    </Layout>
 </template>
 
 <script setup>
-
+import Layout from './Layouts/Layout.vue'
 </script>
 
 <style scoped></style>
