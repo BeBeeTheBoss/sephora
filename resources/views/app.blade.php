@@ -9,7 +9,7 @@
     {{-- <title inertia>{{ config('app.name', 'Sephora') }}</title> --}}
     <title>Sephora</title>
 
-    {{-- @routes --}}
+    @routes
     @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
     @inertiaHead
 </head>

@@ -1,4 +1,5 @@
 <template>
+    <Layout>
     <div class="container d-flex justify-content-center align-items-center" style="height: 100vh">
         <div class="col-md-6 border border-danger rounded-3 p-3">
             <form @submit.prevent="submit">
@@ -60,12 +61,13 @@
             </form>
         </div>
     </div>
+    </Layout>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
-
+import Layout from '../Layouts/Layout.vue'
 const props = defineProps({
     categories : Object
 });
