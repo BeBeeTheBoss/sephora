@@ -33,11 +33,13 @@
                     <Link href="/orders" style="color:black">
                     <IconBtn icon="fa-solid fa-bag-shopping" count="2" />
                     </Link>
-                    <!-- <span>Orders</span> -->
+                <!-- <span>Orders</span> -->
                 </div>
                 <div class="me-3 d-flex align-items-center navIcon" :class="isActive('/wish-lists')"
                     style="cursor:pointer">
+                    <Link href="/wish-lists" style="color:black">
                     <IconBtn icon="fa-regular fa-heart" count="9" />
+                    </Link>
                     <!-- <span>Wishlists</span> -->
                 </div>
             </div>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\WishListController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PaymentController;
@@ -28,16 +29,20 @@ Route::controller(HomePageController::class)->group(function () {
     Route::get('/', 'homePage')->name('home');
 });
 
-Route::controller(CartController::class)->group(function () {
-    Route::get('/cart', 'cartPage')->name('cart');
+Route::group(['prefix' => '/cart', 'controller' => CartController::class, 'as' => 'cart.'], function () {
+    Route::get('/', 'index')->name('cart');
+});
+
+Route::group(['prefix' => '/wish-lists', 'controller' => WishListController::class, 'as' => 'wish_lists.'], function () {
+    Route::get('/', 'index')->name('wishListPage');
 });
 
 Route::group(['prefix' => '/product', 'controller' => UserProductController::class, 'as' => 'products.'], function () {
-    Route::get('/details', 'productDetails')->name('productDetails');
+    Route::get('/details', 'show')->name('productDetails');
 });
 
 Route::group(['prefix' => '/orders', 'controller' => UserOrderController::class, 'as' => 'orders.'], function () {
-    Route::get('/', 'orderPage')->name('orderPage');
+    Route::get('/', 'index')->name('orderPage');
 });
 
 Route::prefix('/admin')->group(function () {

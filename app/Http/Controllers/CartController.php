@@ -10,7 +10,7 @@ class CartController extends Controller
 {
     public function __construct(protected Cart $model) {}
 
-    public function cartPage()
+    public function index()
     {
         return Inertia::render('User/Cart');
     }

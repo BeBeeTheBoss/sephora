@@ -3,12 +3,29 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
+use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class HomePageController extends Controller
 {
     public function homePage()
     {
-        return Inertia::render('User/Home');
+        $categories = Category::withCount('products')->get();
+        $products = Product::with('category')->with('images')->get();
+
+        foreach ($categories as $category) {
+            $category->image = asset('storage/images/' . $category->image);
+        }
+        foreach ($products as $product) {
+            foreach ($product->images as $image) {
+                $image->image = asset('storage/images/' . $image->image);
+            }
+        }
+
+        return Inertia::render('User/Home', [
+            'categories' => $categories,
+            'products' => $products
+        ]);
     }
 }

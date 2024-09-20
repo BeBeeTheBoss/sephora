@@ -66,45 +66,14 @@
             <div class="text-muted">See all</div>
         </div>
         <div class="row w-100 px-5 d-lg-flex d-md-flex d-sm-none d-none">
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-3">
-                <Category name="Make-up" count="12"
-                    image="https://cdn.britannica.com/35/222035-131-9FC95B31/makeup-cosmetics.jpg" />
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-3">
-                <Category name="Lips-stick" count="24"
-                    image="https://images.beautybay.com/eoaaqxyywn6o/REBE1339F_1.jpg_s3.lmb_w21vua/6662e9208386291e7fc58e4c77fa5970/REBE1339F_1.jpg" />
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-3">
-                <Category name="Mockup" count="6"
-                    image="https://www.freemockupworld.com/wp-content/uploads/2021/06/White-Cosmetics-Bottle-Mockup-01.jpg" />
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-3">
-                <Category name="Skincare" count="34"
-                    image="https://pixpine.com/wp-content/uploads/2024/05/free-cosmetic-packaging-mockup-1.jpg" />
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-3">
-                <Category name="Perfume" count="9"
-                    image="https://www.reneecosmetics.in/cdn/shop/files/renee-eau-de-parfum-bloom-renee-cosmetics-1.jpg?v=1716270797" />
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-3">
-                <Category name="Highlighter" count="56"
-                    image="https://co.nice-cdn.com/upload/image/product/large/default/nui-cosmetics-natural-illusion-cream-piari-593932-en.webp" />
+            <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-3" v-for="category in categories" :key="category">
+                <Category :name="category.name" :count="category.products_count" :image="category.image" />
             </div>
         </div>
         <div class="d-lg-none d-md-none d-sm-block d-block">
             <div class="pb-3" style="overflow-x: auto; white-space: nowrap">
-                <CategoryCircle class="d-inline-block"
-                    image="https://cdn.britannica.com/35/222035-131-9FC95B31/makeup-cosmetics.jpg" name="Make-up" />
-                <CategoryCircle class="d-inline-block" name="Lips-stick"
-                    image="https://images.beautybay.com/eoaaqxyywn6o/REBE1339F_1.jpg_s3.lmb_w21vua/6662e9208386291e7fc58e4c77fa5970/REBE1339F_1.jpg" />
-                <CategoryCircle class="d-inline-block" name="Mockup" count="6"
-                    image="https://www.freemockupworld.com/wp-content/uploads/2021/06/White-Cosmetics-Bottle-Mockup-01.jpg" />
-                <CategoryCircle class="d-inline-block" name="Skincare" count="34"
-                    image="https://pixpine.com/wp-content/uploads/2024/05/free-cosmetic-packaging-mockup-1.jpg" />
-                <CategoryCircle class="d-inline-block" name="Perfume" count="9"
-                    image="https://www.reneecosmetics.in/cdn/shop/files/renee-eau-de-parfum-bloom-renee-cosmetics-1.jpg?v=1716270797" />
-                <CategoryCircle class="d-inline-block" name="Highlighter" count="56"
-                    image="https://co.nice-cdn.com/upload/image/product/large/default/nui-cosmetics-natural-illusion-cream-piari-593932-en.webp" />
+                <CategoryCircle v-for="category in categories" :key="category" class="d-inline-block"
+                    :image="category.image" :name="category.name" />
             </div>
         </div>
         <div class="d-lg-flex d-md-flex d-sm-none d-none justify-content-between align-items-center px-lg-5 px-md-3 px-sm-2 px-2 mb-3"
@@ -113,8 +82,10 @@
             <div class="text-muted">See all</div>
         </div>
         <div class="row w-100 px-5 mb-5 d-lg-flex d-md-flex d-sm-none d-none">
-            <div class="col-lg-3 col-md-4 mb-3">
-                <Product @click="dialog = true" />
+            <div class="col-lg-3 col-md-4 mb-3" v-for="product in products" :key="product">
+                <Product :name="product.name" :categoryName="product.category.name" :image="product.images[0].image"
+                    :price="product.price" :discount_price="product.discount_price" :description="product.description"
+                    @click="dialog = true" />
                 <template>
                     <div class="text-center pa-4">
                         <v-dialog v-model="dialog" width="auto">
@@ -169,24 +140,6 @@
                     </div>
                 </template>
             </div>
-            <div class="col-lg-3 col-md-4 mb-3">
-                <Product />
-            </div>
-            <div class="col-lg-3 col-md-4 mb-3">
-                <Product />
-            </div>
-            <div class="col-lg-3 col-md-4 mb-3">
-                <Product />
-            </div>
-            <div class="col-lg-3 col-md-4 mb-3">
-                <Product />
-            </div>
-            <div class="col-lg-3 col-md-4 mb-3">
-                <Product />
-            </div>
-            <div class="col-lg-3 col-md-4 mb-3">
-                <Product />
-            </div>
         </div>
         <div class="d-lg-none d-md-none d-sm-flex d-flex justify-content-between align-items-center px-lg-5 px-md-3 px-sm-2 px-2 mt-2 mb-3"
             style="margin-top:-10px">
@@ -194,29 +147,11 @@
             <div class="text-muted">See all</div>
         </div>
         <div class="d-lg-none d-md-none d-sm-flex d-flex ps-3 pb-3 mb-5" style="overflow-x: scroll;">
-            <div class="me-3">
+            <div class="me-3" v-for="product in products" :key="product">
                 <Link href="/product/details" style="text-decoration:none">
-                <Product size="phone" />
-                </Link>
-            </div>
-            <div class="me-3">
-                <Link href="/product/details" style="text-decoration:none">
-                <Product size="phone" />
-                </Link>
-            </div>
-            <div class="me-3">
-                <Link href="/product/details" style="text-decoration:none">
-                <Product size="phone" />
-                </Link>
-            </div>
-            <div class="me-3">
-                <Link href="/product/details" style="text-decoration:none">
-                <Product size="phone" />
-                </Link>
-            </div>
-            <div class="me-3">
-                <Link href="/product/details" style="text-decoration:none">
-                <Product size="phone" />
+                <Product :name="product.name" :categoryName="product.category.name" :image="product.images[0].image"
+                    :price="product.price" :discount_price="product.discount_price" :description="product.description"
+                    size="phone" />
                 </Link>
             </div>
         </div>
@@ -234,6 +169,12 @@ import { Link } from '@inertiajs/vue3'
 import { ref } from 'vue'
 import IconBtn from "./Components/IconBtn.vue";
 const dialog = ref(false)
+
+const props = defineProps({
+    categories: Object,
+    products: Object
+})
+
 
 </script>
 
