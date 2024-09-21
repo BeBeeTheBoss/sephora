@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     public function __construct(protected Product $model) {}
 
-    public function productDetails()
+    public function show()
     {
         return Inertia::render('User/ProductDetails');
     }

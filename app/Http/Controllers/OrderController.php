@@ -10,7 +10,7 @@ class OrderController extends Controller
 {
     public function __construct(protected Order $model) {}
 
-    public function orderPage()
+    public function index()
     {
         return Inertia::render('User/Order');
     }
