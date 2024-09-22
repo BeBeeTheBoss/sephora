@@ -38,7 +38,9 @@ class PaymentController extends Controller
         return Inertia::render('Admin/Payment/Edit', ['payment' => $payment]);
     }
 
-    public function update(Request $request){
+    public function update(Request $request)
+    {
+        dd($request->all());
         $data = $request->validate([
             'name' => 'required'
         ]);
@@ -47,7 +49,8 @@ class PaymentController extends Controller
         return to_route('payments.index');
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $this->model->find($id)->delete();
         return back();
     }

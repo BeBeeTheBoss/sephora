@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\ProductImage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ProductService
 {
@@ -52,6 +53,9 @@ class ProductService
 
         $product->update($this->formatData($request));
 
+        $this->handleImages($request, $product);
+
+
         return $product;
     }
 
@@ -62,8 +66,7 @@ class ProductService
         $productImages = $this->productImage->where('product_id', $id)->get();
         if ($productImages) {
             foreach ($productImages as $productImage) {
-                File::delete('/storage/images' . $productImage->image);
-                $productImage->delete();
+                File::delete('storage/images/' . $productImage->image);
             }
         }
         if (!$product) {
@@ -84,12 +87,33 @@ class ProductService
         ];
     }
 
+    private function handleImages($request, $product)
+    {
+        // Delete images marked for removal
+        if ($request->has('delete_images')) {
+            foreach ($request->delete_images as $id) {
+                $image = $product->images()->find($id);
+                if ($image) {
+                    // Check if the path exists before attempting to delete
+                    if ($image->path) {
+                        Storage::delete($image->path); // Delete the file from storage
+                    }
+                    $image->delete(); // Remove the record from the database
+                }
+            }
+        }
+
+        // Handle new images
+        if ($request->hasFile('new_images')) {
+            $this->storeImageFiles($request->file('new_images'), $product->id);
+        }
+    }
+
     private function storeImageFiles($imageFiles, $productId)
     {
-        $imageCount = count($imageFiles);
-        for ($i = 0; $i < $imageCount; $i++) {
-            $imageName = uniqid() . '_' . time() . '.' . $imageFiles[$i]->getClientOriginalExtension();
-            $imageFiles[$i]->storeAs('public/images', $imageName);
+        foreach ($imageFiles as $file) {
+            $imageName = uniqid() . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/images', $imageName);
             $this->productImage->create([
                 'product_id' => $productId,
                 'image' => $imageName

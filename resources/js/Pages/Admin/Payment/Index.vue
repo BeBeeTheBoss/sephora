@@ -37,7 +37,7 @@
                     </td>
                     <td>
                         <v-col cols="6">
-                            <v-switch :model-value="true" color="primary" label="on"></v-switch>
+                            <v-switch @change="logSwitchValue(payment.id)" v-model="switchValue[payment.id]" color="primary" label="on"></v-switch>
                         </v-col>
                     </td>
                     <td>
@@ -78,6 +78,16 @@ const props = defineProps({
     payments: Array,
 });
 
+// Initialize switchValue with default states
+const switchValue = ref({});
+props.payments.forEach(payment => {
+    switchValue.value[payment.id] = true; // or false based on your initial state
+});
+
+const logSwitchValue = (id) => {
+    console.log(`Current state is: ${switchValue.value[id]}`);
+};
+
 // Form state to hold the current payment's name
 const form = useForm({
     name: '',
@@ -89,7 +99,7 @@ const editId = ref(null);  // To track which payment is being edited
 // Function to edit the payment, sets the form.name to the selected payment's name
 const editPayment = (payment) => {
     form.name = payment.name;
-    editId.value = payment.id;
+    editId.value = payment.id; // Use payment.id instead of index
     editPage.value = true;
 };
 
@@ -97,7 +107,7 @@ const editPayment = (payment) => {
 const savePayment = (id) => {
     editPage.value = false;
     editId.value = null;
-    update(form,route('payments.update',id));
+    update(form, route('payments.update', id));
 };
 
 // Function to delete the payment
@@ -105,5 +115,6 @@ const deletePayment = (id) => {
     del(form, route('payments.destroy', id));
 };
 </script>
+
 
 <style lang="scss" scoped></style>

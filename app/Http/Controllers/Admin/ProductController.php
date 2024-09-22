@@ -57,7 +57,17 @@ class ProductController extends Controller
 
     public function update(Request $request)
     {
-        dd($request->all());
+        $request->validate([
+            'category_id' => 'required|exists:categories,id',
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'discount_price' => 'nullable|numeric',
+            'description' => 'nullable|string',
+            'delete_images' => 'nullable|array', // Assuming images is the name of your images table
+        ]);
+
+        $this->productService->update($request);
+        return to_route('products.index');
     }
 
     public function destroy($id)
