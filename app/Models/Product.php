@@ -17,6 +17,12 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    //connect with wish_lists
+    public function wish_lists()
+    {
+        return $this->hasMany(WishList::class);
+    }
+
     //connect with product images
     public function images()
     {

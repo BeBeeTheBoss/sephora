@@ -33,7 +33,7 @@
                     <Link href="/orders" style="color:black">
                     <IconBtn icon="fa-solid fa-bag-shopping" count="2" />
                     </Link>
-                <!-- <span>Orders</span> -->
+                    <!-- <span>Orders</span> -->
                 </div>
                 <div class="me-3 d-flex align-items-center navIcon" :class="isActive('/wish-lists')"
                     style="cursor:pointer">
@@ -50,12 +50,9 @@
                     <IconBtn icon="fa-regular fa-bell" count="1" />
                 </div>
                 <div class="dropdown">
-                    <div style="cursor:pointer">
-                        <IconBtn icon="fa-regular fa-user" data-bs-toggle="dropdown" />
-                        <!-- <span>Profile</span> -->
-                    </div>
+                    <IconBtn icon="fa-regular fa-user" data-bs-toggle="dropdown" />
                     <ul class="dropdown-menu h-100 pt-0">
-                        <ProfileIcon />
+                        <ProfileIcon :profile="profile" />
                     </ul>
                 </div>
             </div>
@@ -84,12 +81,23 @@ import IconBtn from "./IconBtn.vue";
 import ProfileIcon from "./ProfileIcon.vue";
 import Search from "./Search.vue";
 import { router, Link } from "@inertiajs/vue3";
+import axios from "axios";
+import { ref, onMounted } from 'vue'
 
 const isActive = (path) => {
 
     return router.page.url == path ? 'navIconActive' : "";
 
 }
+
+const profile = ref(null);
+
+onMounted(() => {
+    axios.get('/profile').then(response => {
+        console.log(response.data);
+
+    })
+})
 
 </script>
 

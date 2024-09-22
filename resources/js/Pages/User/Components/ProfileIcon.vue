@@ -1,27 +1,46 @@
 <template>
     <div class="card pb-3">
-        <div class="img d-flex justify-content-center align-items-center">
-            <img class="w-100 rounded rounded-5"
-                src="https://static.vecteezy.com/system/resources/previews/018/765/757/original/user-profile-icon-in-flat-style-member-avatar-illustration-on-isolated-background-human-permission-sign-business-concept-vector.jpg"
-                alt="">
-        </div>
-        <div class="info">
-            <span>BeBee</span>
-            <div class="text-center">
-                <div style="font-size:10px">
-                    originalbebee@gmail.com
+        <div v-if="profile">
+            <div class="img d-flex justify-content-center align-items-center">
+                <img class="w-100 rounded rounded-5"
+                    src="https://static.vecteezy.com/system/resources/previews/018/765/757/original/user-profile-icon-in-flat-style-member-avatar-illustration-on-isolated-background-human-permission-sign-business-concept-vector.jpg"
+                    alt="">
+            </div>
+            <div class="info">
+                <span>BeBee</span>
+                <div class="text-center">
+                    <div style="font-size:10px">
+                        originalbebee@gmail.com
+                    </div>
+                    <div style="font-size:10px">
+                        09769274236
+                    </div>
                 </div>
-                <div style="font-size:10px">
-                    09769274236
+            </div>
+            <a href="#">Logout</a>
+        </div>
+        <div v-else class="d-flex justify-center">
+            <div class="mt-3">
+                <div class="text-center" style="font-size:13px">
+                    You are not logged in
+                </div>
+                <div class="flex justify-center" style="margin-top:-10px">
+                    <Link>
+                    login
+                    </Link>
                 </div>
             </div>
         </div>
-        <a href="#">Logout</a>
     </div>
 </template>
 
 <script setup>
 import IconBtn from './IconBtn.vue';
+import { Link } from '@inertiajs/vue3';
+
+const props = defineProps({
+    profile: Object
+})
 
 </script>
 
