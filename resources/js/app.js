@@ -16,6 +16,10 @@ import * as directives from 'vuetify/directives';
 import '@mdi/font/css/materialdesignicons.css';
 import { mdi } from 'vuetify/iconsets/mdi';
 
+//toastfication
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
+
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
@@ -58,7 +62,8 @@ createInertiaApp({
         .component('Link', Link)
         .component('font-awesome-icon', FontAwesomeIcon)
         .use(plugin)
-        .use(vuetify)
+          .use(vuetify)
+          .use(Toast)
         .config.globalProperties.$route = route; // route for Link
 
       app.mount(el);

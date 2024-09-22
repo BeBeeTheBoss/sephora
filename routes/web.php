@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomePageController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FeedbackController;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\OrderController as UserOrderController;
 use App\Http\Controllers\ProductController as UserProductController;
 
@@ -25,22 +27,42 @@ use App\Http\Controllers\ProductController as UserProductController;
 |
 */
 
+Route::get('/profile', function () {
+    return response()->json(Auth::user());
+});
+
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/loginPage', 'loginPage')->name('loginPage');
+});
+
+Route::post('/destroy-session', function () {
+    session()->invalidate(); // Destroys the session
+    return response()->json(['status' => 'Session destroyed']);
+});
+
+
+//home
 Route::controller(HomePageController::class)->group(function () {
     Route::get('/', 'homePage')->name('home');
 });
 
+//cart
 Route::group(['prefix' => '/cart', 'controller' => CartController::class, 'as' => 'cart.'], function () {
     Route::get('/', 'index')->name('cart');
 });
 
+//wishlist
 Route::group(['prefix' => '/wish-lists', 'controller' => WishListController::class, 'as' => 'wish_lists.'], function () {
     Route::get('/', 'index')->name('wishListPage');
+    Route::post('/', 'store')->name('create');
 });
 
+//products
 Route::group(['prefix' => '/product', 'controller' => UserProductController::class, 'as' => 'products.'], function () {
     Route::get('/details', 'show')->name('productDetails');
 });
 
+//orders
 Route::group(['prefix' => '/orders', 'controller' => UserOrderController::class, 'as' => 'orders.'], function () {
     Route::get('/', 'index')->name('orderPage');
 });
