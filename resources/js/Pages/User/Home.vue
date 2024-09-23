@@ -177,8 +177,10 @@ const page = usePage();
 
 const props = defineProps({
     categories: Object,
-    products: Object
+    products: Array
 })
+
+console.log(props.products);
 
 const dialogArray = ref([]);
 

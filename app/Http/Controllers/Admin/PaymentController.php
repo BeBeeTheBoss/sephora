@@ -40,12 +40,21 @@ class PaymentController extends Controller
 
     public function update(Request $request)
     {
-        dd($request->all());
-        $data = $request->validate([
-            'name' => 'required'
-        ]);
+        $payment = $this->model->find($request->id);
+        if ($request->name) {
+            $data = $request->validate([
+                'name' => 'required'
+            ]);
+            $payment->update($data);
+        }
 
-        $this->model->find($request->id)->update($data);
+
+        if ($request->is_active === false) {
+            $payment->update([
+                'is_active' => 0
+            ]);
+        }
+
         return to_route('payments.index');
     }
 

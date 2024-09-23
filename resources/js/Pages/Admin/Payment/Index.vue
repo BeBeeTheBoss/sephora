@@ -37,7 +37,7 @@
                     </td>
                     <td>
                         <v-col cols="6">
-                            <v-switch @change="logSwitchValue(payment.id)" v-model="switchValue[payment.id]" color="primary" label="on"></v-switch>
+                            <v-switch @change="logSwitchValue(payment.id)" v-model="switchValue[payment.id]" color="primary" :model-value="payment.is_active" label="on"></v-switch>
                         </v-col>
                     </td>
                     <td>
@@ -78,6 +78,7 @@ const props = defineProps({
     payments: Array,
 });
 
+
 // Initialize switchValue with default states
 const switchValue = ref({});
 props.payments.forEach(payment => {
@@ -85,13 +86,18 @@ props.payments.forEach(payment => {
 });
 
 const logSwitchValue = (id) => {
-    console.log(`Current state is: ${switchValue.value[id]}`);
+
+    const form = useForm({
+    id : id,
+    name: '',
+    is_active : switchValue.value[id]
+});
+    // console.log(`Current state is: ${switchValue.value[id]}`);
+    update(form, route('payments.update', id));
 };
 
 // Form state to hold the current payment's name
-const form = useForm({
-    name: '',
-});
+
 
 const editPage = ref(false);
 const editId = ref(null);  // To track which payment is being edited
