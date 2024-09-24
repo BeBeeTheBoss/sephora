@@ -43,7 +43,7 @@ const isPhoneSize = () => {
         imageClass.value = "height w-100 card-img-top"
     } else {
         cardClass.value = "card shadow-sm";
-        imageClass.value = "w-100 card-img-top"
+        imageClass.value = "w-100 card-img-top pc-height"
     }
 }
 
@@ -54,6 +54,10 @@ isPhoneSize();
 <style scoped>
 .width {
     width: 300px;
+}
+
+.pc-height{
+    height: 400px;
 }
 
 .height {

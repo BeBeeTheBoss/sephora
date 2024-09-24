@@ -2,7 +2,7 @@
     <Layout>
         <div class="container-fluid">
             <div class="row mt-3">
-                <div class="col-8">
+                <div class="col-8" style="padding:0px 70px">
                     <h5 class="fw-bold my-3">My Shopping Cart</h5>
                     <div class="bg-[#fe919e4f] my-2 py-2 px-2 shadow-sm rounded flex items-center"
                         style="position:relative">
@@ -48,9 +48,9 @@
                         SubTotal : 420000 MMK
                     </div>
                 </div>
-                <div class="col-3 ps-3 flex justify-center"
-                    style="height:85vh;overflow:scroll;border-left:solid 1px black;margin-left:40px">
-                    <div class="w-100">
+                <div class="col-4 ps-5 flex justify-center"
+                    style="height:85vh;overflow:scroll;border-left: solid 1px #FE919D;">
+                    <div class="w-100" style="">
                         <h5 class="fw-bold mt-3 mb-4">Summary</h5>
                         <v-textarea color="#FE919D" rows="1" v-model="phone" label="Phone number"
                             variant="outlined"></v-textarea>

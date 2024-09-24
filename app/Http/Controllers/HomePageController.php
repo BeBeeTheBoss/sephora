@@ -13,9 +13,9 @@ class HomePageController extends Controller
     public function homePage()
     {
         $categories = Category::withCount('products')->get();
-        $products = Product::with('category')
+        $products = Product::where('is_active',1)->with('category')
             ->when(Auth::user(), function ($query) {
-                $query->withCount(['wish_lists' => function ($query) {
+                $query->withCount(['wish_lists as is_favorite' => function ($query) {
                     $query->where('user_id', Auth::user()->id);
                 }]);
             })

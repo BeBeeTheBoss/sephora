@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -16,6 +15,14 @@ class AuthController extends Controller
     public function getUsers()
     {
         return $this->userService->get();
+    }
+
+    public function loginPage(){
+        return Inertia::render('User/Login');
+    }
+
+    public function signUpPage(){
+        return Inertia::render('User/Signup');
     }
 
     public function signUp(Request $request)
@@ -30,15 +37,16 @@ class AuthController extends Controller
         DB::beginTransaction();
         try {
 
-            $data = $this->userService->register($request);
+            $this->userService->register($request);
 
             DB::commit();
 
-            return sendResponse($data, 201, "Sign up completed!");
+            return redirect()->route('home');
         } catch (\Throwable $th) {
 
             DB::rollBack();
-            return sendResponse(null, 500, $th->getMessage());
+            session(['failed' => "Something went wrong"]);
+            return redirect()->back();
         }
     }
 
@@ -51,9 +59,17 @@ class AuthController extends Controller
 
         $data = $this->userService->login($request);
         if (isset($data['message'])) {
-            return sendResponse(null, $data['status'], $data['message']);
+            session(['failed' => $data['message']]);
+            return redirect()->back();
         }
 
-        return sendResponse($data, 200, "Login success!");
+        session(['success' => 'Login success']);
+        return redirect()->route('home');
+    }
+
+    public function logout(){
+        Auth::logout();
+        session(['success' => 'Logout success']);
+        return redirect()->route('home');
     }
 }

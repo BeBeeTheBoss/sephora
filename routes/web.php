@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\WishListController;
@@ -13,9 +15,9 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FeedbackController;
-use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\OrderController as UserOrderController;
 use App\Http\Controllers\ProductController as UserProductController;
+use App\Models\WishList;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,15 +31,27 @@ use App\Http\Controllers\ProductController as UserProductController;
 */
 
 Route::get('/profile', function () {
-    return response()->json(Auth::user());
+    if(Auth::check()){
+        return response()->json(Auth::user());
+    }
+
+    return response()->json(null);
+});
+
+Route::get('/wishlists-count',function(){
+    return response()->json(WishList::where('user_id',Auth::user()->id)->count());
 });
 
 Route::controller(AuthController::class)->group(function () {
-    Route::get('/loginPage', 'loginPage')->name('loginPage');
+    Route::get('/login', 'loginPage')->name('loginPage');
+    Route::get('/sign-up','signUpPage')->name('signUpPage');
+    Route::post('/login','login')->name('login');
+    Route::post('/sign-up','signUp')->name('signUp');
+    Route::post('/logout','logout')->name('logout');
 });
 
 Route::post('/destroy-session', function () {
-    session()->invalidate(); // Destroys the session
+    // Session::flush();
     return response()->json(['status' => 'Session destroyed']);
 });
 

@@ -38,7 +38,8 @@
                 <div class="me-3 d-flex align-items-center navIcon" :class="isActive('/wish-lists')"
                     style="cursor:pointer">
                     <Link href="/wish-lists" style="color:black">
-                    <IconBtn icon="fa-regular fa-heart" count="9" />
+                    <IconBtn icon="fa-regular fa-heart" v-if="wishlistsCount" :count="wishlistsCount" />
+                    <IconBtn icon="fa-regular fa-heart" v-else />
                     </Link>
                     <!-- <span>Wishlists</span> -->
                 </div>
@@ -91,10 +92,14 @@ const isActive = (path) => {
 }
 
 const profile = ref(null);
+const wishlistsCount = ref(null);
 
 onMounted(() => {
     axios.get('/profile').then(response => {
-        console.log(response.data);
+        profile.value = response.data
+    })
+    axios.get('/wishlists-count').then(response => {
+        wishlistsCount.value = response.data
 
     })
 })

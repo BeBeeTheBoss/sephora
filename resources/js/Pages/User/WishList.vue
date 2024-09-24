@@ -2,40 +2,46 @@
     <layout>
         <div class="container-fluid">
             <div class="row mt-3">
-                <div class="col-11">
+                <div class="col-12">
                     <h5 class="fw-bold my-3">My wishlists</h5>
                     <div class="row">
-                        <div class="col-lg-3 col-md-4 mb-3">
-                            <Product @click="dialog = true" />
+                        <div class="col-lg-3 col-md-4 mb-3" v-for="product, index in products" :key="product">
+                            <Product :name="product.name" :categoryName="product.category.name"
+                                :image="product.images[0].image" :price="product.price"
+                                :discount_price="product.discount_price" :description="product.description"
+                                @click="dialogArray[index] = true" />
                             <template>
                                 <div class="text-center pa-4">
-                                    <v-dialog v-model="dialog" width="auto">
+                                    <v-dialog v-model="dialogArray[index]" width="auto">
                                         <v-card max-width="400" class="pb-3" style="position:relative">
                                             <div style="position:absolute;top:10px;right:10px;z-index:3">
-                                                <font-awesome-icon @click="dialog = false" icon="fa-solid fa-xmark"
-                                                    class="me-2 text-white fs-5"
+                                                <font-awesome-icon @click="dialogArray[index] = false"
+                                                    icon="fa-solid fa-xmark" class="me-2 text-white fs-5"
                                                     style="background-color: black;padding:6px;border-radius:50%;width:16px;height:16px;cursor:pointer" />
                                             </div>
                                             <div>
-                                                <Carousel height="300px" />
+                                                <Carousel :from="'productCarousel' + product.id"
+                                                    :images="product.images" height="300px" />
                                                 <div style="position:relative;cursor:pointer">
                                                     <div class="card-body px-3 pt-3">
                                                         <div class="flex justify-between items-center">
-                                                            <span class="text-muted" style="font-size:12px">Shirt
-                                                                <font-awesome-icon class="ms-2 me-1"
+                                                            <span class="text-muted" style="font-size:12px">{{
+                                                                product.category.name
+                                                                }} <font-awesome-icon class="ms-2 me-1"
                                                                     icon="fa-solid fa-fire"
                                                                     style="font-size: 13px;color:#fe919d" />12</span>
-                                                            <IconBtn icon="fa-regular fa-heart"
+                                                            <IconBtn v-if="product.is_favorite"
+                                                                @click="addToWishlist(product.id)"
+                                                                icon="fa-solid fa-heart"
+                                                                style="background-color:rgba(255, 255, 255, 0.8);color:#fe919d" />
+                                                            <IconBtn v-else @click="addToWishlist(product.id)"
+                                                                icon="fa-regular fa-heart"
                                                                 style="background-color:rgba(255, 255, 255, 0.8);color:#fe919d" />
                                                         </div>
-                                                        <h5 class="card-title fw-bold">Oversized T-shirt</h5>
-                                                        <p class="card-text text-muted" style="font-size:10px">Some
-                                                            quick example
-                                                            text to build on the card
-                                                            title
-                                                            and make up the bulk of
-                                                            the
-                                                            card's content.</p>
+                                                        <h5 class="card-title fw-bold">{{ product.name }}</h5>
+                                                        <p class="card-text text-muted" style="font-size:10px">
+                                                            {{ product.description }}
+                                                        </p>
                                                         <div class="fw-bold d-flex align-items-center"
                                                             style="color:#fe919d">$23000
                                                             <span
@@ -66,6 +72,11 @@
                             </template>
                         </div>
                     </div>
+                    <div v-if="products.length == 0" class="d-flex justify-content-center items-center ms-5" style="height:80vh">
+                        <div class="text-center">
+                            <img src="../../../../public/images/nodata.svg" class="w-100">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,9 +88,37 @@ import Layout from './Layouts/Layout.vue';
 import Product from './Components/Product.vue';
 import Carousel from './Components/Carousel.vue';
 import IconBtn from './Components/IconBtn.vue';
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { usePage,router } from '@inertiajs/vue3';
+import { route } from 'ziggy-js';
 
-const dialog = ref(false)
+const page = usePage();
+
+const props = defineProps({
+    products: Object
+})
+const dialogArray = ref([]);
+
+onMounted(() => {
+    props.products.forEach(() => {
+        dialogArray.value.push(false)
+    })
+
+    if (page.props.flash) {
+        if (page.props.flash.success) {
+            toast.success(page.props.flash.success);
+            page.props.flash.success = null;
+        } else if (page.props.flash.failed) {
+            toast.error(page.props.flash.failed);
+            page.props.flash.failed = null;
+        }
+    }
+})
+
+const addToWishlist = (id) => {
+    router.post(route('wish_lists.create'), { product_id: id });
+}
+
 
 </script>
 

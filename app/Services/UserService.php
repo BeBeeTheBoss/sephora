@@ -59,7 +59,7 @@ class UserService
         return [
             'name' => $request->name,
             'email' => $request->email,
-            'phone' => $request->phone,
+            'phone' => $request->phone ?? null,
             'password' => Hash::make($request->password)
         ];
     }

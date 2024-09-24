@@ -2,9 +2,9 @@
     <Layout>
         <div class="row w-100 d-flex justify-content-center mt-lg-4 mt-md-4 mt-sm-3 mt-3">
             <div class="col-lg-8 col-md-10 col-sm-12 col-12">
-                <Carousel from="ads" :images="products[0].images" class="d-lg-block d-md-block d-sm-none d-none ps-5"
+                <Carousel from="ads" :images="products[0]?.images" class="d-lg-block d-md-block d-sm-none d-none ps-5"
                     height="450px" />
-                <Carousel from="phone" :images="products[0].images" class="d-lg-none d-md-none d-sm-block d-block"
+                <Carousel from="phone" :images="products[0]?.images" class="d-lg-none d-md-none d-sm-block d-block"
                     height="200px" style="margin-left: 15px" />
             </div>
             <div class="col-lg-4 col-md-10 col-sm-12 col-12 mt-lg-0 mt-md-3 mt-sm-3 mt-3">
@@ -87,10 +87,10 @@
             <div class="col-lg-3 col-md-4 mb-3" v-for="product, index in products" :key="product">
                 <Product :name="product.name" :categoryName="product.category.name" :image="product.images[0].image"
                     :price="product.price" :discount_price="product.discount_price" :description="product.description"
-                    @click="dialogArray[index] = true" />
+                    @click="dialogArray[index].show = true" />
                 <template>
                     <div class="text-center pa-4">
-                        <v-dialog v-model="dialogArray[index]" width="auto">
+                        <v-dialog v-model="dialogArray[index]['show']" width="auto">
                             <v-card max-width="400" class="pb-3" style="position:relative">
                                 <div style="position:absolute;top:10px;right:10px;z-index:3">
                                     <font-awesome-icon @click="dialogArray[index] = false" icon="fa-solid fa-xmark"
@@ -106,7 +106,9 @@
                                                 <span class="text-muted" style="font-size:12px">{{ product.category.name
                                                     }} <font-awesome-icon class="ms-2 me-1" icon="fa-solid fa-fire"
                                                         style="font-size: 13px;color:#fe919d" />12</span>
-                                                <IconBtn @click="addToWishlist(product.id)" icon="fa-regular fa-heart"
+                                                <IconBtn v-if="product.is_favorite" @click="addToWishlist(product.id)" icon="fa-solid fa-heart"
+                                                    style="background-color:rgba(255, 255, 255, 0.8);color:#fe919d" />
+                                                <IconBtn v-else @click="addToWishlist(product.id)" icon="fa-regular fa-heart"
                                                     style="background-color:rgba(255, 255, 255, 0.8);color:#fe919d" />
                                             </div>
                                             <h5 class="card-title fw-bold">{{ product.name }}</h5>
@@ -171,6 +173,7 @@ import IconBtn from "./Components/IconBtn.vue";
 import { useToast } from "vue-toastification";
 import { route } from "ziggy-js";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 const toast = useToast();
 const page = usePage();
@@ -182,20 +185,24 @@ const props = defineProps({
 
 console.log(props.products);
 
+
 const dialogArray = ref([]);
 
 onMounted(() => {
     props.products.forEach(product => {
-        dialogArray.value.push(false)
+        dialogArray.value.push({
+            show : false,
+            quantity : 1
+        })
     })
 
     if (page.props.flash) {
         if (page.props.flash.success) {
             toast.success(page.props.flash.success);
-            axios.post('/destroy-session');
+            page.props.flash.success = null;
         } else if (page.props.flash.failed) {
             toast.error(page.props.flash.failed);
-            axios.post('/destroy-session');
+            page.props.flash.failed = null;
         }
     }
 })
@@ -205,10 +212,10 @@ onUpdated(() => {
     if (page.props.flash) {
         if (page.props.flash.success) {
             toast.success(page.props.flash.success);
-            axios.post('/destroy-session');
+            page.props.flash.success = null;
         } else if (page.props.flash.failed) {
             toast.error(page.props.flash.failed);
-            axios.post('/destroy-session');
+            page.props.flash.failed = null;
         }
     }
 
