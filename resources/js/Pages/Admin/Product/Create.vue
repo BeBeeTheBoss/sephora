@@ -1,6 +1,6 @@
 <template>
     <Layout>
-    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh">
+    <div class="container d-flex justify-content-center align-items-center">
         <div class="col-md-6 border border-danger rounded-3 p-3">
             <form @submit.prevent="submit">
                 <h4 class="text-center">Create Product</h4>

@@ -23,7 +23,6 @@
                     <td class="d-flex">
                         <div class="col-md-6" v-for="image in product.images" :key="image.id">
                             <v-img :src="image.image" style="width:120px;height:120px;">
-
                             </v-img>
                         </div>
                     </td>
