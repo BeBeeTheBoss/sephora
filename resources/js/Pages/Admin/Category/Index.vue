@@ -15,7 +15,7 @@
          <tr v-for="(category,index) in categories" :key="category.id">
            <td>{{index+1}}</td>
            <td>
-            <img v-if="category.image" :src="category.image" alt="" style="width:120px;height:100px;">
+            <img v-if="category.image" :src="category.image" alt="" style="width:100px;height:100px;object-fit:cover;border-radius:50%;">
             <div v-else>-</div>
            </td>
            <td>{{category.name}}</td>
