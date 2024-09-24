@@ -1,7 +1,7 @@
 
 <template>
     <Layout>
-     <Link :href="$route('categories.create')"><button class="btn mb-3 float-end btn-sm text-white" style="background-color:#ED9077;">+ Add</button></Link>
+     <Link :href="$route('categories.create')"><button class="btn mb-3 float-end btn-sm text-white" style="background-color:#ff006e;">+ Add</button></Link>
      <table class="table table-bordered" style="border:1px solid #ff006e;">
        <thead>
          <tr class="table-danger">

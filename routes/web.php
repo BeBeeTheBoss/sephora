@@ -31,23 +31,23 @@ use App\Models\WishList;
 */
 
 Route::get('/profile', function () {
-    if(Auth::check()){
+    if (Auth::check()) {
         return response()->json(Auth::user());
     }
 
     return response()->json(null);
 });
 
-Route::get('/wishlists-count',function(){
-    return response()->json(WishList::where('user_id',Auth::user()->id)->count());
+Route::get('/wishlists-count', function () {
+    return response()->json(WishList::where('user_id', Auth::user()->id)->count());
 });
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'loginPage')->name('loginPage');
-    Route::get('/sign-up','signUpPage')->name('signUpPage');
-    Route::post('/login','login')->name('login');
-    Route::post('/sign-up','signUp')->name('signUp');
-    Route::post('/logout','logout')->name('logout');
+    Route::get('/sign-up', 'signUpPage')->name('signUpPage');
+    Route::post('/login', 'login')->name('login');
+    Route::post('/sign-up', 'signUp')->name('signUp');
+    Route::post('/logout', 'logout')->name('logout');
 });
 
 Route::post('/destroy-session', function () {
@@ -122,8 +122,11 @@ Route::prefix('/admin')->group(function () {
     });
 
     //Carousel Images
-    Route::group(['prefix' => 'carousel_images', 'controller' => CarouselImageController::class, 'as' => 'carousel_images.'], function(){
+    Route::group(['prefix' => 'carousel_images', 'controller' => CarouselImageController::class, 'as' => 'carousel_images.'], function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::post('/{id}/delete', 'destroy')->name('destroy');
     });
 
     //Feedbacks

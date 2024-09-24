@@ -39,7 +39,7 @@
         </li>
 
         <li class="nav-item">
-          <Link :class="isActive('/admin/carousel-images')" :href="$route('carousel-images.index')">
+          <Link :class="isActive('/admin/carousel_images')" :href="$route('carousel_images.index')">
             <i class="fas fa-users"></i> Carousel Images
           </Link>
         </li>
