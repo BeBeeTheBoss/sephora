@@ -1,12 +1,12 @@
 <template>
     <Layout>
         <Link href="/admin/products/create"><button class="btn mb-3 float-end btn-sm text-white"
-            style="background-color: #ed9077">
+            style="background-color: #ff006e">
             + Add
         </button></Link>
-        <table class="table table-bordered">
+        <table class="table table-bordered" style="border:1px solid #ff006e;">
             <thead>
-                <tr>
+                <tr class="table-danger">
                     <th>ID</th>
                     <th>Images</th>
                     <th>Category Name</th>
@@ -20,10 +20,13 @@
             <tbody>
                 <tr v-for="(product, index) in products" :key="product.id">
                     <td>{{ index + 1 }}</td>
-                    <td class="d-flex">
-                        <div class="col-md-6" v-for="image in product.images" :key="image.id">
-                            <v-img :src="image.image" style="width:120px;height:120px;">
-                            </v-img>
+                    <td>
+                        <div class="row p-2">
+                            <div class="col-md-3" v-for="image in product.images" :key="image.id">
+                                <v-img :src="image.image"
+                                 class="my-2 mx-auto" style="width:130px;height:130px;object-fit:cover;border:1px solid green;border-radius:50%;">
+                                </v-img>
+                            </div>
                         </div>
                     </td>
                     <td>{{ product.category.name }}</td>
@@ -49,7 +52,6 @@
 
 <script setup>
 import Layout from "../Layouts/Layout.vue";
-import { ref, computed } from "vue";
 import { useForm } from "@inertiajs/vue3";
 const props = defineProps({
     products: Object,

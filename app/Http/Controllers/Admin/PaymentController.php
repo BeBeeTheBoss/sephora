@@ -47,15 +47,18 @@ class PaymentController extends Controller
             ]);
             $payment->update($data);
         }
-
-
-        if ($request->is_active === false) {
-            $payment->update([
-                'is_active' => 0
-            ]);
-        }
-
         return to_route('payments.index');
+    }
+
+    public function toggleSwitch(Request $request){
+        $payment = $this->model->find($request->id);
+        $request->is_active = $request->is_active ? 1 : 0;
+        $isActive = $request->is_active;
+        $payment->update([
+            'is_active' => $isActive
+        ]);
+        return back();
+
     }
 
     public function destroy($id)
