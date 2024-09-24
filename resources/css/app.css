@@ -5,6 +5,10 @@
 @tailwind components;
 @tailwind utilities;
 
+thead tr th{
+    border:none;
+}
+
 .poppins-thin {
     font-family: "Poppins", system-ui;
     font-weight: 100;

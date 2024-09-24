@@ -1,8 +1,8 @@
 <template>
     <Layout>
-        <table class="table table-bordered">
+        <table class="table table-bordered" style="border:1px solid #ff006e;">
             <thead>
-                <tr>
+                <tr class="table-danger">
                     <th>ID</th>
                     <th>User Name</th>
                     <th>Payment</th>

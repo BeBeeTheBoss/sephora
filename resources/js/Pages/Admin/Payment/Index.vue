@@ -1,14 +1,14 @@
 <template>
     <Layout>
         <Link :href="$route('payments.create')">
-            <button class="btn mb-3 float-end text-white btn-sm" style="background-color:#ff006e;">
-                + Add
-            </button>
+        <button class="btn mb-3 float-end text-white btn-sm" style="background-color:#ff006e;">
+            + Add
+        </button>
         </Link>
 
-        <table class="table table-bordered">
+        <table class="table table-bordered" style="border:1px solid #ff006e;">
             <thead>
-                <tr>
+                <tr class="table-danger">
                     <th>ID</th>
                     <th>Name</th>
                     <th>Is Active</th>
@@ -23,37 +23,24 @@
                             {{ payment.name }}
                         </div>
                         <div v-else>
-                            <v-textarea
-                                autofocus
-                                rows="1"
-                                width="200"
-                                v-model="form.name"
-                                variant="outlined"
-                                label="Name"
-                                hide-details
-                                required
-                            ></v-textarea>
+                            <v-textarea autofocus rows="1" width="200" v-model="form.name" variant="outlined"
+                                label="Name" hide-details required></v-textarea>
                         </div>
                     </td>
                     <td>
                         <v-col cols="6">
-                            <v-switch @change="logSwitchValue(payment.id)" v-model="switchValue[payment.id]" color="primary" :model-value="payment.is_active" label="on"></v-switch>
+                            <p class="d-none">{{ payment.is_active = payment.is_active ? true : false }}</p>
+                            <v-switch @change="changeSwitchValue(payment.is_active, payment.id)" focused="true"
+                                v-model="payment.is_active" color="primary"></v-switch>
                         </v-col>
                     </td>
                     <td>
                         <form @submit.prevent="deletePayment(payment.id)">
-                            <button
-                                @click="editPayment(payment)"
-                                v-if="editId !== payment.id"
-                                class="btn btn-warning btn-sm me-2"
-                            >
+                            <button @click="editPayment(payment)" v-if="editId !== payment.id"
+                                class="btn btn-warning btn-sm me-2">
                                 <font-awesome-icon icon="fa-regular fa-pen-to-square" />
                             </button>
-                            <button
-                                @click="savePayment(payment.id)"
-                                v-else
-                                class="btn btn-success btn-sm me-2"
-                            >
+                            <button @click="savePayment(payment.id)" v-else class="btn btn-success btn-sm me-2">
                                 Save
                             </button>
                             <button class="btn btn-danger btn-sm">
@@ -69,43 +56,42 @@
 
 <script setup>
 import Layout from '../Layouts/Layout.vue';
-import { useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import { update } from '../../Composables/httpMethod.js';
 import { del } from '../../Composables/httpMethod.js';
+import { useForm } from '@inertiajs/vue3';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 const props = defineProps({
     payments: Array,
 });
 
+const form = useForm({
+    name : ''
+})
 
-// Initialize switchValue with default states
-const switchValue = ref({});
-props.payments.forEach(payment => {
-    switchValue.value[payment.id] = true; // or false based on your initial state
-});
 
-const logSwitchValue = (id) => {
-
-    const form = useForm({
-    id : id,
-    name: '',
-    is_active : switchValue.value[id]
-});
-    // console.log(`Current state is: ${switchValue.value[id]}`);
-    update(form, route('payments.update', id));
+const changeSwitchValue = (is_active, id) => {
+    const formForSwitch = useForm({
+        id: id,
+        is_active: is_active
+    })
+    let options = {
+        preserveScroll: true,
+        onSuccess: () => {
+            toast.success("Congrats, it's successful!", {autoClose: 6000})
+        }
+    }
+    formForSwitch.post(route('payments.toggle'),options);
 };
 
-// Form state to hold the current payment's name
-
-
 const editPage = ref(false);
-const editId = ref(null);  // To track which payment is being edited
+const editId = ref(null);
 
-// Function to edit the payment, sets the form.name to the selected payment's name
 const editPayment = (payment) => {
     form.name = payment.name;
-    editId.value = payment.id; // Use payment.id instead of index
+    editId.value = payment.id;
     editPage.value = true;
 };
 

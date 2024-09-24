@@ -6,6 +6,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\WishListController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CarouselImageController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ProductController;
@@ -102,7 +103,13 @@ Route::prefix('/admin')->group(function () {
         Route::post('/', 'store')->name('store');
         Route::get('/{id}/edit', 'edit')->name('edit');
         Route::post('/{id}/update', 'update')->name('update');
+        Route::post('/toggleSwitch', 'toggleSwitch')->name('toggle');
         Route::post('/{id}/delete', 'destroy')->name('destroy');
+    });
+
+    //Carousel Images
+    Route::group(['prefix' => 'carousel_images', 'controller' => CarouselImageController::class, 'as' => 'carousel_images.'], function(){
+        Route::get('/', 'index')->name('index');
     });
 
     //Feedbacks

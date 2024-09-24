@@ -2,7 +2,7 @@
     <Layout>
         <div class="row">
             <div class="col-md-6">
-                <h4 class="text-center">Daily New Order</h4>
+                <h5 class="text-center">Daily New Order</h5>
                 <canvas id="daily_new_order"></canvas>
             </div>
         </div>
@@ -56,7 +56,7 @@ onMounted(() => {
                 label: "Daily New orders",
                 data: orderCountsByDay,
                 fill: false,
-                borderColor: 'rgb(100,200,60)',
+                borderColor: 'rgb(255,102,204)',
                 tension: 0.1
             },
         ],

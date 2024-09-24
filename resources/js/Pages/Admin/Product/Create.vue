@@ -48,8 +48,8 @@
 
                     <v-col cols="12">
                         <button type="button"
-                            class="my-3 ms-2 bg-red-500 inline-flex items-center px-5 py-3 border rounded-md font-semibold text-xs tracking-widest text-white transition ease-in-out duration-150"
-                            @click="addImage">
+                            class="my-3 ms-2 inline-flex items-center px-5 py-3 border rounded-md font-semibold text-xs tracking-widest text-white transition ease-in-out duration-150"
+                            @click="addImage" style="background-color: #ff006e">
                             <font-awesome-icon icon="fa-solid fa-plus" class="me-2" />
                             Add Image
                         </button>

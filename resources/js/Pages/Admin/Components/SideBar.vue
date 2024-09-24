@@ -15,14 +15,14 @@
         </li>
 
         <li class="nav-item">
-          <Link :class="isActive('/admin/orders')" :href="$route('orders.index')">
-            <i class="fas fa-users"></i> Orders
+          <Link :class="isActive('/admin/products')" :href="$route('products.index')">
+            <i class="fas fa-users"></i> Products
           </Link>
         </li>
 
         <li class="nav-item">
-          <Link :class="isActive('/admin/products')" :href="$route('products.index')">
-            <i class="fas fa-users"></i> Products
+          <Link :class="isActive('/admin/orders')" :href="$route('orders.index')">
+            <i class="fas fa-users"></i> Orders
           </Link>
         </li>
 
@@ -35,6 +35,12 @@
         <li class="nav-item">
           <Link :class="isActive('/admin/payments')" :href="$route('payments.index')">
             <i class="fas fa-users"></i> Payments
+          </Link>
+        </li>
+
+        <li class="nav-item">
+          <Link :class="isActive('/admin/carousel-images')" :href="$route('carousel-images.index')">
+            <i class="fas fa-users"></i> Carousel Images
           </Link>
         </li>
       </ul>
