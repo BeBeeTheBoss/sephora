@@ -1,7 +1,7 @@
 <template>
     <layout>
         <div class="container-fluid">
-            <div class="row mt-3">
+            <div class="row mt-3" v-if="products.length != 0">
                 <div class="col-12">
                     <h5 class="fw-bold my-3">My wishlists</h5>
                     <div class="row">
@@ -72,13 +72,14 @@
                             </template>
                         </div>
                     </div>
-                    <div v-if="products.length == 0" class="d-flex justify-content-center items-center ms-5" style="height:80vh">
-                        <div class="text-center">
-                            <img src="../../../../public/images/nodata.svg" class="w-100">
-                        </div>
-                    </div>
                 </div>
             </div>
+            <div v-else class="row flex justify-center align-items-center" style="height:90vh">
+                    <div class="col-2 text-center">
+                        <img src="../../../../public/images/nodata.svg" class="">
+                        There's no data in your wishlist.
+                    </div>
+                </div>
         </div>
     </layout>
 </template>

@@ -64,6 +64,7 @@ Route::controller(HomePageController::class)->group(function () {
 //cart
 Route::group(['prefix' => '/cart', 'controller' => CartController::class, 'as' => 'cart.'], function () {
     Route::get('/', 'index')->name('cart');
+    Route::post('/','store')->name('create');
 });
 
 //wishlist
