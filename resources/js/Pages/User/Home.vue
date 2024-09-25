@@ -26,41 +26,6 @@
                         <ListHeader name="Explore" icon="fa-solid fa-magnifying-glass" />
                     </div>
                 </div>
-                <!-- <div class="row w-100 d-lg-block d-md-block d-sm-none d-none">
-                    <h5 class="fw-bold mb-2">Recommended for you</h5>
-                    <div class="row w-100">
-                        <div class="col-6" style="position: relative; cursor: pointer">
-                            <img src="https://www.jarsking.com/wp-content/uploads/2023/05/HDPE-Cosmetic-Packaging-01.jpg"
-                                class="w-100 rounded" style="
-                  height: 100%;
-                  object-fit: cover;
-                  object-position: center;
-                  opacity: 0.6;
-                " />
-                            <span class="fw-bold" style="
-                  position: absolute;
-                  top: 50%;
-                  left: 50%;
-                  transform: translate(-50%, -50%);
-                ">All-in-one set <font-awesome-icon icon="fa-solid fa-chevron-right" /></span>
-                        </div>
-                        <div class="col-6" style="position: relative; cursor: pointer">
-                            <img src="https://www.hcpackaging.com/app/uploads/2022/04/1004x708_Lotus-Skincare-Collection.jpg"
-                                class="w-100 rounded" style="
-                  height: 100%;
-                  object-fit: cover;
-                  object-position: center;
-                  opacity: 0.6;
-                " />
-                            <span class="fw-bold" style="
-                  position: absolute;
-                  top: 50%;
-                  left: 50%;
-                  transform: translate(-50%, -50%);
-                ">Skincare set <font-awesome-icon icon="fa-solid fa-chevron-right" /></span>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
         <div class="d-flex justify-content-between align-items-center px-lg-5 px-md-3 px-sm-2 px-2 mb-3">

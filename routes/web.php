@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FeedbackController;
 use App\Http\Controllers\OrderController as UserOrderController;
 use App\Http\Controllers\ProductController as UserProductController;
+use App\Models\Cart;
 use App\Models\WishList;
 
 /*
@@ -42,6 +43,10 @@ Route::get('/wishlists-count', function () {
     return response()->json(WishList::where('user_id', Auth::user()->id)->count());
 });
 
+Route::get('/cart-count', function () {
+    return response()->json(Cart::where('user_id', Auth::user()->id)->count());
+});
+
 Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'loginPage')->name('loginPage');
     Route::get('/sign-up', 'signUpPage')->name('signUpPage');
@@ -64,7 +69,8 @@ Route::controller(HomePageController::class)->group(function () {
 //cart
 Route::group(['prefix' => '/cart', 'controller' => CartController::class, 'as' => 'cart.'], function () {
     Route::get('/', 'index')->name('cart');
-    Route::post('/','store')->name('create');
+    Route::post('/', 'store')->name('create');
+    Route::delete('/', 'destroy')->name('delete');
 });
 
 //wishlist
@@ -81,6 +87,7 @@ Route::group(['prefix' => '/product', 'controller' => UserProductController::cla
 //orders
 Route::group(['prefix' => '/orders', 'controller' => UserOrderController::class, 'as' => 'orders.'], function () {
     Route::get('/', 'index')->name('orderPage');
+    Route::post('/', 'store')->name('create');
 });
 
 Route::prefix('/admin')->group(function () {

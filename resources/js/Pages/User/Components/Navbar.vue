@@ -25,13 +25,15 @@
                 </div>
                 <div class="me-3 d-flex align-items-center navIcon" :class="isActive('/cart')" style="cursor:pointer">
                     <Link href="/cart" style="color:black">
-                    <IconBtn icon="fa-solid fa-cart-shopping" count="12" />
+                    <IconBtn icon="fa-solid fa-cart-shopping" v-if="cartCount" :count="cartCount" />
+                    <IconBtn icon="fa-solid fa-cart-shopping" v-else />
                     </Link>
                     <!-- <span>Cart</span> -->
                 </div>
                 <div class="me-3 d-flex align-items-center navIcon" :class="isActive('/orders')" style="cursor:pointer">
                     <Link href="/orders" style="color:black">
-                    <IconBtn icon="fa-solid fa-bag-shopping" count="2" />
+                    <IconBtn icon="fa-solid fa-bag-shopping" v-if="orderCount" :count="orderCount" />
+                    <IconBtn icon="fa-solid fa-bag-shopping" v-else />
                     </Link>
                     <!-- <span>Orders</span> -->
                 </div>
@@ -93,6 +95,7 @@ const isActive = (path) => {
 
 const profile = ref(null);
 const wishlistsCount = ref(null);
+const cartCount = ref(null);
 
 onMounted(() => {
     axios.get('/profile').then(response => {
@@ -100,7 +103,9 @@ onMounted(() => {
     })
     axios.get('/wishlists-count').then(response => {
         wishlistsCount.value = response.data
-
+    })
+    axios.get('/cart-count').then(response => {
+        cartCount.value = response.data
     })
 })
 
