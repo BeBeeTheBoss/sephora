@@ -1,8 +1,8 @@
 
 <template>
     <Layout>
-     <Link :href="$route('categories.create')"><button class="btn mb-3 float-end btn-sm text-white" style="background-color:#ff006e;">+ Add</button></Link>
-     <table class="table table-bordered" style="border:1px solid #ff006e;">
+     <Link :href="$route('categories.create')"><button class="btn mb-3 float-end " style="border:1px solid #ff006e;">+ Create New</button></Link>
+     <table class="table">
        <thead>
          <tr class="table-danger">
            <th>ID</th>
@@ -19,10 +19,11 @@
             <div v-else>-</div>
            </td>
            <td>{{category.name}}</td>
+
            <td>
             <form @submit.prevent="deleteCategory(category.id)">
-             <Link :href="`/admin/categories/${category.id}/edit`"><button class="btn btn-warning btn-sm me-2"><font-awesome-icon icon="fa-regular fa-pen-to-square" /></button></Link>
-             <button class="btn btn-danger btn-sm"><font-awesome-icon icon="fa-solid fa-trash" /></button>
+             <Link :href="`/admin/categories/${category.id}/edit`"><button class="btn btn-sm me-2 border">Edit</button></Link>
+             <button class="btn btn-sm" style="border:1px solid #ff0054;">Delete</button>
             </form>
            </td>
          </tr>
@@ -44,7 +45,6 @@ const form = useForm({})
  const deleteCategory = (id) => {
     del(form,route('categories.destroy',id))
  }
-
 
  </script>
 

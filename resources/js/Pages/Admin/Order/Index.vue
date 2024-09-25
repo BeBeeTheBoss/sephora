@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <table class="table table-bordered" style="border:1px solid #ff006e;">
+        <table class="table">
             <thead>
                 <tr class="table-danger">
                     <th>ID</th>
@@ -24,8 +24,8 @@
                     <td>{{ order.ss }}</td>
                     <td>
                         <form @submit.prevent>
-                            <button @click="AcceptOrReject(order.id,'accept')" class="btn btn-success btn-sm me-2">Accept</button>
-                            <button @click="AcceptOrReject(order.id,'reject')" class="btn btn-danger btn-sm">Reject</button>
+                            <button @click="AcceptOrReject(order.id,'accept')" class="btn border btn-sm me-2">Accept</button>
+                            <button @click="AcceptOrReject(order.id,'reject')" class="btn btn-sm" style="border:1px solid #ff0054;">Reject</button>
                         </form>
                     </td>
                 </tr>

@@ -1,46 +1,45 @@
 <template>
-
-    <div :class="['sidebar', { 'collapsed': isCollapsed }]">
-      <ul class="nav flex-column">
+    <div class="bg-white" :class="['sidebar', { 'collapsed': isCollapsed }]" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+      <ul class="nav flex-column mt-3">
         <li class="nav-item">
           <Link :class="isActive('/admin/dashboard')" :href="$route('dashboard')">
-            <i class="fas fa-home"></i> Dashboard
+            <i class="fas fa-home"></i> <h6 class="text-black">Dashboard</h6>
           </Link>
         </li>
 
         <li class="nav-item">
           <Link :class="isActive('/admin/categories')" :href="$route('categories.index')">
-            <i class="fas fa-users"></i> Categories
+            <i class="fas fa-users"></i> <h6 class="text-black">Categories</h6>
           </Link>
         </li>
 
         <li class="nav-item">
           <Link :class="isActive('/admin/products')" :href="$route('products.index')">
-            <i class="fas fa-users"></i> Products
+            <i class="fas fa-users"></i> <h6 class="text-black">Products</h6>
           </Link>
         </li>
 
         <li class="nav-item">
           <Link :class="isActive('/admin/orders')" :href="$route('orders.index')">
-            <i class="fas fa-users"></i> Orders
+            <i class="fas fa-users"></i> <h6 class="text-black">Orders</h6>
           </Link>
         </li>
 
         <li class="nav-item">
           <Link :class="isActive('/admin/feedbacks')" :href="$route('feedback')">
-            <i class="fas fa-users"></i> FeedBacks
+            <i class="fas fa-users"></i> <h6 class="text-black">FeedBacks</h6>
           </Link>
         </li>
 
         <li class="nav-item">
           <Link :class="isActive('/admin/payments')" :href="$route('payments.index')">
-            <i class="fas fa-users"></i> Payments
+            <i class="fas fa-users"></i> <h6 class="text-black">Payments</h6>
           </Link>
         </li>
 
         <li class="nav-item">
           <Link :class="isActive('/admin/carousel_images')" :href="$route('carousel_images.index')">
-            <i class="fas fa-users"></i> Carousel Images
+            <i class="fas fa-users"></i> <h6 class="text-black">Ads Images</h6>
           </Link>
         </li>
       </ul>

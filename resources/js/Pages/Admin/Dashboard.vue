@@ -1,6 +1,9 @@
 <template>
     <Layout>
         <div class="row">
+            <div class="col-md-3"></div>
+        </div>
+        <div class="row">
             <div class="col-md-6">
                 <h5 class="text-center">Daily New Order</h5>
                 <canvas id="daily_new_order"></canvas>
@@ -11,12 +14,39 @@
 
 <script setup>
 import Layout from './Layouts/Layout.vue'
-import { onMounted } from 'vue';
+import { ref,onMounted } from 'vue';
 import Chart from "chart.js/auto";
 
 const props = defineProps({
     orders: Array
 })
+
+const cards = ref([
+    {
+        id : '',
+        title : '',
+        count : '',
+        icon : ''
+    },
+    {
+        id : '',
+        title : '',
+        count : '',
+        icon : ''
+    },
+    {
+        id : '',
+        title : '',
+        count : '',
+        icon : ''
+    },
+     {
+        id : '',
+        title : '',
+        count : '',
+        icon : ''
+    }
+])
 
 onMounted(() => {
     const ctx = document.getElementById('daily_new_order');

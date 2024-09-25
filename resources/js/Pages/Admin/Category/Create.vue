@@ -5,12 +5,9 @@
                 <h4 class="text-center">Create Category</h4>
                 <v-row>
                     <v-col cols="12">
-                        <v-textarea autofocus rows="1" v-model="form.name" variant="outlined" label="Name" hide-details
-                            ></v-textarea>
-                            <div
-                            v-if="form.errors.name"
-                            class="text-sm mt-2 text-red-400"
-                        >
+                        <v-textarea autofocus rows="1" v-model="form.name" variant="outlined" label="Name"
+                            hide-details></v-textarea>
+                        <div v-if="form.errors.name" class="text-sm mt-2 text-red-400">
                             {{ form.errors.name }}
                         </div>
                     </v-col>
@@ -28,8 +25,12 @@
                     </v-col>
 
                 </v-row>
-
-                <button class="btn w-100 rounded-lg my-2 text-white" style="background-color:#ff595e;">Submit</button>
+                <div class="d-flex ">
+                    <button class="btn w-100 rounded-lg my-2 me-2 text-white"
+                        style="background-color: #2a9d8f;">Back</button>
+                    <button class="btn w-100 rounded-lg my-2 text-white"
+                        style="background-color:#f77f00">Submit</button>
+                </div>
             </form>
         </div>
     </div>

@@ -14,8 +14,8 @@
                             <v-img class="rounded-lg mb-4" :height="300" cover v-if="formImageUrl"
                                 :src="formImageUrl" />
                         </div>
-                    </v-col>
 
+                    </v-col>
                 </v-row>
 
                 <button class="btn w-100 rounded-lg my-2 text-white" style="background-color:#ff595e;">Submit</button>
@@ -33,9 +33,7 @@ const form = useForm({
     image : null,
 })
 
-const formImageUrl = ref([]);
-
-
+const formImageUrl = ref(null);
 const onFileChange = (e) => {
     const file = e.target.files[0];
         formImageUrl.value = URL.createObjectURL(file);

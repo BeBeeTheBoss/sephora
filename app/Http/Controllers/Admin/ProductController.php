@@ -32,14 +32,15 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'category_id' => 'required',
-        //     'name' => 'required',
-        //     'price' => 'required',
-        //     'discount_price' => 'required',
-        //     'description' => 'required',
-        //     'is_active' => 'required',
-        // ]);
+        $request->validate([
+            'category_id' => 'required',
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'discount_price' => 'required',
+            'images.*' => 'nullable|mimes:jpg,jpeg,png,webp'
+
+        ]);
         $this->productService->create($request);
         return redirect()->route('products.index');
     }

@@ -1,12 +1,11 @@
 <template>
     <Layout>
         <Link :href="$route('payments.create')">
-        <button class="btn mb-3 float-end text-white btn-sm" style="background-color:#ff006e;">
-            + Add
-        </button>
+        <button class="btn mb-3 float-end" style="border:1px solid #ff006e;">
+            + Create New </button>
         </Link>
 
-        <table class="table table-bordered" style="border:1px solid #ff006e;">
+        <table class="table">
             <thead>
                 <tr class="table-danger">
                     <th>ID</th>
@@ -37,14 +36,14 @@
                     <td>
                         <form @submit.prevent="deletePayment(payment.id)">
                             <button @click="editPayment(payment)" v-if="editId !== payment.id"
-                                class="btn btn-warning btn-sm me-2">
-                                <font-awesome-icon icon="fa-regular fa-pen-to-square" />
+                                class="btn border btn-sm me-2">
+                                Edit
                             </button>
                             <button @click="savePayment(payment.id)" v-else class="btn btn-success btn-sm me-2">
                                 Save
                             </button>
-                            <button class="btn btn-danger btn-sm">
-                                <font-awesome-icon icon="fa-solid fa-trash" />
+                            <button class="btn btn-sm" style="border:1px solid #ff0054;">
+                                Delete
                             </button>
                         </form>
                     </td>

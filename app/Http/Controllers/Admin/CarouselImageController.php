@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\CarouselImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class CarouselImageController extends Controller
@@ -40,14 +41,41 @@ class CarouselImageController extends Controller
         return to_route('carousel_images.index');
     }
 
-    public function update(Request $request) {}
+    public function edit($id){
+        $carouselImage = $this->model->find($id);
+        $carouselImage->name = asset('storage/images/' . $carouselImage->name);
+        return inertia('Admin/Carousel-Images/Edit',['carouselImage' => $carouselImage]);
+    }
+
+    public function update(Request $request) {
+        $request->validate([
+            'image' => 'required|mimes:png,jpg,jpeg,webp'
+        ]);
+        $carousel = $this->model->find($request->id);
+
+        if ($request->file('image')) {
+            if ($carousel->name) {
+                File::delete('storage/images/' . $carousel->name);
+            }
+            $carouselImage = $request->file('image');
+            $carouselImageName = uniqid() . '_' . time() . '.' . $carouselImage->getClientOriginalExtension();
+            $carouselImage->storeAs('public/images', $carouselImageName);
+            $carousel->name = $carouselImageName;
+            $carousel->save();
+        }
+        return redirect()->route('carousel_images.index');
+    }
 
 
     public function destroy(Request $request)
     {
-        dd($request->all());
+        $carouselImage = $this->model->find($request->id);
+        if($carouselImage){
+            File::delete('storage/images/' . $carouselImage->name);
+        }
+        $carouselImage->delete();
+        return back();
     }
-    // private function handleImages($request)
     // {
     //     // Delete images marked for removal
     //     if ($request->has('delete_images')) {

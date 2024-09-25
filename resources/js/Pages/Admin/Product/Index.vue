@@ -1,10 +1,10 @@
 <template>
     <Layout>
-        <Link href="/admin/products/create"><button class="btn mb-3 float-end btn-sm text-white"
-            style="background-color: #ff006e">
-            + Add
+        <Link href="/admin/products/create"><button class="btn mb-3 float-end"
+            style="border:1px solid #ff006e">
+            + Create New
         </button></Link>
-        <table class="table table-bordered" style="border:1px solid #ff006e;">
+        <table class="table">
             <thead>
                 <tr class="table-danger">
                     <th>ID</th>
@@ -22,7 +22,7 @@
                     <td>{{ index + 1 }}</td>
                     <td>
                         <div class="row p-2">
-                            <div class="col-md-3" v-for="image in product.images" :key="image.id">
+                            <div class="col-md-12" v-for="image in product.images" :key="image.id">
                                 <v-img :src="image.image"
                                  class="my-2 mx-auto" style="width:130px;height:130px;object-fit:cover;border:1px solid green;border-radius:50%;">
                                 </v-img>
