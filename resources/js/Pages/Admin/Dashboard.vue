@@ -4,6 +4,7 @@
             <div v-for="card in cards" :key="card.id" class="col-md-3">
                 <div class="card bg-gradient-to-r from-pink-200 via-purple-200 to-indigo-200 p-6 rounded-md shadow-md">
                     <div class="border-none text-purple-700 text-lg font-semibold">
+                        
                         {{ card.title }}
                     </div>
                     <div class="card-body ">
@@ -26,12 +27,12 @@
 import Layout from './Layouts/Layout.vue'
 import { ref,onMounted } from 'vue';
 import Chart from "chart.js/auto";
-import DashboardCard from '../Admin/jsonData/DashboardCard.json'
 
-const cards = ref(DashboardCard);
 const props = defineProps({
-    orders: Array
+    orders: Array,
+    dashboardCards : Array
 })
+const cards = ref(props.dashboardCards);
 
 onMounted(() => {
     const ctx = document.getElementById('daily_new_order');

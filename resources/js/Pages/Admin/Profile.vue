@@ -1,16 +1,14 @@
 <template>
     <Layout>
         <!-- Profile Header -->
-        <div class="relative bg-cover bg-center h-64 text-white">
-            <div class="absolute inset-0 opacity-50 w-50 mx-auto" style="background-color: #ff006e;"></div>
-            <div class="relative flex flex-col items-center justify-center h-full">
+            <div class="flex justify-center mt-5">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&s"
-                    alt="Profile Picture" class="w-32 h-32 rounded-full border-4 border-white -mb-16">
+                    alt="Profile Picture" class="w-32 rounded-full" style="border:2px solid green;">
             </div>
-        </div>
+
 
         <!-- Profile Edit Form -->
-        <div class="max-w-4xl mx-auto mt-16 bg-white shadow-md rounded-lg">
+        <div class="max-w-4xl mx-auto bg-white shadow-md rounded-lg">
             <form class="p-6 space-y-6">
                 <h3 class="text-2xl font-semibold">Edit Profile</h3>
 

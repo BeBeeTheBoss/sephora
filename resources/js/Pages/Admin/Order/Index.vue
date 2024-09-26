@@ -16,12 +16,14 @@
             <tbody>
                 <tr v-for="(order, index) in orders" :key="order.id">
                     <td>{{ index + 1 }}</td>
-                    <td>{{ order.user_name }}</td>
-                    <td>{{ order.payment }}</td>
+                    <td>{{ order.user.name }}</td>
+                    <td>{{ order.payment.name }}</td>
                     <td>{{ order.order_code }}</td>
                     <td>{{ order.phone }}</td>
                     <td>{{ order.address }}</td>
-                    <td>{{ order.ss }}</td>
+                    <td>
+                        <img :src="order.ss_image" style="width:80px;height:80px;object-fit:cover;" alt="">
+                    </td>
                     <td>
                         <form @submit.prevent>
                             <button @click="AcceptOrReject(order.id,'accept')" class="btn border btn-sm me-2">Accept</button>

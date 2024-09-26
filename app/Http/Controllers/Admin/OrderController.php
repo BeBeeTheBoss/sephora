@@ -14,7 +14,14 @@ class OrderController extends Controller
 
     public function index()
     {
-        $orders = $this->model->get();
+        $orders = $this->model
+        ->with('user')
+        ->with('payment')
+        ->get();
+
+        foreach($orders as $order){
+            $order->ss_image = asset('storage/images/'. $order->ss_image);
+        }
         return Inertia::render('Admin/Order/Index',['orders' => $orders]);
     }
 }
