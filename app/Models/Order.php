@@ -18,12 +18,18 @@ class Order extends Model
         'ss_image',
     ];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function payment(){
+    public function payment()
+    {
         return $this->belongsTo(Payment::class);
     }
 
+    public function order_products()
+    {
+        return $this->hasMany(OrderProduct::class);
+    }
 }

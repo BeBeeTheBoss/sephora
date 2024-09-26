@@ -15,7 +15,15 @@ class OrderController extends Controller
 
     public function index()
     {
-        return Inertia::render('User/Order');
+        $orders = $this->model->where('user_id',Auth::user()->id)->with('payment')->with('order_products')->get();
+
+        foreach ($orders as $order) {
+            $order['total_price'] = $order->order_products->sum('total_price');
+        }
+
+        return Inertia::render('User/Order',[
+            'orders' => $orders
+        ]);
     }
 
     public function store(Request $request)
