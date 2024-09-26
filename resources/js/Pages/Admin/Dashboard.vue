@@ -1,9 +1,19 @@
 <template>
     <Layout>
-        <div class="row">
-            <div class="col-md-3"></div>
+        <div class="row my-3">
+            <div v-for="card in cards" :key="card.id" class="col-md-3">
+                <div class="card bg-gradient-to-r from-pink-200 via-purple-200 to-indigo-200 p-6 rounded-md shadow-md">
+                    <div class="border-none text-purple-700 text-lg font-semibold">
+                        {{ card.title }}
+                    </div>
+                    <div class="card-body ">
+                    <h6 class="text-purple-700">{{ card.count }}</h6>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <div class="row">
+        <div class="row flex justify-center">
             <div class="col-md-6">
                 <h5 class="text-center">Daily New Order</h5>
                 <canvas id="daily_new_order"></canvas>
@@ -16,37 +26,12 @@
 import Layout from './Layouts/Layout.vue'
 import { ref,onMounted } from 'vue';
 import Chart from "chart.js/auto";
+import DashboardCard from '../Admin/jsonData/DashboardCard.json'
 
+const cards = ref(DashboardCard);
 const props = defineProps({
     orders: Array
 })
-
-const cards = ref([
-    {
-        id : '',
-        title : '',
-        count : '',
-        icon : ''
-    },
-    {
-        id : '',
-        title : '',
-        count : '',
-        icon : ''
-    },
-    {
-        id : '',
-        title : '',
-        count : '',
-        icon : ''
-    },
-     {
-        id : '',
-        title : '',
-        count : '',
-        icon : ''
-    }
-])
 
 onMounted(() => {
     const ctx = document.getElementById('daily_new_order');

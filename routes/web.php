@@ -90,62 +90,63 @@ Route::group(['prefix' => '/orders', 'controller' => UserOrderController::class,
     Route::post('/', 'store')->name('create');
 });
 
-Route::prefix('/admin')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+Route::middleware('auth')->group(function () {
+    Route::group(['prefix' => '/admin', 'middleware' => ['auth.is_admin', 'auth']], function () {
+        Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+        //Categories
+        Route::group(['prefix' => 'categories', 'controller' => CategoryController::class, 'as' => 'categories.'], function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/', 'store')->name('store');
+            Route::get('/{id}/edit', 'edit')->name('edit');
+            Route::post('/{id}/update', 'update')->name('update');
+            Route::post('/{id}/delete', 'destroy')->name('destroy');
+        });
 
-    //Categories
-    Route::group(['prefix' => 'categories', 'controller' => CategoryController::class, 'as' => 'categories.'], function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/create', 'create')->name('create');
-        Route::post('/', 'store')->name('store');
-        Route::get('/{id}/edit', 'edit')->name('edit');
-        Route::post('/{id}/update', 'update')->name('update');
-        Route::post('/{id}/delete', 'destroy')->name('destroy');
-    });
+        //Products
+        Route::group(['prefix' => 'products', 'controller' => ProductController::class, 'as' => 'products.'], function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/', 'store')->name('store');
+            Route::get('/{id}/edit', 'edit')->name('edit');
+            Route::post('/{id}/update', 'update')->name('update');
+            Route::post('/{id}/delete', 'destroy')->name('destroy');
+        });
 
-    //Products
-    Route::group(['prefix' => 'products', 'controller' => ProductController::class, 'as' => 'products.'], function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/create', 'create')->name('create');
-        Route::post('/', 'store')->name('store');
-        Route::get('/{id}/edit', 'edit')->name('edit');
-        Route::post('/{id}/update', 'update')->name('update');
-        Route::post('/{id}/delete', 'destroy')->name('destroy');
-    });
+        //Orders
+        Route::group(['prefix' => 'orders', 'controller' => OrderController::class, 'as' => 'orders.'], function () {
+            Route::get('/', 'index')->name('index');
+        });
 
-    //Orders
-    Route::group(['prefix' => 'orders', 'controller' => OrderController::class, 'as' => 'orders.'], function () {
-        Route::get('/', 'index')->name('index');
-    });
+        //Payments
+        Route::group(['prefix' => 'payments', 'controller' => PaymentController::class, 'as' => 'payments.'], function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/', 'store')->name('store');
+            Route::get('/{id}/edit', 'edit')->name('edit');
+            Route::post('/{id}/update', 'update')->name('update');
+            Route::post('/toggleSwitch', 'toggleSwitch')->name('toggle');
+            Route::post('/{id}/delete', 'destroy')->name('destroy');
+        });
 
-    //Payments
-    Route::group(['prefix' => 'payments', 'controller' => PaymentController::class, 'as' => 'payments.'], function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/create', 'create')->name('create');
-        Route::post('/', 'store')->name('store');
-        Route::get('/{id}/edit', 'edit')->name('edit');
-        Route::post('/{id}/update', 'update')->name('update');
-        Route::post('/toggleSwitch', 'toggleSwitch')->name('toggle');
-        Route::post('/{id}/delete', 'destroy')->name('destroy');
-    });
+        //Carousel Images
+        Route::group(['prefix' => 'carousel_images', 'controller' => CarouselImageController::class, 'as' => 'carousel_images.'], function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/', 'store')->name('store');
+            Route::get('/{id}/edit', 'edit')->name('edit');
+            Route::post('/{id}/update', 'update')->name('update');
+            Route::post('/{id}/delete', 'destroy')->name('destroy');
+        });
 
-    //Carousel Images
-    Route::group(['prefix' => 'carousel_images', 'controller' => CarouselImageController::class, 'as' => 'carousel_images.'], function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/create', 'create')->name('create');
-        Route::post('/', 'store')->name('store');
-        Route::get('/{id}/edit', 'edit')->name('edit');
-        Route::post('/{id}/update', 'update')->name('update');
-        Route::post('/{id}/delete', 'destroy')->name('destroy');
-    });
+        //Feedbacks
+        Route::controller(FeedBackController::class)->group(function () {
+            Route::get('/feedback', 'feedback')->name('feedback');
+        });
 
-    //Feedbacks
-    Route::controller(FeedBackController::class)->group(function () {
-        Route::get('/feedback', 'feedback')->name('feedback');
-    });
-
-    //Profile
-    Route::controller(ProfileController::class)->group(function () {
-        Route::get('/profile', 'profile')->name('profile');
+        //Profile
+        Route::controller(ProfileController::class)->group(function () {
+            Route::get('/profile', 'profile')->name('profile');
+        });
     });
 });

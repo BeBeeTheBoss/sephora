@@ -44,11 +44,9 @@ class AuthController extends Controller
         DB::beginTransaction();
         try {
 
-            $this->userService->register($request);
-
+            $data = $this->userService->register($request);
             DB::commit();
 
-            return redirect()->route('home');
         } catch (\Throwable $th) {
 
             DB::rollBack();
@@ -71,6 +69,10 @@ class AuthController extends Controller
         }
 
         session(['success' => 'Login success']);
+        if($data['user']['role'] === 'admin'){
+            session(['success' => 'Login success']);
+            return redirect()->route('dashboard');
+        }
         return redirect()->route('home');
     }
 

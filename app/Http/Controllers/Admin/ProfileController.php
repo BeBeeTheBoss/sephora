@@ -16,7 +16,6 @@ class ProfileController extends Controller
 
     public function profile(){
         $admin = User::where('role', 'admin')
-        ->where('id', 1)
         ->first();
         return Inertia::render('Admin/Profile',['admin' => $admin]);
     }
