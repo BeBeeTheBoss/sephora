@@ -57,7 +57,7 @@ isPhoneSize();
 }
 
 .pc-height {
-    height: 30%;
+    height: 350px;
 }
 
 .height {
