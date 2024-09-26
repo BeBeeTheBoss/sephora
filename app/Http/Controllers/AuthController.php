@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Services\UserService;
@@ -33,6 +34,12 @@ class AuthController extends Controller
             'email' => 'required',
             'password' => 'required'
         ]);
+
+        $email = User::where('email', $request->email)->pluck('email')->first();
+        if($email){
+            session(['failed' => "This email is already registered"]);
+            return redirect()->back();
+        }
 
         DB::beginTransaction();
         try {

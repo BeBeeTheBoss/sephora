@@ -41,11 +41,10 @@
 </template>
 
 <script setup>
-import { Link, useForm } from '@inertiajs/vue3';
+import { Link, useForm,usePage } from '@inertiajs/vue3';
 import { useToast } from "vue-toastification";
 import {route} from 'ziggy-js';
-
-const toast = useToast();
+import {onMounted,onUpdated} from 'vue'
 
 const form = useForm({
     name: '',
@@ -53,6 +52,36 @@ const form = useForm({
     password: '',
     confirm_password: '',
 });
+
+const toast = useToast();
+const page = usePage();
+
+onMounted(() => {
+
+if (page.props.flash) {
+    if (page.props.flash.success) {
+        toast.success(page.props.flash.success);
+        page.props.flash.success = '';
+    } else if (page.props.flash.failed) {
+        toast.error(page.props.flash.failed);
+        page.props.flash.failed = '';
+    }
+}
+})
+
+onUpdated(() => {
+
+if (page.props.flash) {
+    if (page.props.flash.success) {
+        toast.success(page.props.flash.success);
+        page.props.flash.success = '';
+    } else if (page.props.flash.failed) {
+        toast.error(page.props.flash.failed);
+        page.props.flash.failed = '';
+    }
+}
+
+})
 
 
 const submit = () => {

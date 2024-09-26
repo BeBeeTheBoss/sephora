@@ -34,9 +34,9 @@ class UserService
 
     public function login($request)
     {
-        $user = $this->model->where('phone', $request->phone)->first();
+        $user = $this->model->where('email', $request->email)->first();
         if (!$user) {
-            return sendError(404, "This phone number is not registered yet");
+            return sendError(404, "This email is not registered yet");
         }
 
         if (!Hash::check($request->password, $user->password)) {
