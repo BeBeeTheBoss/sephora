@@ -110,6 +110,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/', 'store')->name('store');
             Route::get('/{id}/edit', 'edit')->name('edit');
             Route::post('/{id}/update', 'update')->name('update');
+            Route::post('/toggleSwitch', 'toggleSwitch')->name('toggle');
             Route::post('/{id}/delete', 'destroy')->name('destroy');
         });
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white" :class="['sidebar', { 'collapsed': isCollapsed }]" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+    <div class="bg-white" :class="['sidebar', { 'collapsed': isCollapsed }]" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;margin:30px 0;">
       <ul class="nav flex-column mt-3">
         <li class="nav-item">
           <Link :class="isActive('/admin/dashboard')" :href="$route('dashboard')">

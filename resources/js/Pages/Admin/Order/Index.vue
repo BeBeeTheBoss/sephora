@@ -22,7 +22,7 @@
                     <td>{{ order.phone }}</td>
                     <td>{{ order.address }}</td>
                     <td>
-                        <img :src="order.ss_image" style="width:80px;height:80px;object-fit:cover;" alt="">
+                        <v-img :src="order.ss_image" style="width:80px;height:80px;object-fit:cover;" alt=""></v-img>
                     </td>
                     <td>
                         <form @submit.prevent>

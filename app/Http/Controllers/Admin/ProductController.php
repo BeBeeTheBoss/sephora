@@ -76,4 +76,15 @@ class ProductController extends Controller
         $this->productService->delete($id);
         return redirect()->route('products.index');
     }
+
+    public function toggleSwitch(Request $request)
+    {
+        $product = $this->product->find($request->id);
+        $product->is_active = $request->is_active ? 1 : 0;
+        $isActive = $request->is_active;
+        $product->update([
+            'is_active' => $isActive
+        ]);
+        return back();
+    }
 }

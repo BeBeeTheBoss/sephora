@@ -15,13 +15,13 @@ class OrderController extends Controller
 
     public function index()
     {
-        $orders = $this->model->where('user_id',Auth::user()->id)->with('payment')->with('order_products')->get();
+        $orders = $this->model->where('user_id', Auth::user()->id)->with('payment')->with('order_products')->get();
 
         foreach ($orders as $order) {
             $order['total_price'] = $order->order_products->sum('total_price');
         }
 
-        return Inertia::render('User/Order',[
+        return Inertia::render('User/Order', [
             'orders' => $orders
         ]);
     }
@@ -36,7 +36,7 @@ class OrderController extends Controller
 
         $imageFile = $request->file('ss_image');
         $imageName = uniqid() . '_' . time() . '.' . $imageFile->getClientOriginalExtension();
-        // $imageFile->storeAs('public/images', $imageName);
+        $imageFile->storeAs('public/images', $imageName);
         $data['ss_image'] = $imageName;
 
         $last_order = $this->model->latest()->select('order_code')->first();
