@@ -15,10 +15,13 @@ class OrderController extends Controller
 
     public function index()
     {
-        $orders = $this->model->where('user_id', Auth::user()->id)->with('payment')->with('order_products')->get();
+        $orders = $this->model->where('user_id', Auth::user()->id)->with('payment')->with(['order_products' => function ($query) {
+            $query->with('product');
+        }])->get();
 
         foreach ($orders as $order) {
             $order['total_price'] = $order->order_products->sum('total_price');
+            $order['ss_image'] = asset('storage/images/' . $order['ss_image']);
         }
 
         return Inertia::render('User/Order', [
@@ -65,9 +68,34 @@ class OrderController extends Controller
         return back();
     }
 
+    public function refund(Request $request)
+    {
+        $order = $this->model->find($request->id);
+
+        if ($order->status != 'pending') {
+            session(['failed' => 'Only pending order can be refunded']);
+            return back();
+        }
+
+        OrderProduct::where('order_id', $request->id)->delete();
+        $order->delete();
+        session(['success' => 'Order refunded successfully']);
+        return back();
+    }
+
+    public function received(Request $request)
+    {
+        $order = $this->model->find($request->id);
+        $order->status = 'completed';
+        $order->save();
+        session(['success' => 'You received the order successfully']);
+        return back();
+    }
+
     private function generateOrderCode($order_code)
     {
-        $number = ((int) $order_code[count($order_code) - 1]) + 1;
+        $order_code = explode('#', $order_code)[1];
+        $number = ((int) $order_code) + 1;
         return "SEP_ORD#" . $number;
     }
 
