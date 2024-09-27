@@ -88,6 +88,8 @@ Route::group(['prefix' => '/product', 'controller' => UserProductController::cla
 Route::group(['prefix' => '/orders', 'controller' => UserOrderController::class, 'as' => 'orders.'], function () {
     Route::get('/', 'index')->name('orderPage');
     Route::post('/', 'store')->name('create');
+    Route::post('/refund', 'refund')->name('refund');
+    Route::post('/received', 'received')->name('received');
 });
 
 Route::middleware('auth')->group(function () {
