@@ -18,11 +18,13 @@ class AuthController extends Controller
         return $this->userService->get();
     }
 
-    public function loginPage(){
+    public function loginPage()
+    {
         return Inertia::render('User/Login');
     }
 
-    public function signUpPage(){
+    public function signUpPage()
+    {
         return Inertia::render('User/Signup');
     }
 
@@ -36,7 +38,7 @@ class AuthController extends Controller
         ]);
 
         $email = User::where('email', $request->email)->pluck('email')->first();
-        if($email){
+        if ($email) {
             session(['failed' => "This email is already registered"]);
             return redirect()->back();
         }
@@ -46,7 +48,7 @@ class AuthController extends Controller
 
             $data = $this->userService->register($request);
             DB::commit();
-
+            return redirect()->route('home');
         } catch (\Throwable $th) {
 
             DB::rollBack();
@@ -69,14 +71,15 @@ class AuthController extends Controller
         }
 
         session(['success' => 'Login success']);
-        if($data['user']['role'] === 'admin'){
+        if ($data['user']['role'] === 'admin') {
             session(['success' => 'Login success']);
             return redirect()->route('dashboard');
         }
         return redirect()->route('home');
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         session(['success' => 'Logout success']);
         return redirect()->route('home');
