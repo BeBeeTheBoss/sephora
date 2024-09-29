@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="">
       <Header @toggleSidebar="toggleSidebar" />
       <Sidebar :isCollapsed="isSidebarCollapsed" />
 

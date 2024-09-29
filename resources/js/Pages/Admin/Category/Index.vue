@@ -1,7 +1,7 @@
 
 <template>
     <Layout>
-     <Link :href="$route('categories.create')"><button class="btn mb-3 float-end " style="border:1px solid #ff006e;">+ Create New</button></Link>
+     <Link :href="$route('categories.create')"><button class="btn btn-sm mb-3 float-end " style="border:1px solid #ff006e;">+ Create New</button></Link>
      <table class="table">
        <thead>
          <tr class="table-danger">
@@ -22,7 +22,7 @@
 
            <td>
             <form @submit.prevent="deleteCategory(category.id)">
-             <Link :href="`/admin/categories/${category.id}/edit`"><button class="btn btn-sm me-2 border">Edit</button></Link>
+             <Link :href="`/admin/categories/${category.id}/edit`"><button class="btn btn-sm me-2 border border-warning">Edit</button></Link>
              <button class="btn btn-sm" style="border:1px solid #ff0054;">Delete</button>
             </form>
            </td>
@@ -43,7 +43,7 @@
 const form = useForm({})
 
  const deleteCategory = (id) => {
-    del(form,route('categories.destroy',id))
+    del(route('categories.destroy',id))
  }
 
  </script>

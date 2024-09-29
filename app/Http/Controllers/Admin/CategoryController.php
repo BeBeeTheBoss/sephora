@@ -17,9 +17,9 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = $this->categoryService->get();
-        if($categories){
-            foreach($categories as $category){
-                $category->image = $category->image ? asset('storage/images/'. $category->image) : null;
+        if ($categories) {
+            foreach ($categories as $category) {
+                $category->image = $category->image ? asset('storage/images/' . $category->image) : null;
             }
         }
         return Inertia::render('Admin/Category/Index', ['categories' => $categories]);
@@ -38,6 +38,7 @@ class CategoryController extends Controller
         ]);
 
         $this->categoryService->create($request);
+        session(['success' => 'Category created successfully']);
         return to_route('categories.index');
     }
 
@@ -51,17 +52,18 @@ class CategoryController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:categories',
+            'name' => 'required',
         ]);
 
-        $this->categoryService->update($request);
-        Session::flash('success', 'Update Category Success');
+        $data = $this->categoryService->update($request);
+
         return to_route('categories.index');
     }
 
     public function destroy(Request $request)
     {
         $this->categoryService->delete($request->id);
+        session(['success' => 'Category deleted successfully']);
         return back();
     }
 }

@@ -90,6 +90,7 @@ Route::group(['prefix' => '/orders', 'controller' => UserOrderController::class,
     Route::post('/', 'store')->name('create');
     Route::post('/refund', 'refund')->name('refund');
     Route::post('/received', 'received')->name('received');
+    Route::post('/decision/', 'decision')->name('decision');
 });
 
 Route::middleware('auth')->group(function () {
@@ -102,7 +103,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/', 'store')->name('store');
             Route::get('/{id}/edit', 'edit')->name('edit');
             Route::post('/{id}/update', 'update')->name('update');
-            Route::post('/{id}/delete', 'destroy')->name('destroy');
+            Route::delete('/{id}/delete', 'destroy')->name('destroy');
         });
 
         //Products
@@ -113,7 +114,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/{id}/edit', 'edit')->name('edit');
             Route::post('/{id}/update', 'update')->name('update');
             Route::post('/toggleSwitch', 'toggleSwitch')->name('toggle');
-            Route::post('/{id}/delete', 'destroy')->name('destroy');
+            Route::delete('/{id}/delete', 'destroy')->name('destroy');
+            Route::get('/{id}/detail', 'detail')->name('detail');
         });
 
         //Orders
@@ -129,7 +131,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/{id}/edit', 'edit')->name('edit');
             Route::post('/{id}/update', 'update')->name('update');
             Route::post('/toggleSwitch', 'toggleSwitch')->name('toggle');
-            Route::post('/{id}/delete', 'destroy')->name('destroy');
+            Route::delete('/{id}/delete', 'destroy')->name('destroy');
         });
 
         //Carousel Images
@@ -139,7 +141,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/', 'store')->name('store');
             Route::get('/{id}/edit', 'edit')->name('edit');
             Route::post('/{id}/update', 'update')->name('update');
-            Route::post('/{id}/delete', 'destroy')->name('destroy');
+            Route::delete('/{id}/delete', 'destroy')->name('destroy');
         });
 
         //Feedbacks
@@ -150,6 +152,7 @@ Route::middleware('auth')->group(function () {
         //Profile
         Route::controller(ProfileController::class)->group(function () {
             Route::get('/profile', 'profile')->name('profile');
+            Route::post('/updateProfile', 'update')->name('updateProfile');
         });
     });
 });

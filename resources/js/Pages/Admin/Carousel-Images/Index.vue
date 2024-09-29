@@ -1,7 +1,7 @@
 
 <template>
     <Layout>
-     <Link :href="$route('carousel_images.create')"><button class="btn mb-3 float-end btn-sm " style="border:1px solid #ff006e;">+ Create New</button></Link>
+     <Link :href="$route('carousel_images.create')"><button class="btn mb-3 float-end btn-sm" style="border:1px solid #ff006e;">+ Create New</button></Link>
      <table class="table">
        <thead>
          <tr class="table-danger">
@@ -19,7 +19,7 @@
            </td>
            <td>
             <form @submit.prevent="deleteImage(carousel_image.id)">
-             <Link :href="$route('carousel_images.edit',carousel_image.id)"><button class="btn border btn-sm me-2">Edit</button></Link>
+             <Link :href="$route('carousel_images.edit',carousel_image.id)"><button class="btn border border-warning btn-sm me-2">Edit</button></Link>
              <button class="btn btn-sm" style="border:1px solid #ff0054;">Delete</button>
             </form>
            </td>
@@ -32,16 +32,14 @@
 
  <script setup>
  import Layout from '../Layouts/Layout.vue'
- import {useForm} from '@inertiajs/vue3'
  import {del} from '../../Composables/httpMethod.js'
  const props = defineProps({
     carousel_images : Array
  });
 
-const form = useForm({})
 
  const deleteImage = (id) => {
-    del(form,route('carousel_images.destroy',id))
+    del(route('carousel_images.destroy',id))
  }
 
 

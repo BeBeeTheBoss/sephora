@@ -1,38 +1,33 @@
 <template>
     <Layout>
     <div class="container d-flex justify-content-center align-items-center">
-        <div class="col-md-6 border border-danger rounded-3 p-3">
+        <div class="col-md-6 border border-success rounded-3 p-3 shadow-lg">
             <form @submit.prevent="submit">
                 <h4 class="text-center">Create Product</h4>
                 <v-row>
                     <v-col cols="12">
                         <v-select label="Select Category" v-model="form.category_id" :items="props.categories"
                             item-title="name" item-value="id" required></v-select>
-                        <ErrorMessage :text="form.errors.category_id" />
                     </v-col>
 
                     <v-col cols="12">
                         <v-textarea autofocus rows="1" v-model="form.name" variant="outlined" label="Name"
                             hide-details></v-textarea>
-                        <ErrorMessage :text="form.errors.name" />
                     </v-col>
 
                     <v-col cols="12">
                         <v-textarea autofocus rows="1" v-model="form.description" variant="outlined" label="Description"
                             hide-details></v-textarea>
-                        <ErrorMessage :text="form.errors.description" />
                     </v-col>
 
                     <v-col cols="12">
                         <v-textarea autofocus rows="1" v-model="form.price" variant="outlined" label="Price"
                             hide-details></v-textarea>
-                        <ErrorMessage :text="form.errors.price" />
                     </v-col>
 
                     <v-col cols="12">
                         <v-textarea autofocus rows="1" v-model="form.discount_price" variant="outlined"
                             label="Discount Price" hide-details></v-textarea>
-                        <ErrorMessage :text="form.errors.discount_price" />
                     </v-col>
                     <v-col cols="12" v-for="(imageBox, index) in imagesBoxes" :key="index">
                         <v-file-input @change="onFileChange($event, index)" :show-size="1000"
@@ -49,13 +44,13 @@
                     <v-col cols="12">
                         <button type="button"
                             class="my-3 ms-2 inline-flex items-center px-5 py-3 border rounded-md font-semibold text-xs tracking-widest text-white transition ease-in-out duration-150"
-                            @click="addImage" style="background-color: #ff006e">
+                            @click="addImage" style="background-color: green;">
                             <font-awesome-icon icon="fa-solid fa-plus" class="me-2" />
                             Add Image
                         </button>
                     </v-col>
                 </v-row>
-                <button class="btn w-100 rounded-lg text-white my-2" style="background-color: #ff595e">
+                <button class="btn btn-success w-100 rounded-lg text-white my-3 py-2">
                     Submit
                 </button>
             </form>

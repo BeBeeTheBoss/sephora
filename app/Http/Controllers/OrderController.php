@@ -92,12 +92,26 @@ class OrderController extends Controller
         return back();
     }
 
+    public function decision(Request $request)
+    {
+        $order = $this->model->find($request->id);
+        if ($request->status === 'accept') {
+            $order->status = 'delivered';
+        } else {
+            $order->status = 'rejected';
+        }
+        $order->save();
+        return back();
+    }
+
     private function generateOrderCode($order_code)
     {
         $order_code = explode('#', $order_code)[1];
         $number = ((int) $order_code) + 1;
         return "SEP_ORD#" . $number;
     }
+
+
 
     private function formatData($request)
     {

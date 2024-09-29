@@ -24,14 +24,9 @@
                     <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                     <input type="email" id="email" name="email" v-model="form.email"
                         class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    
                 </div>
 
-                <!-- Phone Field -->
-                <div>
-                    <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
-                    <input type="tel" id="phone" name="phone" v-model="form.phone"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                </div>
 
                 <!-- Password Field -->
                 <div>
@@ -44,13 +39,13 @@
                 <div>
                     <label for="update-password" class="block text-sm font-medium text-gray-700">Confirm
                         Password</label>
-                    <input type="password" id="update-password" name="update-password" placeholder="••••••••"
+                    <input type="password" id="update-password" name="update-password" v-model="confirmPassword"
                         class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 </div>
 
                 <!-- Submit Button -->
                 <div>
-                    <button @click="update" type="submit"
+                    <button @click="updateProfile" type="button"
                         class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save
                         Changes</button>
                 </div>
@@ -60,23 +55,37 @@
 </template>
 
 <script setup>
-import { useForm } from '@inertiajs/vue3';
+import { ref } from 'vue';
+ import { useForm } from '@inertiajs/vue3';
 import Layout from './Layouts/Layout.vue'
+import { update } from '../Composables/httpMethod.js'
+import { useToast } from 'vue-toastification';
+
 const props = defineProps({
     admin: Object
 })
 
+const confirmPassword = ref('')
+const toast = useToast()
 
 const form = useForm({
     name: props.admin.name,
     email: props.admin.email,
-    phone: props.admin.phone,
-    password: props.admin.password
+    password : ''
 })
 
-const update = () => {
-    alert('hi');
-}
+const updateProfile = () => {
+    if(form.email === ''){
+        toast.warning('The email field is required');
+    }
+
+    if (form.password !== confirmPassword.value) {
+        toast.warning("Password and Confirm Password do not match.");
+    } else {
+        update(form, route("updateProfile", props.admin.id));
+    }
+};
+
 </script>
 
 <style lang="scss" scoped></style>

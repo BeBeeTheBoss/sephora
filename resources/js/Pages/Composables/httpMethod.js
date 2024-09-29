@@ -1,6 +1,6 @@
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
-
+import { router } from '@inertiajs/vue3';
 /**
  * post method
  *
@@ -49,7 +49,7 @@ const update = (form, url, tasksOnSuccess = () => {}) => {
         preserveScroll: true,
         onSuccess: () => {
             tasksOnSuccess()
-            toast.success("Congrats, it's successful!", {autoClose: 6000})
+            toast.success("Congrats, it's successfully updated!", {autoClose: 6000})
         }
     }
     form.post(url, options)
@@ -61,9 +61,9 @@ const update = (form, url, tasksOnSuccess = () => {}) => {
  * @param object form - the useForm helper
  * @param string url - route url
  */
-const del = (form, url) => {
+const del = (url) => {
     if(confirm('Sure to delete?')){
-        form.post(url, {
+        router.delete(url, {
             preserveScroll: true,
             onSuccess: () => {
                 toast.success("Congrats, deleted successful!", {autoClose: 6000});

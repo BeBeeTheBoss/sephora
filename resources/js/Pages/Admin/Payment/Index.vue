@@ -1,7 +1,7 @@
 <template>
     <Layout>
         <Link :href="$route('payments.create')">
-        <button class="btn mb-3 float-end" style="border:1px solid #ff006e;">
+        <button class="btn btn-sm mb-3 float-end" style="border:1px solid #ff006e;">
             + Create New </button>
         </Link>
 
@@ -36,7 +36,7 @@
                     <td>
                         <form @submit.prevent="deletePayment(payment.id)">
                             <button @click="editPayment(payment)" v-if="editId !== payment.id"
-                                class="btn border btn-sm me-2">
+                                class="btn border border-warning btn-sm me-2">
                                 Edit
                             </button>
                             <button @click="savePayment(payment.id)" v-else class="btn btn-success btn-sm me-2">
@@ -103,7 +103,7 @@ const savePayment = (id) => {
 
 // Function to delete the payment
 const deletePayment = (id) => {
-    del(form, route('payments.destroy', id));
+    del(route('payments.destroy', id));
 };
 </script>
 

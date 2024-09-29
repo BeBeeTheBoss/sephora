@@ -1,5 +1,6 @@
 <template>
-    <div class="container d-flex justify-content-center align-items-center" style="height:100vh;">
+    <Layout>
+    <div class="container d-flex justify-content-center align-items-center" style="height:80vh;">
         <div class="col-md-6 border border-danger rounded-3 p-3">
             <form @submit.prevent="submit">
                 <h4 class="text-center">Create Carousel Image</h4>
@@ -22,16 +23,22 @@
             </form>
         </div>
     </div>
+    </Layout>
 
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
+import Layout from '../Layouts/Layout.vue';
+import { useToast } from 'vue-toastification';
+
 
 const form = useForm({
     image : null,
 })
+
+const toast = useToast()
 
 const formImageUrl = ref(null);
 const onFileChange = (e) => {
@@ -44,6 +51,9 @@ const clearImage = () => {
 };
 
 const submit = () => {
+    if(form.image == null){
+        toast.warning('The image field is required');
+    }
     form.post(route('carousel_images.store'));
 };
 </script>

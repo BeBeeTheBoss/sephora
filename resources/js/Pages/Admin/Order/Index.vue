@@ -10,6 +10,7 @@
                     <th>Phone</th>
                     <th>Address</th>
                     <th>Screen Shot</th>
+                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -24,10 +25,13 @@
                     <td>
                         <v-img :src="order.ss_image" style="width:80px;height:80px;object-fit:cover;" alt=""></v-img>
                     </td>
-                    <td>
+                    <td>{{ order.status }}</td>
+                    <td v-if="order.status != 'pending'">
                         <form @submit.prevent>
-                            <button @click="AcceptOrReject(order.id,'accept')" class="btn border btn-sm me-2">Accept</button>
-                            <button @click="AcceptOrReject(order.id,'reject')" class="btn btn-sm" style="border:1px solid #ff0054;">Reject</button>
+                            <button @click="AcceptOrReject(order.id, 'accept')"
+                                class="btn border border-success btn-sm me-2">Accept</button>
+                            <button @click="AcceptOrReject(order.id, 'reject')" class="btn btn-sm broder border-danger"
+                      >Reject</button>
                         </form>
                     </td>
                 </tr>
@@ -38,15 +42,28 @@
 </template>
 
 <script setup>
+import { useForm } from '@inertiajs/vue3';
 import Layout from '../Layouts/Layout.vue'
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 const props = defineProps(['orders']);
+const form = useForm({
+    id: '',
+    status: ''
+})
 
-const AcceptOrReject = (id,status) => {
-    if(status === 'accept'){
-        console.log('accept');
-    }else{
-        console.log('reject');
-    }
+const AcceptOrReject = (id, status) => {
+
+        form.id = id
+        form.status = status
+        let options = {
+            preserveScroll: true,
+            onSuccess: () => {
+                toast.success("Congrats, it's successful!", { autoClose: 6000 })
+            }
+        }
+        form.post(route('orders.decision'), options);
+    
 }
 
 </script>

@@ -14,7 +14,6 @@
                 item-value="id"
                 required
               />
-              <ErrorMessage :text="form.errors.category_id" />
             </v-col>
 
             <!-- Product Fields (Name, Description, Price, etc.) -->
@@ -27,7 +26,6 @@
                 label="Name"
                 hide-details
               />
-              <ErrorMessage :text="form.errors.name" />
             </v-col>
 
             <v-col cols="12">
@@ -39,7 +37,6 @@
                 label="Description"
                 hide-details
               />
-              <ErrorMessage :text="form.errors.description" />
             </v-col>
 
             <v-col cols="12">
@@ -51,7 +48,6 @@
                 label="Price"
                 hide-details
               />
-              <ErrorMessage :text="form.errors.price" />
             </v-col>
 
             <v-col cols="12">
@@ -63,7 +59,6 @@
                 label="Discount Price"
                 hide-details
               />
-              <ErrorMessage :text="form.errors.discount_price" />
             </v-col>
 
             <!-- Existing Image Display -->

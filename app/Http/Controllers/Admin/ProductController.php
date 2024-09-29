@@ -47,11 +47,10 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $product = $this->product->with('images')->find($id);
+        $product = $this->product->find($id);
         foreach ($product->images as $image) {
             $image->image = asset('storage/images/' . $image->image);
         }
-        $product->save();
         $categories = Category::get();
         return Inertia::render('Admin/Product/Edit', ['product' => $product, 'categories' => $categories]);
     }
@@ -64,7 +63,7 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'discount_price' => 'nullable|numeric',
             'description' => 'nullable|string',
-            'delete_images' => 'nullable|array', // Assuming images is the name of your images table
+            'delete_images' => 'nullable|array',
         ]);
 
         $this->productService->update($request);
@@ -86,5 +85,14 @@ class ProductController extends Controller
             'is_active' => $isActive
         ]);
         return back();
+    }
+
+    public function detail($id)
+    {
+        $product = $this->product->find($id);
+        foreach ($product->images as $image) {
+            $image->image = asset('storage/images/' . $image->image);
+        }
+        return inertia('Admin/Product/Detail', ['product' => $product]);
     }
 }
