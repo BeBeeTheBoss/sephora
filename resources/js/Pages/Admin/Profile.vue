@@ -8,7 +8,7 @@
 
 
         <!-- Profile Edit Form -->
-        <div class="max-w-4xl mx-auto bg-white shadow-md rounded-lg">
+        <div class="col-md-4 mx-auto bg-white shadow-md rounded-lg border border-success my-2">
             <form class="p-6 space-y-6">
                 <h3 class="text-2xl font-semibold">Edit Profile</h3>
 

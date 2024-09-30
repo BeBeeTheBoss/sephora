@@ -26,11 +26,11 @@
                         <v-img :src="order.ss_image" style="width:80px;height:80px;object-fit:cover;" alt=""></v-img>
                     </td>
                     <td>{{ order.status }}</td>
-                    <td v-if="order.status != 'pending'">
+                    <td>
                         <form @submit.prevent>
-                            <button @click="AcceptOrReject(order.id, 'accept')"
+                            <button v-if="order.status == 'rejected'" @click="AcceptOrReject(order.id, 'accept')"
                                 class="btn border border-success btn-sm me-2">Accept</button>
-                            <button @click="AcceptOrReject(order.id, 'reject')" class="btn btn-sm broder border-danger"
+                            <button v-if="order.status == 'delivered'" @click="AcceptOrReject(order.id, 'reject')" class="btn btn-sm broder border-danger"
                       >Reject</button>
                         </form>
                     </td>
