@@ -2,7 +2,6 @@
     <div class="poppins-medium">
         <Navbar />
         <slot />
-        <SpeedDial/>
         <BottomNavbar class="d-lg-none d-md-none d-sm-flex d-flex" />
         <Footer />
     </div>

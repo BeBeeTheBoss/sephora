@@ -128,13 +128,14 @@
         </div>
         <div class="d-lg-none d-md-none d-sm-flex d-flex ps-3 pb-3 mb-5" style="overflow-x: scroll;">
             <div class="me-3" v-for="product in products" :key="product">
-                <Link href="/product/details" style="text-decoration:none">
+                <Link :href="'/product/details/'+product.id" style="text-decoration:none">
                 <Product :name="product.name" :categoryName="product.category.name" :image="product.images[0].image"
                     :price="product.price" :discount_price="product.discount_price" :description="product.description"
                     size="phone" />
                 </Link>
             </div>
         </div>
+        <SpeedDial/>
     </Layout>
 </template>
 
@@ -150,7 +151,7 @@ import { ref, onMounted, onUpdated } from 'vue'
 import IconBtn from "./Components/IconBtn.vue";
 import { useToast } from "vue-toastification";
 import { route } from "ziggy-js";
-import axios from "axios";
+import SpeedDial from "./Components/SpeedDial.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 const toast = useToast();

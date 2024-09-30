@@ -103,6 +103,7 @@
 
 <script setup>
 import IconBtn from './IconBtn.vue';
+import axios from 'axios';
 
 </script>
 

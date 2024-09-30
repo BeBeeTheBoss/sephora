@@ -81,7 +81,7 @@ Route::group(['prefix' => '/wish-lists', 'controller' => WishListController::cla
 
 //products
 Route::group(['prefix' => '/product', 'controller' => UserProductController::class, 'as' => 'products.'], function () {
-    Route::get('/details', 'show')->name('productDetails');
+    Route::get('/details/{id}', 'show')->name('productDetails');
 });
 
 //orders
