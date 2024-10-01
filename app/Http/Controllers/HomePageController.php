@@ -55,7 +55,7 @@ class HomePageController extends Controller
             'categories' => $categories,
             'products' => $products,
             'carouselImages' => $carousel_images,
-            'cartData' => $cartData,
+            'cartData' => $cartData ?? [],
             'payments' => $payments,
             'is_auth' => Auth::check()
         ]);

@@ -59,6 +59,7 @@ import IconBtn from './Components/IconBtn.vue';
 import { useForm,router,usePage } from '@inertiajs/vue3';
 import {ref,onMounted,onUpdated} from 'vue'
 import { useToast } from 'vue-toastification';
+import {route} from 'ziggy-js';
 
 const page = usePage();
 const toast = useToast();
@@ -97,7 +98,7 @@ onUpdated(() => {
 const quantity = ref(1)
 
 const back = () => {
-    window.history.back();
+    router.get(route('home'));
 }
 
 const subQuantity = (id) => {

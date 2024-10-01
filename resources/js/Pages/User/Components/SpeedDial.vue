@@ -12,7 +12,7 @@
         <template v-slot:activator="{ props: activatorProps }">
             <v-fab v-bind="activatorProps" size="large" class="speed-dial d-lg-none d-md-none d-sm-block d-block"
                 icon="$vuetify">
-                <IconBtn icon="fa-solid fa-cart-shopping" from="floatingIcon" count="3" class="icon" />
+                <IconBtn icon="fa-solid fa-cart-shopping" from="floatingIcon" :count="cartData.length" class="icon" />
             </v-fab>
         </template>
 
@@ -43,8 +43,8 @@
                         <div class="col-2 text-center">
                             {{ item.product.price * quantity[index] }} Ks
                         </div>
-                        <span class="translate-middle badge bg-danger" style="position:absolute;top:50%;right:-55px">
-                            <FontAwesomeIcon icon="fa-solid fa-trash-can" style="font-size:16px;cursor:pointer" />
+                        <span class="translate-middle badge bg-danger" style="position:absolute;top:2px;right:-20px">
+                            <FontAwesomeIcon icon="fa-solid fa-xmark" style="font-size:12px;cursor:pointer" />
                         </span>
                     </div>
                     <div class="text-end" style="font-size:13px">
@@ -88,6 +88,7 @@ import axios from 'axios';
 import {usePage} from '@inertiajs/vue3';
 import {ref,onMounted,onUpdated} from 'vue'
 import { useToast } from 'vue-toastification';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 const toast = useToast();
 const page = usePage();
@@ -137,7 +138,11 @@ const subQuantity = (index) => {
     quantity.value[index] = quantity.value[index] <= 1 ? 1 : quantity.value[index] - 1;
 }
 
-
+const deleteProduct = (id) => {
+    router.delete(route('cart.delete', {
+        id: id
+    }));
+}
 
 </script>
 
