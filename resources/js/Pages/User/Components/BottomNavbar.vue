@@ -1,5 +1,6 @@
 <template>
     <div class="button-container border">
+        <Link :href="route('home')">
         <button class="button" :class="isActive('/')">
             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 1024 1024" stroke-width="0"
                 fill="currentColor" stroke="currentColor" class="icon">
@@ -8,6 +9,7 @@
                 </path>
             </svg>
         </button>
+        </Link>
         <button class="button" :class="isActive('/search')">
             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" aria-hidden="true" viewBox="0 0 24 24"
                 stroke-width="2" fill="none" stroke="currentColor" class="icon">
@@ -15,9 +17,11 @@
                 </path>
             </svg>
         </button>
-        <button class="button" :class="isActive('/wish_lists')">
+        <Link :href="route('wish_lists.wishListPage')">
+        <button class="button" :class="isActive('/wish-lists')">
             <IconBtn icon="fa-regular fa-heart" style="font-size: 10px;color:#fe919d" />
         </button>
+        </Link>
         <button class="button" :class="isActive('/profile')">
             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="0"
                 fill="currentColor" stroke="currentColor" class="icon">
@@ -31,7 +35,8 @@
 
 <script setup>
 import IconBtn from './IconBtn.vue';
-import { router } from '@inertiajs/vue3';
+import { router, Link } from '@inertiajs/vue3';
+import { route } from 'ziggy-js';
 
 const isActive = (path) => {
 

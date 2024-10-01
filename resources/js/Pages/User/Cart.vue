@@ -22,15 +22,15 @@
 
                         </div>
                         <div class="col-2 text-center">
-                            {{ product.product.price * quantity[index] }} MMK
+                            {{ product.product.price * quantity[index] }} Ks
                         </div>
-                        <span @click="deleteProduct(product.id)" class="translate-middle badge bg-danger"
+                        <span @click="deleteProduct(product.id,product.product.price * quantity[index])" class="translate-middle badge bg-danger"
                             style="position:absolute;top:50%;right:-55px;cursor:pointer">
                             <FontAwesomeIcon icon="fa-solid fa-trash-can" style="font-size:16px;" />
                         </span>
                     </div>
                     <div class="text-end">
-                        SubTotal : {{ sub_total }} MMK
+                        SubTotal : {{ sub_total }} Ks
                     </div>
                 </div>
                 <div class="col-4 ps-5 flex justify-center"
@@ -55,11 +55,11 @@
                         </div>
                         <div class="flex justify-between">
                             <div>Shipping Fee</div>
-                            <div>+ 5000 MMK</div>
+                            <div>+ 5000 Ks</div>
                         </div>
                         <div class="flex justify-between">
                             <div>Total</div>
-                            <div>{{ sub_total + 5000 }} MMK</div>
+                            <div>{{ sub_total + 5000 }} Ks</div>
                         </div>
                         <div class="mt-4 pb-2">
                             <button @click="checkOut"
@@ -70,7 +70,7 @@
             </div>
             <div v-else class="row flex justify-center align-items-center" style="height:90vh">
                 <div class="col-2 text-center">
-                    <img src="../../../../public/images/nodata.svg" class="">
+                    <img src="../../images/nodata.svg" class="">
                     There's no data in your cart.
                 </div>
             </div>
@@ -154,10 +154,11 @@ const subQuantity = (index) => {
     quantity.value[index] = quantity.value[index] <= 1 ? 1 : quantity.value[index] - 1;
 }
 
-const deleteProduct = (id) => {
+const deleteProduct = (id,price) => {
     router.delete(route('cart.delete', {
         id: id
     }));
+    sub_total.value -= price
 }
 
 const checkOut = () => {

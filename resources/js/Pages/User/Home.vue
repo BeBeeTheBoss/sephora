@@ -11,13 +11,13 @@
                 <div
                     class="row w-100 px-lg-4 px-md-2 px-sm-0 px-0 ps-lg-0 ps-md-0 ps-sm-3 ps-5 d-lg-flex d-md-flex d-sm-none d-none">
                     <div class="col-lg-6 col-md-4 col-md-3 col-6 h-100" style="cursor:pointer">
-                        <ListHeader name="Popular" icon="fa-solid fa-arrow-up-right-dots" />
+                        <Link class="text-decoration-none text-black" :href="$route('products.popular')"><ListHeader name="Popular" icon="fa-solid fa-arrow-up-right-dots" /></Link>
                     </div>
                     <div class="col-lg-6 col-md-4 col-md-3 col-6 h-100" style="cursor:pointer">
-                        <ListHeader name="Trending" icon="fa-solid fa-fire" />
+                        <Link class="text-decoration-none text-black" :href="$route('products.trending')"><ListHeader name="Trending" icon="fa-solid fa-fire" /></Link>
                     </div>
                     <div class="col-lg-6 col-md-4 col-md-3 col-6 h-100" style="cursor:pointer">
-                        <ListHeader name="Best sellers" icon="fa-solid fa-basket-shopping" />
+                        <Link class="text-decoration-none text-black" :href="$route('products.recommend')"><ListHeader name="Recommend" icon="fa-solid fa-basket-shopping" /></Link>
                     </div>
                     <div class="col-lg-6 col-md-4 col-md-3 col-6 h-100" style="cursor:pointer">
                         <ListHeader name="New arrivals" icon="fa-solid fa-box-open" />
@@ -50,9 +50,9 @@
         </div>
         <div class="row w-100 px-5 mb-5 d-lg-flex d-md-flex d-sm-none d-none">
             <div class="col-lg-3 col-md-4 mb-3" v-for="product, index in products" :key="product">
-                <Product :name="product.name" :categoryName="product.category.name" :image="product.images[0].image"
+                <Product @click="openProductModal(index,product.id)"  :name="product.name" :categoryName="product.category.name" :image="product.images[0].image"
                     :price="product.price" :discount_price="product.discount_price" :description="product.description"
-                    @click="dialogArray[index] = true" />
+                />
                 <template>
                     <div class="text-center pa-4">
                         <v-dialog v-model="dialogArray[index]" width="auto">
@@ -63,6 +63,7 @@
                                         style="background-color: black;padding:6px;border-radius:50%;width:16px;height:16px;cursor:pointer" />
                                 </div>
                                 <div>
+
                                     <Carousel :from="'productCarousel' + product.id" :images="product.images"
                                         height="300px" />
                                     <div style="position:relative;cursor:pointer">
@@ -93,7 +94,7 @@
                                                         </span>
                                                 </div>
                                                 <div class="pe-1">
-                                                    {{ product.price * quantity[index] }} MMK
+                                                    {{ product.price * quantity[index] }} Ks
                                                 </div>
                                             </div>
                                         </div>
@@ -135,7 +136,7 @@
                 </Link>
             </div>
         </div>
-        <SpeedDial/>
+        <SpeedDial :payments="payments" :cartData="cartData" v-if="is_auth"/>
     </Layout>
 </template>
 
@@ -153,6 +154,7 @@ import { useToast } from "vue-toastification";
 import { route } from "ziggy-js";
 import SpeedDial from "./Components/SpeedDial.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import axios from 'axios';
 
 const toast = useToast();
 const page = usePage();
@@ -160,11 +162,32 @@ const page = usePage();
 const props = defineProps({
     categories: Object,
     products: Array,
-    carouselImages : Object
+    carouselImages : Object,
+    cartData : Array,
+    payments : Array,
+    is_auth : Boolean
 })
+
 
 const dialogArray = ref([]);
 const quantity = ref([]);
+
+
+const incrementViewCount = (productId) => {
+    axios.post(`/product/${productId}/increment-view`)
+        .then(response => {
+            console.log('View count incremented:', response.data);
+        })
+        .catch(error => {
+            console.error('Error incrementing view count:', error);
+        });
+};
+
+const openProductModal = (index, productId) => {
+    dialogArray.value[index] = true;
+    incrementViewCount(productId);
+};
+
 
 onMounted(() => {
     props.products.forEach(product => {

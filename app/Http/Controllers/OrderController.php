@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use Inertia\Inertia;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,12 @@ class OrderController extends Controller
 
     public function index()
     {
+
+        if(!Auth::check()){
+            session(['failed' => 'Please login first']);
+            return back();
+        }
+
         $orders = $this->model->where('user_id', Auth::user()->id)->with('payment')->with(['order_products' => function ($query) {
             $query->with('product');
         }])->get();
@@ -25,6 +32,27 @@ class OrderController extends Controller
         }
 
         return Inertia::render('User/Order', [
+            'orders' => $orders
+        ]);
+    }
+
+    public function phoneSizePage(){
+
+        if(!Auth::check()){
+            session(['failed' => 'Please login first']);
+            return back();
+        }
+
+        $orders = $this->model->where('user_id', Auth::user()->id)->with('payment')->with(['order_products' => function ($query) {
+            $query->with('product');
+        }])->get();
+
+        foreach ($orders as $order) {
+            $order['total_price'] = $order->order_products->sum('total_price');
+            $order['ss_image'] = asset('storage/images/' . $order['ss_image']);
+        }
+
+        return Inertia::render('User/PhoneOrder', [
             'orders' => $orders
         ]);
     }
@@ -52,6 +80,7 @@ class OrderController extends Controller
         $data['order_code'] = $order_code;
         $order = $this->model->create($data);
 
+
         foreach ($request->order_products as $order_product) {
             OrderProduct::create([
                 'order_id' => $order->id,
@@ -60,7 +89,13 @@ class OrderController extends Controller
                 'quantity' => $order_product['quantity'],
                 'total_price' => $order_product['total_price']
             ]);
+
+            //update view_count in product
+            $product = Product::find($order_product['product_id']);
+            $product->increment('order_count');
+
         }
+
 
         Cart::where('user_id', Auth::user()->id)->delete();
 
@@ -92,17 +127,6 @@ class OrderController extends Controller
         return back();
     }
 
-    public function decision(Request $request)
-    {
-        $order = $this->model->find($request->id);
-        if ($request->status === 'accept') {
-            $order->status = 'delivered';
-        } else {
-            $order->status = 'rejected';
-        }
-        $order->save();
-        return back();
-    }
 
     private function generateOrderCode($order_code)
     {

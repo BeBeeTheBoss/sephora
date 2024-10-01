@@ -24,4 +24,16 @@ class OrderController extends Controller
         }
         return Inertia::render('Admin/Order/Index',['orders' => $orders]);
     }
+
+    public function decision(Request $request)
+    {
+        $order = $this->model->find($request->id);
+        if ($request->status === 'accept') {
+            $order->status = 'delivered';
+        } else {
+            $order->status = 'rejected';
+        }
+        $order->save();
+        return back();
+    }
 }

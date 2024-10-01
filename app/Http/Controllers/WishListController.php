@@ -60,6 +60,9 @@ class WishListController extends Controller
             'product_id' => $request->product_id,
             'user_id' => Auth::user()->id
         ]);
+
+        $product = Product::find($request->product_id);
+        $product->increment('favourite_count');
         session(['success' => 'Product added to wishlist']);
         return redirect()->back();
     }

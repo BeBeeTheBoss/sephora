@@ -25,17 +25,19 @@ class HomePageController extends Controller
             })
             ->with('images')->get();
 
-        $products = Cart::where('user_id', Auth::user()->id)->with(['product' => function ($query) {
-            $query->with('images');
-        }])->get();
+        if(Auth::check()){
+            $cartData = Cart::where('user_id', Auth::user()->id)->with(['product' => function ($query) {
+                $query->with('images');
+            }])->get();
 
-        $payments = Payment::where('is_active', 1)->get();
-
-        foreach ($products as $product) {
-            foreach ($product->product->images as $image) {
-                $image->image = asset('storage/images/' . $image->image);
+            foreach ($cartData as $product) {
+                foreach ($product->product->images as $image) {
+                    $image->image = asset('storage/images/' . $image->image);
+                }
             }
         }
+
+        $payments = Payment::where('is_active', 1)->get();
 
         foreach ($categories as $category) {
             $category->image = asset('storage/images/' . $category->image);
@@ -52,7 +54,10 @@ class HomePageController extends Controller
         return Inertia::render('User/Home', [
             'categories' => $categories,
             'products' => $products,
-            'carouselImages' => $carousel_images
+            'carouselImages' => $carousel_images,
+            'cartData' => $cartData ?? [],
+            'payments' => $payments,
+            'is_auth' => Auth::check()
         ]);
     }
 }

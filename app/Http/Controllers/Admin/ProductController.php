@@ -11,11 +11,11 @@ use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
-    public function __construct(protected ProductService $productService, protected Product $product) {}
+    public function __construct(protected ProductService $productService, protected Product $model) {}
 
     public function index()
     {
-        $products = $this->product->with('category', 'images')->get();
+        $products = $this->model->with('category', 'images')->get();
         foreach ($products as $product) {
             foreach ($product->images as $image) {
                 $image->image = asset('storage/images/' . $image->image);
@@ -47,7 +47,7 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $product = $this->product->find($id);
+        $product = $this->model->find($id);
         foreach ($product->images as $image) {
             $image->image = asset('storage/images/' . $image->image);
         }
@@ -78,7 +78,7 @@ class ProductController extends Controller
 
     public function toggleSwitch(Request $request)
     {
-        $product = $this->product->find($request->id);
+        $product = $this->model->find($request->id);
         $product->is_active = $request->is_active ? 1 : 0;
         $isActive = $request->is_active;
         $product->update([
@@ -89,7 +89,7 @@ class ProductController extends Controller
 
     public function detail($id)
     {
-        $product = $this->product->find($id);
+        $product = $this->model->find($id);
         foreach ($product->images as $image) {
             $image->image = asset('storage/images/' . $image->image);
         }
