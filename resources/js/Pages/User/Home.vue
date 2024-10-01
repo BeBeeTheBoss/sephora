@@ -135,7 +135,7 @@
                 </Link>
             </div>
         </div>
-        <SpeedDial/>
+        <SpeedDial :cartData="cartData" v-if="is_auth"/>
     </Layout>
 </template>
 
@@ -160,8 +160,12 @@ const page = usePage();
 const props = defineProps({
     categories: Object,
     products: Array,
-    carouselImages : Object
+    carouselImages : Object,
+    cartData : Array,
+    payments : Array,
+    is_auth : Boolean
 })
+
 
 const dialogArray = ref([]);
 const quantity = ref([]);

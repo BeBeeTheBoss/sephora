@@ -26,48 +26,29 @@
                         <h5 class="fw-bold">My Shopping cart</h5>
                         <IconBtn icon="fa-solid fa-xmark" @click="isActive.value = false" />
                     </div>
-                    <div class="bg-[#fe919e4f] my-2 py-2 px-2 shadow-sm rounded flex items-center"
+                    <div v-for="item,index in cartData" :key="item" class="bg-[#fe919e4f] my-2 py-2 px-2 shadow-sm rounded flex items-center"
                         style="position:relative;font-size:12px">
                         <div class="col-1">
-                            <img src="https://via.placeholder.com/200" class="w-100">
+                            <img :src="item.product.images[0].image" class="w-100">
                         </div>
                         <div class="col-3 text-center">
-                            Something
+                            {{ item.product.name }}
                         </div>
                         <div class="col-6 flex justify-center items-center">
-                            <IconBtn icon="fas fa-circle-plus" />
-                            <input type="text" class="form-control w-25">
-                            <IconBtn icon="fas fa-circle-minus" />
+                            <IconBtn icon="fas fa-circle-minus" @click="subQuantity(index)" />
+                            <input type="text" class="form-control text-center" disabled="true" :value="quantity[index]" style="width:50%">
+                            <IconBtn icon="fas fa-circle-plus"
+                                @click="quantity[index]++, sub_total += item.product.price" />
                         </div>
                         <div class="col-2 text-center">
-                            10000 MMK
+                            {{ item.product.price * quantity[index] }} Ks
                         </div>
                         <span class="translate-middle badge bg-danger" style="position:absolute;top:50%;right:-55px">
                             <FontAwesomeIcon icon="fa-solid fa-trash-can" style="font-size:16px;cursor:pointer" />
                         </span>
                     </div>
-                    <div class="bg-[#fe919e4f] my-2 py-2 px-2 shadow-sm rounded flex items-center"
-                        style="position:relative;font-size:12px">
-                        <div class="col-1">
-                            <img src="https://via.placeholder.com/200" class="w-100">
-                        </div>
-                        <div class="col-3 text-center">
-                            Something
-                        </div>
-                        <div class="col-6 flex justify-center items-center">
-                            <IconBtn icon="fas fa-circle-plus" />
-                            <input type="text" class="form-control w-25">
-                            <IconBtn icon="fas fa-circle-minus" />
-                        </div>
-                        <div class="col-2 text-center">
-                            10000 MMK
-                        </div>
-                        <span class="translate-middle badge bg-danger" style="position:absolute;top:50%;right:-55px">
-                            <FontAwesomeIcon icon="fa-solid fa-trash-can" style="font-size:16px;cursor:pointer" />
-                        </span>
-                    </div>
-                    <div class="text-end">
-                        SubTotal : 420000 MMK
+                    <div class="text-end" style="font-size:13px">
+                        SubTotal : {{ sub_total }} Ks
                     </div>
                     <div class="w-100">
                         <div class="flex justify-between items-center mt-4 mb-3">
@@ -104,6 +85,59 @@
 <script setup>
 import IconBtn from './IconBtn.vue';
 import axios from 'axios';
+import {usePage} from '@inertiajs/vue3';
+import {ref,onMounted,onUpdated} from 'vue'
+import { useToast } from 'vue-toastification';
+
+const toast = useToast();
+const page = usePage();
+
+const quantity = ref([]);
+const sub_total = ref(0);
+
+const props = defineProps({
+    cartData : Array
+})
+
+console.log(props.cartData);
+
+onMounted(() => {
+    props.cartData.forEach(item => {
+        quantity.value.push(item.quantity);
+        sub_total.value += (item.product.price * item.quantity);
+    })
+
+    if (page.props.flash) {
+        if (page.props.flash.success) {
+            toast.success(page.props.flash.success);
+            page.props.flash.success = null;
+        } else if (page.props.flash.failed) {
+            toast.error(page.props.flash.failed);
+            page.props.flash.failed = null;
+        }
+    }
+})
+
+onUpdated(() => {
+
+    if (page.props.flash) {
+        if (page.props.flash.success) {
+            toast.success(page.props.flash.success);
+            page.props.flash.success = null;
+        } else if (page.props.flash.failed) {
+            toast.error(page.props.flash.failed);
+            page.props.flash.failed = null;
+        }
+    }
+
+})
+
+const subQuantity = (index) => {
+    sub_total.value -= quantity.value[index] == 1 ? 0 : props.cartData[index].product.price;
+    quantity.value[index] = quantity.value[index] <= 1 ? 1 : quantity.value[index] - 1;
+}
+
+
 
 </script>
 
