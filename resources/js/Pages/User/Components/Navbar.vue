@@ -60,10 +60,14 @@
                 </div>
             </div>
             <div class="col-2 d-flex justify-content-end pe-2 d-lg-none d-md-none d-sm-flex d-flex">
-                <IconBtn icon="fa-solid fa-bag-shopping" count="1" data-bs-toggle="offcanvas"
+                <Link :href="'/orders/all'">
+                    <IconBtn icon="fa-solid fa-bag-shopping" v-if="ordersCount" :count="ordersCount"
                     data-bs-target="#offcanvasExample" />
-                <IconBtn icon="fa-regular fa-bell" count="3" data-bs-toggle="offcanvas"
+                    <IconBtn icon="fa-solid fa-bag-shopping"
                     data-bs-target="#offcanvasExample" />
+                </Link>
+                <!-- <IconBtn icon="fa-regular fa-bell" count="3" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasExample" /> -->
             </div>
         </div>
     </nav>
@@ -96,6 +100,7 @@ const isActive = (path) => {
 const profile = ref(null);
 const wishlistsCount = ref(null);
 const cartCount = ref(null);
+const ordersCount = ref(null);
 
 onMounted(() => {
     axios.get('/profile').then(response => {
@@ -106,6 +111,9 @@ onMounted(() => {
     })
     axios.get('/cart-count').then(response => {
         cartCount.value = response.data
+    })
+    axios.get('/orders-count').then(response => {
+        ordersCount.value = response.data
     })
 })
 

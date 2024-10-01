@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Cart;
+use App\Models\Order;
+use App\Models\WishList;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -8,17 +11,15 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\WishListController;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\CarouselImageController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FeedbackController;
+use App\Http\Controllers\Admin\CarouselImageController;
 use App\Http\Controllers\OrderController as UserOrderController;
 use App\Http\Controllers\ProductController as UserProductController;
-use App\Models\Cart;
-use App\Models\WishList;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,10 @@ Route::get('/wishlists-count', function () {
 
 Route::get('/cart-count', function () {
     return response()->json(Cart::where('user_id', Auth::user()->id)->count());
+});
+
+Route::get('/orders-count', function () {
+    return response()->json(Order::where('user_id', Auth::user()->id)->where('status','PENDING')->count());
 });
 
 Route::controller(AuthController::class)->group(function () {
@@ -91,6 +96,7 @@ Route::group(['prefix' => '/product', 'controller' => UserProductController::cla
 //orders
 Route::group(['prefix' => '/orders', 'controller' => UserOrderController::class, 'as' => 'orders.'], function () {
     Route::get('/', 'index')->name('orderPage');
+    Route::get('/all','phoneSizePage')->name('phoneSize');
     Route::post('/', 'store')->name('create');
     Route::post('/refund', 'refund')->name('refund');
     Route::post('/received', 'received')->name('received');

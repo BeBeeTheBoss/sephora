@@ -1,8 +1,8 @@
 <template>
     <Layout>
         <div class="container">
-            <h5 class="fw-bold mt-4 mb-3 col-10 offset-1">My orders</h5>
-            <div class="row flex justify-center">
+            <h5 v-if="orders.length != 0" class="fw-bold mt-4 mb-3 col-10 offset-1">My orders</h5>
+            <div v-if="orders.length != 0" class="row flex justify-center">
                 <div class="col-10">
                     <table class="table table-striped border">
                         <thead>
@@ -66,7 +66,7 @@
                                                         Date: {{ formatDate(order.created_at) }}
                                                     </div>
                                                 </div>
-                                                <div class="row py-1 mb-2"
+                                                <div class="row py-1 mb-2 mt-4"
                                                     style="border-bottom: 2px dashed #5F5F5F;border-top: 2px dashed #5F5F5F">
                                                     <div class="col-7 text-start">
                                                         Item
@@ -130,7 +130,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="text-center py-2 mt-1"
+                                                    <div class="text-center py-2 mt-4"
                                                         style="border-top: 2px dashed #5F5F5F;border-bottom: 2px dashed #5F5F5F">
                                                         Thanks for you order
                                                     </div>
@@ -142,6 +142,12 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+            <div v-else class="row flex justify-center align-items-center" style="height:90vh">
+                <div class="col-2 text-center">
+                    <img src="../../images/nodata.svg" class="">
+                    There's no data in your wishlist.
                 </div>
             </div>
         </div>

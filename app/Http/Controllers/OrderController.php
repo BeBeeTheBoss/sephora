@@ -16,6 +16,12 @@ class OrderController extends Controller
 
     public function index()
     {
+
+        if(!Auth::check()){
+            session(['failed' => 'Please login first']);
+            return back();
+        }
+
         $orders = $this->model->where('user_id', Auth::user()->id)->with('payment')->with(['order_products' => function ($query) {
             $query->with('product');
         }])->get();
@@ -26,6 +32,27 @@ class OrderController extends Controller
         }
 
         return Inertia::render('User/Order', [
+            'orders' => $orders
+        ]);
+    }
+
+    public function phoneSizePage(){
+
+        if(!Auth::check()){
+            session(['failed' => 'Please login first']);
+            return back();
+        }
+
+        $orders = $this->model->where('user_id', Auth::user()->id)->with('payment')->with(['order_products' => function ($query) {
+            $query->with('product');
+        }])->get();
+
+        foreach ($orders as $order) {
+            $order['total_price'] = $order->order_products->sum('total_price');
+            $order['ss_image'] = asset('storage/images/' . $order['ss_image']);
+        }
+
+        return Inertia::render('User/PhoneOrder', [
             'orders' => $orders
         ]);
     }

@@ -11,7 +11,7 @@
             <p class="card-text text-muted" style="font-size:10px">
                 {{ description }}
             </p>
-            <div class="fw-bold d-flex align-items-center" style="color:#fe919d">{{ price }} MMK <span
+            <div class="fw-bold d-flex align-items-center" style="color:#fe919d">{{ price }} Ks <span
                     class="text-decoration-line-through text-muted ms-1" style="font-size:12px">{{ discount_price
                     }}</span>
             </div>

@@ -94,7 +94,7 @@
                                                         </span>
                                                 </div>
                                                 <div class="pe-1">
-                                                    {{ product.price * quantity[index] }} MMK
+                                                    {{ product.price * quantity[index] }} Ks
                                                 </div>
                                             </div>
                                         </div>
@@ -136,7 +136,7 @@
                 </Link>
             </div>
         </div>
-        <SpeedDial :cartData="cartData" v-if="is_auth"/>
+        <SpeedDial :payments="payments" :cartData="cartData" v-if="is_auth"/>
     </Layout>
 </template>
 

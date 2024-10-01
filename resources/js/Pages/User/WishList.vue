@@ -75,8 +75,8 @@
                 </div>
             </div>
             <div v-else class="row flex justify-center align-items-center" style="height:90vh">
-                    <div class="col-2 text-center">
-                        <img src="../../../../public/images/nodata.svg" class="">
+                    <div class="col-lg-2 col-md-5 col-sm-10 col-10 text-center">
+                        <img src="../../images/nodata.svg" class="">
                         There's no data in your wishlist.
                     </div>
                 </div>

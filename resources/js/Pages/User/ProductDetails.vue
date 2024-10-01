@@ -30,7 +30,7 @@
                         </span>
                     </div>
                     <div class="pe-1">
-                        {{ product.price * quantity }} MMK
+                        {{ product.price * quantity }} Ks
                     </div>
                 </div>
             </div>
