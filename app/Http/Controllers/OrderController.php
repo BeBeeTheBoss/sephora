@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use Inertia\Inertia;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,6 +53,7 @@ class OrderController extends Controller
         $data['order_code'] = $order_code;
         $order = $this->model->create($data);
 
+
         foreach ($request->order_products as $order_product) {
             OrderProduct::create([
                 'order_id' => $order->id,
@@ -60,7 +62,13 @@ class OrderController extends Controller
                 'quantity' => $order_product['quantity'],
                 'total_price' => $order_product['total_price']
             ]);
+
+            //update view_count in product
+            $product = Product::find($order_product['product_id']);
+            $product->increment('order_count');
+
         }
+
 
         Cart::where('user_id', Auth::user()->id)->delete();
 
@@ -92,17 +100,6 @@ class OrderController extends Controller
         return back();
     }
 
-    public function decision(Request $request)
-    {
-        $order = $this->model->find($request->id);
-        if ($request->status === 'accept') {
-            $order->status = 'delivered';
-        } else {
-            $order->status = 'rejected';
-        }
-        $order->save();
-        return back();
-    }
 
     private function generateOrderCode($order_code)
     {

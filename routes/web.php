@@ -82,6 +82,10 @@ Route::group(['prefix' => '/wish-lists', 'controller' => WishListController::cla
 //products
 Route::group(['prefix' => '/product', 'controller' => UserProductController::class, 'as' => 'products.'], function () {
     Route::get('/details/{id}', 'show')->name('productDetails');
+    Route::post('/{id}/increment-view', 'viewCount')->name('view-count');
+    Route::get('/trending', 'trending')->name('trending');
+    Route::get('/popular', 'popular')->name('popular');
+    Route::get('/recommend', 'recommend')->name('recommend');
 });
 
 //orders
@@ -90,7 +94,6 @@ Route::group(['prefix' => '/orders', 'controller' => UserOrderController::class,
     Route::post('/', 'store')->name('create');
     Route::post('/refund', 'refund')->name('refund');
     Route::post('/received', 'received')->name('received');
-    Route::post('/decision/', 'decision')->name('decision');
 });
 
 Route::middleware('auth')->group(function () {
@@ -121,6 +124,7 @@ Route::middleware('auth')->group(function () {
         //Orders
         Route::group(['prefix' => 'orders', 'controller' => OrderController::class, 'as' => 'orders.'], function () {
             Route::get('/', 'index')->name('index');
+            Route::post('/decision/', 'decision')->name('decision');
         });
 
         //Payments

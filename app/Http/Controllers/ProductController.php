@@ -29,4 +29,24 @@ class ProductController extends Controller
             'product' => $product
         ]);
     }
+
+    public function trending(){
+        $trendingProducts = $this->model->where('view_count','desc')->get();
+        return inertia('User/TrendingProduct',['trending_products' => $trendingProducts]);
+    }
+
+    public function popular(){
+        $popularProducts = $this->model->where('order_count','desc')->get();
+        return inertia('User/PopularProduct',['popular_products' => $popularProducts]);
+    }
+
+    public function recommend(){
+        // return inertia('User/recommendProduct',['recommend_products' => ]);
+    }
+
+    //product view count
+    public function viewCount($id){
+        $product = $this->model->find($id);
+        $product->increment('view_count');
+    }
 }
