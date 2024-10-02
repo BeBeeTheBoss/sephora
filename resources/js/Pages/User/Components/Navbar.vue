@@ -63,7 +63,7 @@
                 <Link :href="'/orders/all'">
                 <IconBtn icon="fa-solid fa-bag-shopping" v-if="ordersCount" :count="ordersCount"
                     data-bs-target="#offcanvasExample" />
-                <IconBtn icon="fa-solid fa-bag-shopping" data-bs-target="#offcanvasExample" />
+                <IconBtn icon="fa-solid fa-bag-shopping" v-else data-bs-target="#offcanvasExample" />
                 </Link>
                 <!-- <IconBtn icon="fa-regular fa-bell" count="3" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasExample" /> -->

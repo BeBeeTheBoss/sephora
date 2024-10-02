@@ -38,11 +38,14 @@
         </div>
         <div class="d-flex justify-content-between align-items-center px-lg-5 px-md-3 px-sm-2 px-2 mb-3">
             <h5 class="mt-lg-5 mt-md-4 mt-sm-2 mt-2 fw-bold">Categories</h5>
-            <div class="text-muted">See all</div>
+            <!-- <div class="text-muted">See all</div> -->
         </div>
         <div class="row w-100 px-5 d-lg-flex d-md-flex d-sm-none d-none">
             <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-3" v-for="category in categories" :key="category">
-                <Category :name="category.name" :count="category.products_count" :image="category.image" />
+                <Category
+                    @click="select_category = select_category == category.id ? '' : category.id, showData(searchKey)"
+                    :name="category.name" :count="category.products_count" :image="category.image"
+                    :is_active="select_category == category.id" />
             </div>
         </div>
         <div class="d-lg-none d-md-none d-sm-block d-block">
@@ -168,7 +171,7 @@ import axios from 'axios';
 
 const toast = useToast();
 const page = usePage();
-const searchKey = ref(null);
+const searchKey = ref('');
 
 const props = defineProps({
     categories: Object,
@@ -179,13 +182,14 @@ const props = defineProps({
     is_auth: Boolean
 })
 
+const select_category = ref('');
 const all_products = ref(props.products);
 
 const showData = (data) => {
 
     searchKey.value = data;
 
-    axios.get('/search?name=' + data).then(response => {
+    axios.get('/search?name=' + data + '&category_id=' + select_category.value).then(response => {
         all_products.value = response.data;
         console.log(all_products.value);
         if (data) {

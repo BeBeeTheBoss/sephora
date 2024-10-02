@@ -66,6 +66,9 @@ Route::get('/orders-count', function () {
 
 Route::get('/search', function (Request $request) {
     $products = Product::where('is_active', 1)->with('category')
+        ->when($request->category_id, function ($query) use ($request) {
+            $query->where('category_id', $request->category_id);
+        })
         ->when($request->name, function ($query) use ($request) {
             $query->where('name', 'like', '%' . $request->name . '%');
         })

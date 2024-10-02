@@ -39,8 +39,8 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faUser,faEye,faBell,faHeart,faPenToSquare } from '@fortawesome/free-regular-svg-icons';
-import { faCartShopping,faAnglesRight,faArrowUpRightDots,faHome,faFire,faBasketShopping,faBoxOpen,faMagnifyingGlass,faChevronRight,faBars,faBagShopping,faPlus,faTrash,faCircleXmark,faCircleMinus,faCirclePlus,faTrashCan,faXmark,faArrowLeft,faHeart as faSolidHeart,faArrowRightFromBracket,faEllipsis } from '@fortawesome/free-solid-svg-icons';
-library.add(faHeart,faUser,faCartShopping,faEye,faAnglesRight,faArrowUpRightDots,faFire,faBasketShopping,faBoxOpen,faMagnifyingGlass,faChevronRight,faBars,faBagShopping,faBell,faHome,faPlus,faPenToSquare,faTrash,faCircleXmark,faCircleMinus,faCirclePlus,faTrashCan,faXmark,faArrowLeft,faSolidHeart,faArrowRightFromBracket,faEllipsis);
+import { faCartShopping,faAnglesRight,faArrowUpRightDots,faHome,faFire,faBasketShopping,faBoxOpen,faMagnifyingGlass,faChevronRight,faBars,faBagShopping,faPlus,faTrash,faCircleXmark,faCircleMinus,faCirclePlus,faTrashCan,faXmark,faArrowLeft,faHeart as faSolidHeart,faArrowRightFromBracket,faEllipsis,faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+library.add(faHeart,faUser,faCartShopping,faEye,faAnglesRight,faArrowUpRightDots,faFire,faBasketShopping,faBoxOpen,faMagnifyingGlass,faChevronRight,faBars,faBagShopping,faBell,faHome,faPlus,faPenToSquare,faTrash,faCircleXmark,faCircleMinus,faCirclePlus,faTrashCan,faXmark,faArrowLeft,faSolidHeart,faArrowRightFromBracket,faEllipsis,faCircleCheck);
 
 const vuetify = createVuetify({
   components,
