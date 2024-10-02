@@ -78,13 +78,12 @@ class ProductController extends Controller
 
         $products = Product::whereIn('category_id', $categoryIds)
             ->get();
-
-        foreach($products as $product){
-            foreach($product->images as $image){
+        foreach ($products as $product) {
+            foreach ($product->images as $image) {
                 $image->image = asset('storage/images/' . $image->image);
             }
         }
-        return inertia('User/RecommendProduct',['recommend_products' => $products]);
+        return inertia('User/RecommendProduct', ['recommend_products' => $products]);
     }
 
     public function new_arrival()

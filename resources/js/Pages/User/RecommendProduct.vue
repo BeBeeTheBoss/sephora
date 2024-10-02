@@ -1,5 +1,5 @@
 <template>
-    <Nav />
+    <Navbar />
     <div class="container row py-4">
         <h3 ref="titleRef" class="section-title"></h3>
         <div class="col-md-4 product-card" v-for="product in recommend_products" :key="product.id">

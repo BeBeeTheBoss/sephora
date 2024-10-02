@@ -14,11 +14,16 @@
                             <v-file-input chips prepend-icon="mdi-camera"
                                 @change="onFileChange" @input="form.image = $event.target.files[0]" variant="outlined"
                                 label="File" show-size clearable @click:clear="clearImage"></v-file-input>
-                            <div class="preview flex justify-center">
+                            <div class="preview flex justify-center position-relative">
                                 <v-img class="rounded-lg mb-4" :width="1" :height="300" cover v-if="formImageUrl"
                                     :src="formImageUrl" />
                                 <v-img class="rounded-lg mb-4" :width="1" :height="300" cover v-else-if="form.image"
                                     :src="form.image" />
+                                    <div v-if="form.image" style="position:absolute;top:10px;right:10px">
+                                <button @click="clearImage">
+                                    <font-awesome-icon icon="fa-solid fa-circle-xmark" class="text-white fs-2" />
+                                </button>
+                            </div>
                             </div>
                         </v-col>
                 </v-row>
@@ -41,6 +46,8 @@ const form = useForm({
     id : props.category.id,
     name: props.category.name,
     image: props.category.image,
+    delete_images: []
+
 });
 
 const formImageUrl = ref(null);
@@ -50,6 +57,13 @@ const onFileChange = (e) => {
     formImageUrl.value = URL.createObjectURL(file);
 }
 const clearImage = () => {
+
+    if (form.image) {
+        let imageName = form.image.name || formImageUrl.value.split('/').pop();
+        if (!form.delete_images.includes(imageName)) {
+            form.delete_images.push(imageName);
+        }
+    }
     formImageUrl.value = null;
     form.image = null;
 }
