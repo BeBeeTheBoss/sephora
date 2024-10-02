@@ -48,6 +48,11 @@ class CategoryService
             $category->image = $categoryImageName;
         }
 
+        if ($request->image == null) {
+            File::delete('storage/images/' . $category->image);
+            $category->image = null;
+        }
+
         $category->name = $request->name;
         $category->save();
         return $category;
