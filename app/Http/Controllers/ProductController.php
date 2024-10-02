@@ -74,6 +74,7 @@ class ProductController extends Controller
             }])
             ->get()
             ->pluck('order_products.*.product.category_id')
+            ->flatten()
             ->unique();
 
         $products = Product::whereIn('category_id', $categoryIds)

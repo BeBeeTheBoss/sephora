@@ -73,7 +73,7 @@
                 />
                 <div style="position:absolute;top:10px;right:10px">
                   <button type="button" @click="deleteExistingImage(imgIndex)">
-                    <font-awesome-icon icon="fa-solid fa-circle-xmark" class="fs-2" />
+                    <font-awesome-icon icon="fa-solid fa-circle-xmark" class="fs-2 text-white" />
                   </button>
                 </div>
               </div>
@@ -130,8 +130,8 @@
     product: Object
   });
 
-  const formImageUrl = ref([]); // New image previews
-  const deleteImages = ref([]);  // Images to delete
+  const formImageUrl = ref([]);
+  const deleteImages = ref([]);  
 
   const form = useForm({
     category_id: props.product.category_id,
@@ -139,10 +139,10 @@
     description: props.product.description,
     price: props.product.price,
     discount_price: props.product.discount_price,
-    images: props.product.images, // Existing images from the product
+    images: props.product.images, 
   });
 
-  const imagesBoxes = ref([{}]); // New images input boxes
+  const imagesBoxes = ref([{}]); 
 
   // Add new image box
   const addImage = () => {
@@ -153,8 +153,8 @@
   const onFileChange = (e, index) => {
     const file = e.target.files[0];
     if (file) {
-      formImageUrl.value[index] = URL.createObjectURL(file); // Preview image
-      imagesBoxes.value[index].images = file;               // Store the file
+      formImageUrl.value[index] = URL.createObjectURL(file); 
+      imagesBoxes.value[index].images = file;              
     }
   };
 
@@ -168,16 +168,14 @@
   const deleteExistingImage = (index) => {
     const image = form.images[index];
     if (image) {
-      deleteImages.value.push(image.id); // Track image for deletion
-      form.images.splice(index, 1);      // Remove from the display
+      deleteImages.value.push(image.id); 
+      form.images.splice(index, 1);     
     }
   };
 
-  // Handle form update submission
   const update = () => {
     const formData = new FormData();
 
-    // Append form fields
     formData.append('category_id', form.category_id);
     formData.append('name', form.name);
     formData.append('description', form.description);

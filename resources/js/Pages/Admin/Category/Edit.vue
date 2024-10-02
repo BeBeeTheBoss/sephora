@@ -58,8 +58,8 @@ const onFileChange = (e) => {
 }
 const clearImage = () => {
 
-    if (form.image) {
-        let imageName = form.image.name || formImageUrl.value.split('/').pop();
+    if (formImageUrl.value != null) {
+        let imageName = formImageUrl.value.split('/').pop();
         if (!form.delete_images.includes(imageName)) {
             form.delete_images.push(imageName);
         }
