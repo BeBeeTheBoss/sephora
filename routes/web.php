@@ -2,7 +2,9 @@
 
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\WishList;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -41,15 +43,46 @@ Route::get('/profile', function () {
 });
 
 Route::get('/wishlists-count', function () {
-    return response()->json(WishList::where('user_id', Auth::user()->id)->count());
+    if (Auth::check()) {
+        return response()->json(WishList::where('user_id', Auth::user()->id)->count());
+    }
+    return 0;
 });
 
 Route::get('/cart-count', function () {
-    return response()->json(Cart::where('user_id', Auth::user()->id)->count());
+    if (Auth::check()) {
+        return response()->json(Cart::where('user_id', Auth::user()->id)->count());
+    }
+
+    return 0;
 });
 
 Route::get('/orders-count', function () {
-    return response()->json(Order::where('user_id', Auth::user()->id)->where('status','PENDING')->count());
+    if (Auth::check()) {
+        return response()->json(Order::where('user_id', Auth::user()->id)->where('status', 'PENDING')->count());
+    }
+    return 0;
+});
+
+Route::get('/search', function (Request $request) {
+    $products = Product::where('is_active', 1)->with('category')
+        ->when($request->name, function ($query) use ($request) {
+            $query->where('name', 'like', '%' . $request->name . '%');
+        })
+        ->when(Auth::user(), function ($query) {
+            $query->withCount(['wish_lists as is_favorite' => function ($query) {
+                $query->where('user_id', Auth::user()->id);
+            }]);
+        })
+        ->with('images')->get();
+
+    foreach ($products as $product) {
+        foreach ($product->images as $image) {
+            $image->image = asset('storage/images/' . $image->image);
+        }
+    }
+
+    return $products;
 });
 
 Route::controller(AuthController::class)->group(function () {
@@ -97,7 +130,7 @@ Route::group(['prefix' => '/product', 'controller' => UserProductController::cla
 //orders
 Route::group(['prefix' => '/orders', 'controller' => UserOrderController::class, 'as' => 'orders.'], function () {
     Route::get('/', 'index')->name('orderPage');
-    Route::get('/all','phoneSizePage')->name('phoneSize');
+    Route::get('/all', 'phoneSizePage')->name('phoneSize');
     Route::post('/', 'store')->name('create');
     Route::post('/refund', 'refund')->name('refund');
     Route::post('/received', 'received')->name('received');

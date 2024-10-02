@@ -48,10 +48,10 @@
             </div>
             <div
                 class="search col-lg-5 col-md-6 d-lg-flex d-md-flex align-items-center d-sm-none d-none pe-4 justify-content-end">
-                <Search @seachInput="sendToLayout"/>
-                <div class="d-flex align-items-center" style="cursor:pointer">
+                <Search @seachInput="sendToLayout" />
+                <!-- <div class="d-flex align-items-center" style="cursor:pointer">
                     <IconBtn icon="fa-regular fa-bell" count="1" />
-                </div>
+                </div> -->
                 <div class="dropdown">
                     <IconBtn icon="fa-regular fa-user" data-bs-toggle="dropdown" />
                     <ul class="dropdown-menu h-100 pt-0">
@@ -61,10 +61,9 @@
             </div>
             <div class="col-2 d-flex justify-content-end pe-2 d-lg-none d-md-none d-sm-flex d-flex">
                 <Link :href="'/orders/all'">
-                    <IconBtn icon="fa-solid fa-bag-shopping" v-if="ordersCount" :count="ordersCount"
+                <IconBtn icon="fa-solid fa-bag-shopping" v-if="ordersCount" :count="ordersCount"
                     data-bs-target="#offcanvasExample" />
-                    <IconBtn icon="fa-solid fa-bag-shopping"
-                    data-bs-target="#offcanvasExample" />
+                <IconBtn icon="fa-solid fa-bag-shopping" data-bs-target="#offcanvasExample" />
                 </Link>
                 <!-- <IconBtn icon="fa-regular fa-bell" count="3" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasExample" /> -->
@@ -89,11 +88,13 @@ import ProfileIcon from "./ProfileIcon.vue";
 import Search from "./Search.vue";
 import { router, Link } from "@inertiajs/vue3";
 import axios from "axios";
-import { ref, onMounted,provide } from 'vue'
+import { ref, onMounted, provide } from 'vue'
+
+const emit = defineEmits(['searchInput']);
 
 const data = ref('');
 const sendToLayout = (input) => {
-    emit('searchInput',input);
+    emit('searchInput', input)
 }
 
 const isActive = (path) => {
