@@ -1,5 +1,6 @@
 <template>
     <Layout>
+        Search : {{ searchInputValue }}
         <div class="row w-100 d-flex justify-content-center mt-lg-4 mt-md-4 mt-sm-3 mt-3">
             <div class="col-lg-8 col-md-10 col-sm-12 col-12">
                 <Carousel from="ads" :images="carouselImages" class="d-lg-block d-md-block d-sm-none d-none ps-5"
@@ -20,7 +21,7 @@
                         <Link class="text-decoration-none text-black" :href="$route('products.recommend')"><ListHeader name="Recommend" icon="fa-solid fa-basket-shopping" /></Link>
                     </div>
                     <div class="col-lg-6 col-md-4 col-md-3 col-6 h-100" style="cursor:pointer">
-                        <ListHeader name="New arrivals" icon="fa-solid fa-box-open" />
+                        <Link class="text-decoration-none text-black" :href="$route('products.new-arrival')"><ListHeader name="New Arrivals" icon="fa-solid fa-box-open" /></Link>
                     </div>
                     <div class="col-lg-6 col-md-4 col-md-3 col-6 h-100" style="cursor:pointer">
                         <ListHeader name="Explore" icon="fa-solid fa-magnifying-glass" />
@@ -50,7 +51,7 @@
         </div>
         <div class="row w-100 px-5 mb-5 d-lg-flex d-md-flex d-sm-none d-none">
             <div class="col-lg-3 col-md-4 mb-3" v-for="product, index in products" :key="product">
-                <Product @click="openProductModal(index,product.id)"  :name="product.name" :categoryName="product.category.name" :image="product.images[0].image"
+                <Product @click="openProductModal(index,product.id)"  :name="product.name" :categoryName="product.category.name" :image="product.images[0]?.image"
                     :price="product.price" :discount_price="product.discount_price" :description="product.description"
                 />
                 <template>
@@ -130,7 +131,7 @@
         <div class="d-lg-none d-md-none d-sm-flex d-flex ps-3 pb-3 mb-5" style="overflow-x: scroll;">
             <div class="me-3" v-for="product in products" :key="product">
                 <Link :href="'/product/details/'+product.id" style="text-decoration:none">
-                <Product :name="product.name" :categoryName="product.category.name" :image="product.images[0].image"
+                <Product :name="product.name" :categoryName="product.category.name" :image="product.images[0]?.image"
                     :price="product.price" :discount_price="product.discount_price" :description="product.description"
                     size="phone" />
                 </Link>
@@ -155,6 +156,8 @@ import { route } from "ziggy-js";
 import SpeedDial from "./Components/SpeedDial.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import axios from 'axios';
+import { inject } from 'vue';
+
 
 const toast = useToast();
 const page = usePage();
@@ -168,6 +171,8 @@ const props = defineProps({
     is_auth : Boolean
 })
 
+const searchInputValue = inject('searchInputValue');
+console.log(searchInputValue);
 
 const dialogArray = ref([]);
 const quantity = ref([]);
@@ -179,6 +184,13 @@ const incrementViewCount = (productId) => {
             console.log('View count incremented:', response.data);
         })
         .catch(error => {
+            if (error.response) {
+                toast.error('Failed to increment view count.');
+            } else if (error.request) {
+                toast.error('No response from the server.');
+            } else {
+                toast.error('An error occurred while incrementing view count.');
+            }
             console.error('Error incrementing view count:', error);
         });
 };

@@ -1,4 +1,5 @@
 <template>
+    <Navbar />
     <div class="container row py-4">
         <h3 ref="titleRef" class="section-title"></h3>
         <div class="col-md-4 product-card" v-for="product in trending_products" :key="product.id">
@@ -17,7 +18,7 @@
 <script setup>
 import {ref,onMounted} from 'vue';
 import Carousel from "./Components/Carousel.vue";
-
+import Navbar from './Components/Navbar.vue';
 const props = defineProps({
     trending_products: Array
 })
@@ -31,13 +32,13 @@ const applyRainbowColors = () => {
     const titleText = "Trending Products";
     const titleElement = titleRef.value;
     titleElement.innerHTML = '';
-    
+
     // Loop through each letter and apply a color
     for (let i = 0; i < titleText.length; i++) {
         const letterSpan = document.createElement('span');
         letterSpan.textContent = titleText[i];
 
- 
+
         if (i < 8) {
             letterSpan.style.color = rainbowColors[i % rainbowColors.length];
         }

@@ -91,6 +91,7 @@ Route::group(['prefix' => '/product', 'controller' => UserProductController::cla
     Route::get('/trending', 'trending')->name('trending');
     Route::get('/popular', 'popular')->name('popular');
     Route::get('/recommend', 'recommend')->name('recommend');
+    Route::get('/new_arrival', 'new_arrival')->name('new-arrival');
 });
 
 //orders

@@ -11,7 +11,7 @@
                     </div>
                     <div class="input-group">
                         <label for="password" style="color:#FE919D">Password</label>
-                        <input v-model="form.password" type="password" name="password" id="password" placeholder="">
+                        <input @keyup.enter="submit" v-model="form.password" type="password" name="password" id="password" placeholder="">
                         <div class="forgot">
                             <a rel="noopener noreferrer" href="#">Forgot Password ?</a>
                         </div>

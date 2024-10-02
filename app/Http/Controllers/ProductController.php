@@ -58,16 +58,45 @@ class ProductController extends Controller
 
     public function recommend()
     {
-        // $products = Order::where('user_id', Auth::id())  // Retrieve orders for the current user
-        //     ->whereHas('order_products', function ($query) {
-        //         $query->whereHas('product', function ($productQuery) {
-        //             $productQuery->
-        //         });
-        //     })
-        //     ->with('order_products.product')  // Eager load the related products for performance
-        //     ->get();
-        // dd($products);
-        // return inertia('User/recommendProduct',['recommend_products' => ]);
+        if (!Auth::check()) {
+            session(['failed' => 'Please login first']);
+            return back();
+        }
+
+        $categoryIds = Order::where('user_id', Auth::id())
+            ->whereHas('order_products', function ($query) {
+                $query->whereHas('product', function ($productQuery) {
+                    $productQuery->whereNotNull('category_id');
+                });
+            })
+            ->with(['order_products.product' => function ($query) {
+                $query->select('id', 'category_id');
+            }])
+            ->get()
+            ->pluck('order_products.*.product.category_id')
+            ->unique();
+
+        $products = Product::whereIn('category_id', $categoryIds)
+            ->get();
+
+        foreach($products as $product){
+            foreach($product->images as $image){
+                $image->image = asset('storage/images/' . $image->image);
+            }
+        }
+        return inertia('User/RecommendProduct',['recommend_products' => $products]);
+    }
+
+    public function new_arrival()
+    {
+        $newArrivalProducts = $this->model->orderBy('created_at', 'desc')->get(); // By Date
+        foreach ($newArrivalProducts as $product) {
+            foreach ($product->images as $image) {
+                $image->image = asset('storage/images/' . $image->image);
+            }
+        }
+
+        return inertia('User/NewArrivalProduct', ['new_arrival_products' => $newArrivalProducts]);
     }
 
     //product view count

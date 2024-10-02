@@ -5,9 +5,8 @@
         </button></Link>
         <div class="row">
             <div v-for="product in products" :key="product.id" class="col-md-4">
-                <div class="card card-body">
-                        <v-img :src="product.images[0].image" style="height: 100px"></v-img>
-       
+                <div class="card card-body" style="height:400px;">
+                        <v-img :src="product.images[0]?.image" style="height: 100px"></v-img>
                     <div>
                         <h6 class="mt-3" style="font-size:14px;">{{ product.name }}</h6>
                         <h6 style="font-size:14px;">{{ product.description }}</h6>
@@ -15,9 +14,9 @@
                         <div class="flex">
                             <p class="me-1" v-if="product.discount_price > 0"
                                 style="text-decoration: line-through;font-size:14px;">
-                                {{ product.price }} 
+                                {{ product.price }}
                             </p>
-                            <span class="text-danger" style="font-size:14px;">{{ product.discount_price }}% Off</span>
+                            <span v-if="product.discount_price != 0" class="text-danger" style="font-size:14px;">{{ product.discount_price }}% Off</span>
                         </div>
                         <p class="d-none">{{ product.is_active = product.is_active ? true : false }}</p>
                         <v-switch @change="changeSwitchValue(product.is_active, product.id)" focused="true"

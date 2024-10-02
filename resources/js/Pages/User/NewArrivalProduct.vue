@@ -2,7 +2,7 @@
     <Navbar />
     <div class="container row py-4">
         <h3 ref="titleRef" class="section-title"></h3>
-        <div class="col-md-4 product-card" v-for="product in popular_products" :key="product.id">
+        <div class="col-md-4 product-card" v-for="product in new_arrival_products" :key="product.id">
             <Carousel :from="'productCarousel' + product.id" :images="product.images" height="300px" />
             <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
@@ -20,7 +20,7 @@ import {ref,onMounted} from 'vue';
 import Carousel from "./Components/Carousel.vue";
 import Navbar from './Components/Navbar.vue';
 const props = defineProps({
-    popular_products: Array
+    new_arrival_products: Array
 })
 
 const titleRef = ref(null);
@@ -29,7 +29,7 @@ const titleRef = ref(null);
 const rainbowColors = ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#4B0082', '#9400D3', '#FF1493'];
 
 const applyRainbowColors = () => {
-    const titleText = "Popular Products";
+    const titleText = "New Arrival Products";
     const titleElement = titleRef.value;
     titleElement.innerHTML = '';
 
@@ -39,7 +39,7 @@ const applyRainbowColors = () => {
         letterSpan.textContent = titleText[i];
 
 
-        if (i < 7) {
+        if (i < 11) {
             letterSpan.style.color = rainbowColors[i % rainbowColors.length];
         }
 

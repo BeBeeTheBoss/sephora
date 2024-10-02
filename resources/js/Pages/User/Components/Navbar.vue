@@ -48,7 +48,7 @@
             </div>
             <div
                 class="search col-lg-5 col-md-6 d-lg-flex d-md-flex align-items-center d-sm-none d-none pe-4 justify-content-end">
-                <Search />
+                <Search @seachInput="sendToLayout"/>
                 <div class="d-flex align-items-center" style="cursor:pointer">
                     <IconBtn icon="fa-regular fa-bell" count="1" />
                 </div>
@@ -89,13 +89,19 @@ import ProfileIcon from "./ProfileIcon.vue";
 import Search from "./Search.vue";
 import { router, Link } from "@inertiajs/vue3";
 import axios from "axios";
-import { ref, onMounted } from 'vue'
+import { ref, onMounted,provide } from 'vue'
+
+const data = ref('');
+const sendToLayout = (input) => {
+    emit('searchInput',input);
+}
 
 const isActive = (path) => {
 
     return router.page.url == path ? 'navIconActive' : "";
 
 }
+
 
 const profile = ref(null);
 const wishlistsCount = ref(null);
