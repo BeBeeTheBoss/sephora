@@ -10,11 +10,11 @@
                     <div>
                         <h6 class="mt-3" style="font-size:14px;">{{ product.name }}</h6>
                         <h6 class="whitespace-pre" style="font-size:14px;">{{ product.description }}</h6>
-                        <span class="font-semibold">${{ product.discount_price }} </span>
+                        <span class="font-semibold">${{ product.price }} </span>
                         <div class="flex">
                             <p class="me-1" v-if="product.discount_price > 0"
                                 style="text-decoration: line-through;font-size:14px;">
-                                {{ product.price }}
+                                {{ product.discount_price }}
                             </p>
                             <!-- <span v-if="product.discount_price != 0" class="text-danger" style="font-size:14px;">{{ product.discount_price }}% Off</span> -->
                         </div>

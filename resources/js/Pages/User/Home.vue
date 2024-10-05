@@ -62,6 +62,7 @@
         </div>
         <div class="row w-100 px-5 mb-5 d-lg-flex d-md-flex d-sm-none d-none">
             <div class="col-lg-3 col-md-4 mb-3" v-for="product, index in all_products" :key="product">
+                
                 <Product @click="openProductModal(index, product.id)" :name="product.name"
                     :categoryName="product.category.name" :image="product.images[0]?.image" :price="product.price"
                     :discount_price="product.discount_price" :description="product.description" />

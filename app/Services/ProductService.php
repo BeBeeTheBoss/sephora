@@ -80,8 +80,8 @@ class ProductService
         return [
             'category_id' => $request->category_id,
             'name' => $request->name,
-            'price' => $request->price,
-            'discount_price' => $request->price - ($request->price * $request->discount_price) / 100,
+            'price' => $request->price - ($request->price * $request->discount_price) / 100,
+            'discount_price' => $request->price,
             'description' => $request->description ?? null,
             'is_active' => $request->is_active ?? true,
         ];
