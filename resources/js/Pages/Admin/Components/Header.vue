@@ -1,6 +1,6 @@
 <template>
     <div class="" style="position:sticky;z-index:10;top:0;">
-        <nav class="navbar navbar-expand-lg navbar-light">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#06d6a0;">
             <div class="container-fluid z-10">
                 <img src="https://iconape.com/wp-content/png_logo_vector/shopping-and-ecommerce-28.png"
                     style="width: 40px" />
@@ -10,10 +10,7 @@
                         <span class=" font-bold">hora</span>
                     </div>
                 </a>
-                <div class="ms-32 d-flex">
-                    <font-awesome-icon icon="fa-solid fa-magnifying-glass" class="mt-2" />
-                    <input type="text" placeholder="Search" class="form-control ms-2">
-                </div>
+             
                 <ul class="navbar-nav ms-auto me-12">
                     <ProfileImage :profile="profile" />
                 </ul>

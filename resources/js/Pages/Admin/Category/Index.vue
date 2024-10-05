@@ -2,6 +2,7 @@
 <template>
     <Layout>
      <Link :href="$route('categories.create')"><button class="btn btn-sm mb-3 float-end " style="border:1px solid #ff006e;">+ Create New</button></Link>
+     <h3 class="text-center text-success">Category List</h3>
      <table class="table">
        <thead>
          <tr class="table-danger">

@@ -30,9 +30,9 @@
                         <ListHeader name="New Arrivals" icon="fa-solid fa-box-open" />
                         </Link>
                     </div>
-                    <div class="col-lg-6 col-md-4 col-md-3 col-6 h-100" style="cursor:pointer">
+                    <!-- <div class="col-lg-6 col-md-4 col-md-3 col-6 h-100" style="cursor:pointer">
                         <ListHeader name="Explore" icon="fa-solid fa-magnifying-glass" />
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

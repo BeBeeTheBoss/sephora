@@ -28,9 +28,9 @@
                     <td>{{ order.status }}</td>
                     <td>
                         <form @submit.prevent>
-                            <button v-if="order.status == 'rejected'" @click="AcceptOrReject(order.id, 'accept')"
+                            <button @click="AcceptOrReject(order.id, 'accept')"
                                 class="btn border border-success btn-sm me-2">Accept</button>
-                            <button v-if="order.status == 'delivered'" @click="AcceptOrReject(order.id, 'reject')" class="btn btn-sm broder border-danger"
+                            <button @click="AcceptOrReject(order.id, 'reject')" class="btn btn-sm broder border-danger"
                       >Reject</button>
                         </form>
                     </td>

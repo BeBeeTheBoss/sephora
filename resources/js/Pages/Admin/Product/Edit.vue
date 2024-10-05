@@ -1,6 +1,7 @@
 <template>
+  <Layout>
     <div class="container d-flex justify-content-center align-items-center">
-      <div class="col-md-6 rounded-3 p-3" style="border:1px solid #ff006e;">
+      <div class="col-md-6 rounded-3 border border-success shadow-lg p-3">
         <form @submit.prevent="update">
           <h4 class="text-center">Edit Product</h4>
           <v-row>
@@ -106,24 +107,26 @@
             <!-- Add More Images Button -->
             <v-col cols="12">
               <button type="button"
-                class="my-3 ms-2 inline-flex items-center px-5 py-3 border rounded-md font-semibold text-xs tracking-widest text-white transition ease-in-out duration-150"
-                @click="addImage" style="background-color:#ff006e">
+                class="my-3 ms-2 inline-flex items-center px-5 py-3 bg-success rounded-md font-semibold text-xs tracking-widest text-white transition ease-in-out duration-150"
+                @click="addImage">
                 <font-awesome-icon icon="fa-solid fa-plus" class="me-2" />
                 Add Image
               </button>
             </v-col>
           </v-row>
-          <button class="btn w-100 rounded-lg text-white my-2" style="background-color: #ff006e">
+          <button class="btn btn-success w-100 rounded-lg text-white my-2">
             Update
           </button>
         </form>
       </div>
     </div>
+  </Layout>
   </template>
 
   <script setup>
   import { ref } from "vue";
   import { useForm } from "@inertiajs/vue3";
+  import Layout from '../Layouts/Layout.vue'
 
   const props = defineProps({
     categories: Object,

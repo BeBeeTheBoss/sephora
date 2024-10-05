@@ -1,6 +1,6 @@
 <template>
     <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
-        <div class="col-md-6 border border-danger rounded-3 p-3">
+        <div class="col-md-6 border border-success shadow-lg rounded-3 p-3">
             <form @submit.prevent="updateCategory">
                 <h4 class="text-center">Edit Category</h4>
                 <v-row>
@@ -28,7 +28,7 @@
                         </v-col>
                 </v-row>
 
-                <button class="btn w-100 rounded-lg my-2 text-white" style="background-color:#ff595e;">Update</button>
+                <button class="btn btn-success w-100 rounded-lg my-2 text-white">Update</button>
             </form>
         </div>
     </div>
