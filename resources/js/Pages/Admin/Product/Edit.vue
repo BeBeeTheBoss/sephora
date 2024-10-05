@@ -131,18 +131,18 @@
   });
 
   const formImageUrl = ref([]);
-  const deleteImages = ref([]);  
+  const deleteImages = ref([]);
 
   const form = useForm({
     category_id: props.product.category_id,
     name: props.product.name,
     description: props.product.description,
     price: props.product.price,
-    discount_price: props.product.discount_price,
-    images: props.product.images, 
+    discount_price: (props.product.price-props.product.discount_price)/ props.product.price * 100,
+    images: props.product.images,
   });
 
-  const imagesBoxes = ref([{}]); 
+  const imagesBoxes = ref([{}]);
 
   // Add new image box
   const addImage = () => {
@@ -153,8 +153,8 @@
   const onFileChange = (e, index) => {
     const file = e.target.files[0];
     if (file) {
-      formImageUrl.value[index] = URL.createObjectURL(file); 
-      imagesBoxes.value[index].images = file;              
+      formImageUrl.value[index] = URL.createObjectURL(file);
+      imagesBoxes.value[index].images = file;
     }
   };
 
@@ -168,8 +168,8 @@
   const deleteExistingImage = (index) => {
     const image = form.images[index];
     if (image) {
-      deleteImages.value.push(image.id); 
-      form.images.splice(index, 1);     
+      deleteImages.value.push(image.id);
+      form.images.splice(index, 1);
     }
   };
 

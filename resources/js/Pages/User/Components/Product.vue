@@ -8,10 +8,10 @@
             <span class="text-muted" style="font-size:12px">{{ categoryName }}<font-awesome-icon class="ms-2 me-1"
                     icon="fa-solid fa-fire" style="font-size: 13px;color:#fe919d" />12</span>
             <h5 class="card-title fw-bold">{{ name }}</h5>
-            <p class="card-text text-muted" style="font-size:10px">
+            <p class="card-text text-muted" style="font-size:10px;white-space: pre;">
                 {{ description }}
             </p>
-            <div class="fw-bold d-flex align-items-center" style="color:#fe919d">{{ price }} Ks <span
+            <div class="fw-bold d-flex align-items-center" style="color:#fe919d">${{ price }} <span
                     class="text-decoration-line-through text-muted ms-1" style="font-size:12px">{{ discount_price
                     }}</span>
             </div>

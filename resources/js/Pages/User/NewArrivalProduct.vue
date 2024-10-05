@@ -9,7 +9,7 @@
                 <p class="card-text">
                     {{ product.description }}
                 </p>
-                <p class="card-price">{{ product.price }} Ks</p>
+                <p class="card-price">${{ product.price }} </p>
             </div>
         </div>
     </div>

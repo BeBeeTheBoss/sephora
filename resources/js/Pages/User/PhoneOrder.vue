@@ -28,7 +28,7 @@
                                     {{ order.order_code }}
                                 </span>
                             </td>
-                            <td>{{ order.total_price + 5000 }} Ks</td>
+                            <td>${{ order.total_price + 50 }}</td>
                             <td>{{ order.payment.name }}</td>
                             <td class="text-capitalize">
                                 <span class="rounded px-2 py-1 text-white" :class="checkStatus(order.status)">

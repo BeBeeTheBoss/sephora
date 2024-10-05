@@ -42,6 +42,7 @@
         </div>
         <div class="row w-100 px-5 d-lg-flex d-md-flex d-sm-none d-none">
             <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-3" v-for="category in categories" :key="category">
+                {{ select_category }}
                 <Category
                     @click="select_category = select_category == category.id ? '' : category.id, showData(searchKey)"
                     :name="category.name" :count="category.products_count" :image="category.image"
@@ -91,13 +92,13 @@
                                                     style="background-color:rgba(255, 255, 255, 0.8);color:#fe919d" />
                                             </div>
                                             <h5 class="card-title fw-bold">{{ product.name }}</h5>
-                                            <p class="card-text text-muted" style="font-size:10px">
+                                            <p class="card-text text-muted" style="font-size:10px;white-space: pre;" >
                                                 {{ product.description }}
                                             </p>
                                             <div class="fw-bold d-flex align-items-center justify-between"
                                                 style="color:#fe919d">
                                                 <div>
-                                                    {{ product.price }}
+                                                    $ {{ product.price }}
                                                     <span class="text-decoration-line-through text-muted ms-1"
                                                         style="font-size:12px">{{ product.discount_price }}</span>
                                                     <span class="ms-2">
@@ -105,7 +106,7 @@
                                                     </span>
                                                 </div>
                                                 <div class="pe-1">
-                                                    {{ product.price * quantity[index] }} Ks
+                                                    ${{ product.price * quantity[index] }}
                                                 </div>
                                             </div>
                                         </div>

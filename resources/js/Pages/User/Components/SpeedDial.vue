@@ -44,7 +44,7 @@
                                 @click="quantity[index]++, sub_total += item.product.price" />
                         </div>
                         <div class="col-2 text-center">
-                            {{ item.product.price * quantity[index] }} Ks
+                            ${{ item.product.price * quantity[index] }}
                         </div>
                         <span @click="deleteProduct(item.id, item.product.price * quantity[index])"
                             class="translate-middle badge bg-danger" style="position:absolute;top:2px;right:-20px">
@@ -52,7 +52,7 @@
                         </span>
                     </div>
                     <div class="text-end" style="font-size:13px">
-                        SubTotal : {{ sub_total }} Ks
+                        SubTotal : ${{ sub_total }}
                     </div>
                     <div class="w-100" style="">
                         <h5 class="fw-bold mt-3 mb-4">Summary</h5>
@@ -74,11 +74,11 @@
                         </div>
                         <div class="flex justify-between">
                             <div>Shipping Fee</div>
-                            <div>+ 5000 Ks</div>
+                            <div>+ $50</div>
                         </div>
                         <div class="flex justify-between">
                             <div>Total</div>
-                            <div>{{ sub_total + 5000 }} Ks</div>
+                            <div>${{ sub_total + 50 }}</div>
                         </div>
                         <div class="mt-4 pb-2">
                             <button @click="checkOut"

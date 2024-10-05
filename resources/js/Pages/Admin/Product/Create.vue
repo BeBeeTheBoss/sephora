@@ -27,7 +27,7 @@
 
                     <v-col cols="12">
                         <v-textarea autofocus rows="1" v-model="form.discount_price" variant="outlined"
-                            label="Discount Price" hide-details></v-textarea>
+                            label="Discount Percent(%)" hide-details></v-textarea>
                     </v-col>
                     <v-col cols="12" v-for="(imageBox, index) in imagesBoxes" :key="index">
                         <v-file-input @change="onFileChange($event, index)" :show-size="1000"
@@ -60,7 +60,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref,computed,watch } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import Layout from '../Layouts/Layout.vue'
 const props = defineProps({
@@ -97,6 +97,7 @@ const onFileChange = (e, index) => {
         imagesBoxes.value[index].images = file;
     }
 };
+
 
 const clearImage = (index) => {
     formImageUrl.value[index] = null;
