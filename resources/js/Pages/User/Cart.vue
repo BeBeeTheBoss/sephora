@@ -59,7 +59,7 @@
                         </div>
                         <div class="flex justify-between">
                             <div>Total</div>
-                            <div>${{ sub_total + 50 }}</div>
+                            <div>${{ sub_total }}</div>
                         </div>
                         <div class="mt-4 pb-2">
                             <button @click="checkOut"

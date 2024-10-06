@@ -22,11 +22,11 @@
 
                 <div class="col-md-6">
                     <h3>{{ product.name }}</h3>
-                    <p>{{ product.description }}</p>
+                    <p class=" w-100 text-wrap">{{ product.description }}</p>
 
                     <div v-if="product.discount_price > 0">
-                        <span class="text-muted" style="text-decoration: line-through;">${{ product.price }}</span>
-                        <span class="text-danger ms-2">${{ product.discount_price }}</span>
+                        <span class="text-muted" >${{ product.price }}</span>
+                        <span class="text-danger ms-2" style="text-decoration: line-through;">${{ product.discount_price }}</span>
                     </div>
                     <div v-else>
                         <span class="text-dark">${{ product.price }}</span>

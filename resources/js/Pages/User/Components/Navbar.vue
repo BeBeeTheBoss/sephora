@@ -46,9 +46,9 @@
                     <!-- <span>Wishlists</span> -->
                 </div>
             </div>
-            <div
+            <div 
                 class="search col-lg-5 col-md-6 d-lg-flex d-md-flex align-items-center d-sm-none d-none pe-4 justify-content-end">
-                <Search @seachInput="sendToLayout" />
+                <Search v-if="isHomePage" @seachInput="sendToLayout" />
                 <!-- <div class="d-flex align-items-center" style="cursor:pointer">
                     <IconBtn icon="fa-regular fa-bell" count="1" />
                 </div> -->
@@ -86,9 +86,9 @@
 import IconBtn from "./IconBtn.vue";
 import ProfileIcon from "./ProfileIcon.vue";
 import Search from "./Search.vue";
-import { router, Link } from "@inertiajs/vue3";
+import { router, Link,usePage } from "@inertiajs/vue3";
 import axios from "axios";
-import { ref, onMounted, provide } from 'vue'
+import { ref, onMounted, provide,computed } from 'vue'
 
 const emit = defineEmits(['searchInput']);
 
@@ -102,6 +102,8 @@ const isActive = (path) => {
     return router.page.url == path ? 'navIconActive' : "";
 
 }
+const { url } = usePage();
+const isHomePage = computed(() => url === '/');
 
 
 const profile = ref(null);

@@ -42,7 +42,6 @@
         </div>
         <div class="row w-100 px-5 d-lg-flex d-md-flex d-sm-none d-none">
             <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-3" v-for="category in categories" :key="category">
-                {{ select_category }}
                 <Category
                     @click="select_category = select_category == category.id ? '' : category.id, showData(searchKey)"
                     :name="category.name" :count="category.products_count" :image="category.image"
@@ -80,7 +79,7 @@
                                     <Carousel :from="'productCarousel' + product.id" :images="product.images"
                                         height="300px" />
                                     <div style="position:relative;cursor:pointer">
-                                        <div class="card-body px-3 pt-3">
+                                        <div class="card-body px-3 pt-3" style="max-height: 150px; overflow-y: auto;">
                                             <div class="flex justify-between items-center">
                                                 <span class="text-muted" style="font-size:12px">{{ product.category.name
                                                     }} <font-awesome-icon class="ms-2 me-1" icon="fa-solid fa-fire"
@@ -93,7 +92,7 @@
                                                     style="background-color:rgba(255, 255, 255, 0.8);color:#fe919d" />
                                             </div>
                                             <h5 class="card-title fw-bold">{{ product.name }}</h5>
-                                            <p class="card-text text-muted" style="font-size:10px;white-space: pre;" >
+                                            <p class="card-text text-muted w-100" style="font-size:10px;white-space: pre;" >
                                                 {{ product.description }}
                                             </p>
                                             <div class="fw-bold d-flex align-items-center justify-between"
@@ -200,6 +199,7 @@ const showData = (data) => {
     })
 
 }
+
 
 // const searchInputValue = inject('searchInputValue');
 // console.log(searchInputValue);

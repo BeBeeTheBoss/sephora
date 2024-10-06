@@ -1,5 +1,4 @@
 <template>
-
     <div class="InputContainer">
         <input v-model="searchInput" @keyup.enter="$emit('seachInput',searchInput)" placeholder="Search.." id="input" class="input" name="text" type="text">
     </div>
@@ -8,6 +7,7 @@
 
 <script setup>
 import { ref,provide } from 'vue';
+
 const searchInput = ref('');
 provide('searchInputValue', searchInput);
 

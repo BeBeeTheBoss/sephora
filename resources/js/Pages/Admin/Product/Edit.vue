@@ -50,14 +50,13 @@
                 hide-details
               />
             </v-col>
-
             <v-col cols="12">
               <v-textarea
                 autofocus
                 rows="1"
                 v-model="form.discount_price"
                 variant="outlined"
-                label="Discount Price"
+                label="Discount Percentage(%)"
                 hide-details
               />
             </v-col>
@@ -132,7 +131,7 @@
     categories: Object,
     product: Object
   });
-
+console.log((props.product.discount_price - props.product.price)/ props.product.price * 100);
   const formImageUrl = ref([]);
   const deleteImages = ref([]);
 
@@ -140,8 +139,8 @@
     category_id: props.product.category_id,
     name: props.product.name,
     description: props.product.description,
-    price: props.product.price,
-    discount_price: (props.product.price-props.product.discount_price)/ props.product.price * 100,
+    price: props.product.discount_price,
+    discount_price: ((props.product.discount_price - props.product.price) / props.product.price).toFixed(1) * 100,
     images: props.product.images,
   });
 

@@ -25,7 +25,7 @@
                                         {{ order.order_code }}
                                     </span>
                                 </td>
-                                <td>{{ order.total_price + 5000 }} MMK</td>
+                                <td>$ {{ order.total_price + 50 }}</td>
                                 <td>{{ order.payment.name }}</td>
                                 <td class="text-capitalize">
                                     <span class="rounded px-2 py-1 text-white" :class="checkStatus(order.status)">
@@ -100,7 +100,7 @@
                                                         Shipping Fee
                                                     </div>
                                                     <div class="col-3 text-end">
-                                                        5000
+                                                        50
                                                     </div>
                                                     <div class="col-7 pt-2 offset-5"
                                                         style="border-bottom: 2px dashed #5F5F5F;">
@@ -109,7 +109,7 @@
                                                         Total
                                                     </div>
                                                     <div class="col-3 text-end">
-                                                        {{ order.total_price + 5000 }}
+                                                        {{ order.total_price + 50 }}
                                                     </div>
                                                 </div>
                                                 <div class="row mt-4 py-2 flex justify-center"
