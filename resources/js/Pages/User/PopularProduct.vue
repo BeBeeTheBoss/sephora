@@ -1,6 +1,6 @@
 <template>
     <Navbar />
-    <div class="container row py-4">
+    <div class="container row py-4 gap-3">
         <h3 ref="titleRef" class="section-title"></h3>
         <div class="col-md-4 product-card" v-for="product in popular_products" :key="product.id">
             <Carousel :from="'productCarousel' + product.id" :images="product.images" height="300px" />

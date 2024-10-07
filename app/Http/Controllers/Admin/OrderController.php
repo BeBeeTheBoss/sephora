@@ -22,8 +22,6 @@ class OrderController extends Controller
             }])
             ->get();
 
-        dd($orders);
-
 
         foreach ($orders as $order) {
             $order['total_price'] = $order->order_products->sum('total_price');

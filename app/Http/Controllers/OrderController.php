@@ -26,7 +26,7 @@ class OrderController extends Controller
             $query->with('product');
         }])->get();
 
-        
+
         foreach ($orders as $order) {
             $order['total_price'] = $order->order_products->sum('total_price');
             $order['ss_image'] = asset('storage/images/' . $order['ss_image']);

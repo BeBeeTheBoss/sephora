@@ -11,7 +11,7 @@
             <p class="card-text text-muted w-100" style="font-size:10px;white-space: pre;">
                 {{ truncatedDescription(description) }}
             </p>
-            <div class="fw-bold d-flex align-items-center" style="color:#fe919d">${{ price }} <span
+            <div class="fw-bold d-flex align-items-center" style="color:#fe919d">${{ price }} <span v-if="discount_price > 0"
                     class="text-decoration-line-through text-muted ms-1" style="font-size:12px">{{ discount_price
                     }}</span>
             </div>
