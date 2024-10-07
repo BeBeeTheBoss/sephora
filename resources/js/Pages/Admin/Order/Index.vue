@@ -26,7 +26,7 @@
                         <v-img :src="order.ss_image" style="width:80px;height:80px;object-fit:cover;" alt=""></v-img>
                     </td>
                     <td>{{ order.status }}</td>
-                    <td>
+                    <td v-if="order.status != 'completed'">
                         <form @submit.prevent>
                             <button @click="AcceptOrReject(order.id, 'accept')"
                                 class="btn border border-success btn-sm me-2">Accept</button>
@@ -63,7 +63,7 @@ const AcceptOrReject = (id, status) => {
             }
         }
         form.post(route('orders.decision'), options);
-    
+
 }
 
 </script>

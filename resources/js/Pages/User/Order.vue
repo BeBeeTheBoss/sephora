@@ -28,7 +28,7 @@
                                 <td>$ {{ order.total_price + 50 }}</td>
                                 <td>{{ order.payment.name }}</td>
                                 <td class="text-capitalize">
-                                    <span class="rounded px-2 py-1 text-white" :class="checkStatus(order.status)">
+                                    <span class="rounded px-2 py-1 text-danger" :class="checkStatus(order.status)">
                                         {{ order.status }}
                                     </span>
                                 </td>
