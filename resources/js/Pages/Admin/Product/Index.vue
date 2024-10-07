@@ -4,9 +4,9 @@
           + Create New
       </button></Link>
       <div class="row">
-              <div class=" mb-3">
+              <div class="mb-3">
                   <!-- <font-awesome-icon icon="fa-solid fa-magnifying-glass" class="mt-2 flex" /> -->
-                  <input type="text" placeholder="Search" v-model="searchQuery" class="form-control ms-2 w-25">
+                  <input type="text" placeholder="Search" v-model="searchQuery" class="form-control ms-2 w-25 border border-success">
               </div>
 
           <div v-for="product in filteredProducts" :key="product.id" class="col-md-4">
@@ -105,4 +105,32 @@ const deleteProduct = (id) => {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.InputContainer {
+    width: 210px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom, rgb(227, 213, 255), rgb(255, 231, 231));
+    border-radius: 30px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.075);
+}
+
+.input {
+    width: 200px;
+    height: 30px;
+    border: none;
+    outline: none;
+    caret-color: rgb(255, 81, 0);
+    background-color: rgb(255, 255, 255);
+    border-radius: 30px;
+    padding-left: 15px;
+    letter-spacing: 0.8px;
+    color: rgb(19, 19, 19);
+    font-size: 13.4px;
+}
+
+</style>
