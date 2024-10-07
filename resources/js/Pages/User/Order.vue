@@ -33,7 +33,7 @@
                                     </span>
                                 </td>
                                 <td>{{ formatDate(order.created_at) }}</td>
-                                <td style="z-index:100">
+                                <td v-if="order.status != 'rejected'" style="z-index:100">
                                     <div class="dropdown">
                                         <IconBtn icon="fa-solid fa-ellipsis" style="margin-top:-5px"
                                             data-bs-toggle="dropdown" />

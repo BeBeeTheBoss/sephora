@@ -13,7 +13,7 @@
               <div class="">
                       <img :src="product.images[0]?.image" style="height: 100px" />
                   <div>
-                      <h6 class="mt-3" style="font-size:14px;">{{ product.name }}</h6>
+                      <h6 class="mt-3 w-100" style="font-size:14px;">{{ product.name }}</h6>
                       <h6 class="whitespace-pre" style="font-size:14px;">{{ truncatedDescription(product) }}</h6>
                       <span class="font-semibold">${{ product.price }} </span>
                       <div class="flex">

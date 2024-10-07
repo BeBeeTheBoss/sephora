@@ -37,7 +37,7 @@ class ProductController extends Controller
             'name' => 'required',
             'description' => 'required',
             'price' => 'required',
-            'discount_price' => 'required',
+            'discount_price' => 'nullable',
             'images.*' => 'nullable|mimes:jpg,jpeg,png,webp'
 
         ]);

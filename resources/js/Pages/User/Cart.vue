@@ -7,7 +7,7 @@
                     <div class="bg-[#fe919e4f] my-2 py-2 px-2 shadow-sm rounded flex items-center"
                         v-for="product, index in products" :key="product" style="position:relative">
                         <div class="col-1">
-                            <img :src="product.product.images[0].image" class="w-100"
+                            <img :src="product.product.images[0]?.image" class="w-100"
                                 style="height:100px;object-fit:cover;object-position: center;">
                         </div>
                         <div class="col-3 text-start ps-5">

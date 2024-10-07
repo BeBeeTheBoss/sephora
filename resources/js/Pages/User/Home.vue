@@ -61,10 +61,10 @@
         </div>
         <div class="row w-100 px-5 mb-5 d-lg-flex d-md-flex d-sm-none d-none">
             <div class="col-lg-3 col-md-4 mb-3" v-for="product, index in all_products" :key="product">
-                
+
                 <Product @click="openProductModal(index, product.id)" :name="product.name"
                     :categoryName="product.category.name" :image="product.images[0]?.image" :price="product.price"
-                    :discount_price="product.discount_price" :description="product.description" />
+                    :discount_price="product.discount_price" :description="product.description" :popular="product.view_count" />
                 <template>
                     <div class="text-center pa-4">
                         <v-dialog v-model="dialogArray[index]" width="auto">
@@ -83,7 +83,7 @@
                                             <div class="flex justify-between items-center">
                                                 <span class="text-muted" style="font-size:12px">{{ product.category.name
                                                     }} <font-awesome-icon class="ms-2 me-1" icon="fa-solid fa-fire"
-                                                        style="font-size: 13px;color:#fe919d" />12</span>
+                                                        style="font-size: 13px;color:#fe919d" />{{ product.view_count }}</span>
                                                 <IconBtn v-if="product.is_favorite" @click="addToWishlist(product.id)"
                                                     icon="fa-solid fa-heart"
                                                     style="background-color:rgba(255, 255, 255, 0.8);color:#fe919d" />

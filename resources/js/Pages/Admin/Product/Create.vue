@@ -62,7 +62,8 @@
 <script setup>
 import { ref,computed,watch } from "vue";
 import { useForm } from "@inertiajs/vue3";
-import Layout from '../Layouts/Layout.vue'
+import Layout from '../Layouts/Layout.vue';
+import { post } from '../../Composables/httpMethod.js';
 const props = defineProps({
     categories : Object
 });
@@ -106,7 +107,7 @@ const clearImage = (index) => {
 
 const submit = () => {
     form.images = imagesBoxes.value.map((box) => box.images);
-    form.post("/admin/products");
+    post(form, route("products.store"));
 };
 </script>
 

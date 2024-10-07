@@ -77,14 +77,22 @@ class ProductService
 
     private function formatData($request)
     {
-        return [
+        $data = [
             'category_id' => $request->category_id,
             'name' => $request->name,
-            'price' => $request->price - ($request->price * $request->discount_price) / 100,
-            'discount_price' => $request->price,
+            'price' => $request->price,
+            'discount_price' => null,
             'description' => $request->description ?? null,
             'is_active' => $request->is_active ?? true,
         ];
+
+        if($request->discount_price){
+            $data['price'] = $request->price - ($request->price * $request->discount_price) / 100;
+            $data['discount_price'] = $request->price;
+        }
+
+        return $data;
+
     }
 
     private function handleImages($request, $product)
