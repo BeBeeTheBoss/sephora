@@ -15,14 +15,21 @@ class OrderController extends Controller
     public function index()
     {
         $orders = $this->model
-        ->with('user')
-        ->with('payment')
-        ->get();
+            ->with('user')
+            ->with('payment')
+            ->with(['order_products' => function ($query) {
+                $query->with('product');
+            }])
+            ->get();
 
-        foreach($orders as $order){
-            $order->ss_image = asset('storage/images/'. $order->ss_image);
+        dd($orders);
+
+
+        foreach ($orders as $order) {
+            $order['total_price'] = $order->order_products->sum('total_price');
+            $order['ss_image'] = asset('storage/images/' . $order->ss_image);
         }
-        return Inertia::render('Admin/Order/Index',['orders' => $orders]);
+        return Inertia::render('Admin/Order/Index', ['orders' => $orders]);
     }
 
     public function decision(Request $request)

@@ -17,7 +17,7 @@ class OrderController extends Controller
     public function index()
     {
 
-        if(!Auth::check()){
+        if (!Auth::check()) {
             session(['failed' => 'Please login first']);
             return back();
         }
@@ -26,6 +26,7 @@ class OrderController extends Controller
             $query->with('product');
         }])->get();
 
+        
         foreach ($orders as $order) {
             $order['total_price'] = $order->order_products->sum('total_price');
             $order['ss_image'] = asset('storage/images/' . $order['ss_image']);
@@ -36,9 +37,10 @@ class OrderController extends Controller
         ]);
     }
 
-    public function phoneSizePage(){
+    public function phoneSizePage()
+    {
 
-        if(!Auth::check()){
+        if (!Auth::check()) {
             session(['failed' => 'Please login first']);
             return back();
         }
@@ -93,7 +95,6 @@ class OrderController extends Controller
             //update view_count in product
             $product = Product::find($order_product['product_id']);
             $product->increment('order_count');
-
         }
 
 

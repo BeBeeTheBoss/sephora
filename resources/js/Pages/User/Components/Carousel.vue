@@ -49,4 +49,11 @@ onMounted(() => {
 
 </script>
 
-<style></style>
+<style scoped>
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: red; /* Set the background color */
+}
+
+
+</style>
