@@ -7,7 +7,7 @@
                     <v-img :src="selectedImage" style="width: 100%; height: 400px;" class="mb-4" />
 
                     <!-- Thumbnail Gallery -->
-                     
+
                     <div class="d-flex justify-content-center">
                         <v-img
                             v-for="(image, index) in product.images"
@@ -20,9 +20,9 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-6 border border-danger">
                     <h3>{{ product.name }}</h3>
-                    <p class=" w-100 text-wrap">{{ product.description }}</p>
+                    <p class="whitespace-pre-wrap">{{ product.description }}</p>
 
                     <div v-if="product.discount_price > 0">
                         <span class="text-muted" >${{ product.price }}</span>

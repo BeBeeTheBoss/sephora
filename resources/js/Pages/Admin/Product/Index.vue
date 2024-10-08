@@ -9,12 +9,12 @@
                   <input type="text" placeholder="Search" v-model="searchQuery" class="form-control ms-2 w-25 border border-success">
               </div>
 
-          <div v-for="product in filteredProducts" :key="product.id" class="col-md-4">
+          <div v-for="product in filteredProducts" :key="product.id" class="col-md-4 border border-danger">
               <div class="">
-                      <img :src="product.images[0]?.image" style="height: 100px" />
+                      <img class="mx-auto" :src="product.images[0]?.image" style="height: 100px" />
                   <div>
-                      <h6 class="mt-3 w-100" style="font-size:14px;">{{ product.name }}</h6>
-                      <h6 class="whitespace-pre" style="font-size:14px;">{{ truncatedDescription(product) }}</h6>
+                      <h6 class="mt-3 w-100" style="font-size:14px;">- {{ product.name }}</h6>
+                      <h6 class="whitespace-pre" style="font-size:14px;">- {{ truncatedDescription(product) }}</h6>
                       <span class="font-semibold">${{ product.price }} </span>
                       <div class="flex">
                           <p class="me-1" v-if="product.discount_price > 0"
@@ -56,7 +56,7 @@ const props = defineProps({
 
 const truncatedDescription = (product) => {
   const words = product.description ? product.description.trim().split(/\s+/) : [];
-  if (words.length > 50) {
+  if (words.length > 10) {
     return words.slice(0,  5).join(' ') + '...';
   } else {
     return product.description;

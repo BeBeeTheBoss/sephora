@@ -39,7 +39,6 @@ class ProductController extends Controller
             'price' => 'required',
             'discount_price' => 'nullable',
             'images.*' => 'nullable|mimes:jpg,jpeg,png,webp'
-
         ]);
         $this->productService->create($request);
         return redirect()->route('products.index');
