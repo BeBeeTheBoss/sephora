@@ -9,7 +9,7 @@
                   <input type="text" placeholder="Search" v-model="searchQuery" class="form-control ms-2 w-25 border border-success">
               </div>
 
-          <div v-for="product in filteredProducts" :key="product.id" class="col-md-4 border border-danger">
+          <div v-for="product in filteredProducts" :key="product.id" class="col-md-4">
               <div class="">
                       <img class="mx-auto" :src="product.images[0]?.image" style="height: 100px" />
                   <div>
