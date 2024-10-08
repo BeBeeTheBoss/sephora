@@ -39,7 +39,7 @@
                                                                 style="background-color:rgba(255, 255, 255, 0.8);color:#fe919d" />
                                                         </div>
                                                         <h5 class="card-title fw-bold">{{ product.name }}</h5>
-                                                        <p class="card-text text-muted" style="font-size:10px">
+                                                        <p class="card-text text-muted whitespace-pre-wrap" style="font-size:10px">
                                                             {{ product.description }}
                                                         </p>
                                                         <div class="fw-bold d-flex align-items-center"

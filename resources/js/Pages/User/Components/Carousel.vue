@@ -6,11 +6,11 @@
                     :src="image.image" alt="" />
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" :data-bs-target="'#' + id" data-bs-slide="prev">
+        <button v-if="images.length > 1"  class="carousel-control-prev" type="button" :data-bs-target="'#' + id" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" :data-bs-target="'#' + id" data-bs-slide="next">
+        <button v-if="images.length > 1"  class="carousel-control-next" type="button" :data-bs-target="'#' + id" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
@@ -50,9 +50,13 @@ onMounted(() => {
 </script>
 
 <style scoped>
+
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-    background-color: red; /* Set the background color */
+    background-color: rgb(252, 80, 80); /* Set the background color */
+    border-radius: 50%;
+    width:25px;
+    height:25px;
 }
 
 

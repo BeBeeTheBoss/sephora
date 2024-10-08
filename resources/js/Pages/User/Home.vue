@@ -68,7 +68,7 @@
                 <template>
                     <div class="text-center pa-4">
                         <v-dialog v-model="dialogArray[index]" width="auto">
-                            <v-card max-width="400" class="pb-3" style="position:relative">
+                            <v-card max-width="600" class="pb-3" style="position:relative;min-height:500px;">
                                 <div style="position:absolute;top:10px;right:10px;z-index:3">
                                     <font-awesome-icon @click="dialogArray[index] = false" icon="fa-solid fa-xmark"
                                         class="me-2 text-white fs-5"
@@ -77,8 +77,8 @@
                                 <div>
 
                                     <Carousel :from="'productCarousel' + product.id" :images="product.images"
-                                        height="300px" />
-                                    <div style="position:relative;cursor:pointer">
+                                     height="250px" />
+                                    <div class="" style="position:relative;cursor:pointer">
                                         <div class="card-body px-3 pt-3" style="max-height: 150px; overflow-y: auto;">
                                             <div class="flex justify-between items-center">
                                                 <span class="text-muted" style="font-size:12px">{{ product.category.name
@@ -92,7 +92,7 @@
                                                     style="background-color:rgba(255, 255, 255, 0.8);color:#fe919d" />
                                             </div>
                                             <h5 class="card-title fw-bold">{{ product.name }}</h5>
-                                            <p class="card-text text-muted w-100" style="font-size:10px;white-space: pre;" >
+                                            <p class="card-text text-muted whitespace-pre-wrap" style="font-size:10px;" >
                                                 {{ product.description }}
                                             </p>
                                             <div class="fw-bold d-flex align-items-center justify-between"

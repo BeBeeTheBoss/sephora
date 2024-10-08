@@ -6,7 +6,7 @@
             <Carousel :from="'productCarousel' + product.id" :images="product.images" height="300px" />
             <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
-                <p class="card-text">
+                <p class="card-text whitespace-pre-wrap">
                     {{ product.description }}
                 </p>
                 <p class="card-price">${{ product.price }} </p>

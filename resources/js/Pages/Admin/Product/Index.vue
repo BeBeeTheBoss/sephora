@@ -33,7 +33,7 @@
                               Delete
                           </button>
                           <Link :href="$route('products.detail', product.id)"><button
-                              class="btn border btn-sm ms-2">Detail</button></Link>
+                              class="btn btn-success btn-sm ms-2">Detail</button></Link>
                       </form>
                   </div>
               </div>
