@@ -136,16 +136,22 @@
 
   const formImageUrl = ref([]);
   const deleteImages = ref([]);
+  let discountPercentage = 0; // Default value in case of error
 
+if (props.product.discount_price !== undefined &&
+    props.product.price !== undefined &&
+    props.product.price > 0) {
+    discountPercentage = (((props.product.discount_price - props.product.price) / props.product.price) * 100);
+}
   const form = useForm({
     category_id: props.product.category_id,
     name: props.product.name,
     description: props.product.description,
     price: props.product.discount_price,
-    discount_price: ((props.product.discount_price - props.product.price) / props.product.price).toFixed(1) * 100,
+    discount_price: Math.floor(discountPercentage),
     images: props.product.images,
   });
-
+console.log(discountPercentage);
   const imagesBoxes = ref([{}]);
 
   // Add new image box
