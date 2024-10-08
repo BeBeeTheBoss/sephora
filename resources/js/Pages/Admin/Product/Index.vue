@@ -1,5 +1,6 @@
 <template>
   <Layout>
+    <h3 class="text-center font-bold" style="color:#fe919d;">Product List</h3>
       <Link :href="$route('products.create')"><button class="btn btn-sm mb-3 float-end" style="border: 1px solid #ff006e">
           + Create New
       </button></Link>
@@ -9,19 +10,19 @@
                   <input type="text" placeholder="Search" v-model="searchQuery" class="form-control ms-2 w-25 border border-success">
               </div>
 
-          <div v-for="product in filteredProducts" :key="product.id" class="col-md-4">
+          <div v-for="product in filteredProducts" :key="product.id" class="col-md-3 p-2">
               <div class="">
-                      <img class="mx-auto" :src="product.images[0]?.image" style="height: 100px" />
+                    <img class="mx-auto w-100" :src="product.images[0]?.image" style="height: 150px" />
                   <div>
-                      <h6 class="mt-3 w-100" style="font-size:14px;">- {{ product.name }}</h6>
+                      <h6 class="mt-3 w-100 text-center font-semibold" style="font-size:14px;color:#fe919d;">{{ product.name }}</h6>
                       <h6 class="whitespace-pre" style="font-size:14px;">- {{ truncatedDescription(product) }}</h6>
-                      <span class="font-semibold">${{ product.price }} </span>
                       <div class="flex">
-                          <p class="me-1" v-if="product.discount_price > 0"
-                              style="text-decoration: line-through;font-size:14px;">
+                        <span class="font-bold">${{ product.price }} </span>
+
+                          <p class="ms-2 mt-0.5 font-semibold" v-if="product.discount_price > 0"
+                              style="text-decoration: line-through;font-size:14px;color:red;">
                               {{ product.discount_price }}
                           </p>
-                          <!-- <span v-if="product.discount_price != 0" class="text-danger" style="font-size:14px;">{{ product.discount_price }}% Off</span> -->
                       </div>
                       <p class="d-none">{{ product.is_active = product.is_active ? true : false }}</p>
                       <v-switch @change="changeSwitchValue(product.is_active, product.id)" focused="true"

@@ -22,7 +22,7 @@
 
                         </div>
                         <div class="col-2 text-center">
-                           $ {{ product.product.price * quantity[index] }}
+                           {{ product.product.price * quantity[index] }}Ks
                         </div>
                         <span @click="deleteProduct(product.id,product.product.price * quantity[index])" class="translate-middle badge bg-danger"
                             style="position:absolute;top:50%;right:-55px;cursor:pointer">
@@ -30,7 +30,7 @@
                         </span>
                     </div>
                     <div class="text-end">
-                         SubTotal : ${{ sub_total }}
+                         SubTotal : {{ sub_total }}Ks
                     </div>
                 </div>
                 <div class="col-4 ps-5 flex justify-center"
@@ -55,11 +55,11 @@
                         </div>
                         <div class="flex justify-between">
                             <div>Shipping Fee</div>
-                            <div>+ $50</div>
+                            <div>+ 500Ks</div>
                         </div>
                         <div class="flex justify-between">
                             <div>Total</div>
-                            <div>${{ sub_total }}</div>
+                            <div>{{ sub_total }}Ks</div>
                         </div>
                         <div class="mt-4 pb-2">
                             <button @click="checkOut"

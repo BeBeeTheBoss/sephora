@@ -9,7 +9,7 @@
                 <p class="card-text whitespace-pre-wrap">
                     {{ product.description }}
                 </p>
-                <p class="card-price">${{ product.price }}</p>
+                <p class="card-price">{{ product.price }} Ks</p>
             </div>
         </div>
     </div>

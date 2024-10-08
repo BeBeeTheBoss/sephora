@@ -77,7 +77,7 @@
                                 <div>
 
                                     <Carousel :from="'productCarousel' + product.id" :images="product.images"
-                                     height="250px" />
+                                     height="300px" />
                                     <div class="" style="position:relative;cursor:pointer">
                                         <div class="card-body px-3 pt-3" style="max-height: 150px; overflow-y: auto;">
                                             <div class="flex justify-between items-center">
@@ -98,15 +98,15 @@
                                             <div class="fw-bold d-flex align-items-center justify-between"
                                                 style="color:#fe919d">
                                                 <div>
-                                                    $ {{ product.price }}
-                                                    <span class="text-decoration-line-through text-muted ms-1"
-                                                        style="font-size:12px">{{ product.discount_price }}</span>
+                                                    {{ product.price }}Ks
+                                                    <!-- <span class="text-decoration-line-through text-muted ms-1"
+                                                        style="font-size:12px">{{ product.discount_price }}</span> -->
                                                     <span class="ms-2">
                                                         x {{ quantity[index] }}
                                                     </span>
                                                 </div>
                                                 <div class="pe-1">
-                                                    ${{ product.price * quantity[index] }}
+                                                    {{ product.price * quantity[index] }}Ks
                                                 </div>
                                             </div>
                                         </div>

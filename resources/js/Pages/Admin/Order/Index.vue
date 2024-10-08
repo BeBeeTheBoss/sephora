@@ -88,7 +88,7 @@
                                             Shipping Fee
                                         </div>
                                         <div class="col-3 text-end">
-                                            50
+                                            500
                                         </div>
                                         <div class="col-7 pt-2 offset-5" style="border-bottom: 2px dashed #5F5F5F;">
                                         </div>
@@ -96,7 +96,7 @@
                                             Total
                                         </div>
                                         <div class="col-3 text-end">
-                                            {{ order.total_price + 50 }}
+                                            {{ order.total_price + 500 }}
                                         </div>
                                     </div>
                                     <div class="row mt-4 py-2 flex justify-center"

@@ -25,7 +25,7 @@
                                         {{ order.order_code }}
                                     </span>
                                 </td>
-                                <td>$ {{ order.total_price + 50 }}</td>
+                                <td>{{ order.total_price + 500 }}Ks</td>
                                 <td>{{ order.payment.name }}</td>
                                 <td class="text-capitalize">
                                     <span class="rounded px-2 py-1 text-danger" :class="checkStatus(order.status)">
@@ -34,16 +34,16 @@
                                 </td>
                                 <td>{{ formatDate(order.created_at) }}</td>
                                 <td style="z-index:100">
-                                    <div v-if="order.status == 'pending'" class="dropdown">
+                                    <div v-if="order.status != 'completed'" class="dropdown">
                                         <IconBtn icon="fa-solid fa-ellipsis" style="margin-top:-5px"
                                             data-bs-toggle="dropdown" />
                                         <ul class="dropdown-menu">
-                                            <li class="dropdown-item" style="cursor: pointer;">
+                                            <li v-if="order.status == 'pending'" class="dropdown-item" style="cursor: pointer;">
                                                 <div @click="refund(order.id)">
                                                     Refund
                                                 </div>
                                             </li>
-                                            <li class="dropdown-item" style="cursor: pointer;">
+                                            <li v-if="order.status != 'completed'" class="dropdown-item" style="cursor: pointer;">
                                                 <div @click="received(order.id)">
                                                     Received
                                                 </div>
@@ -100,7 +100,7 @@
                                                         Shipping Fee
                                                     </div>
                                                     <div class="col-3 text-end">
-                                                        50
+                                                        500
                                                     </div>
                                                     <div class="col-7 pt-2 offset-5"
                                                         style="border-bottom: 2px dashed #5F5F5F;">
@@ -109,7 +109,7 @@
                                                         Total
                                                     </div>
                                                     <div class="col-3 text-end">
-                                                        {{ order.total_price + 50 }}
+                                                        {{ order.total_price + 500 }}
                                                     </div>
                                                 </div>
                                                 <div class="row mt-4 py-2 flex justify-center"

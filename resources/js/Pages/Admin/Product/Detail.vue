@@ -20,16 +20,16 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 border border-danger">
-                    <h3>{{ product.name }}</h3>
+                <div class="col-md-6 mt-4">
+                    <h5 class="font-semibold">{{ product.name }}</h5>
                     <p class="whitespace-pre-wrap">{{ product.description }}</p>
 
                     <div v-if="product.discount_price > 0">
-                        <span class="text-muted" >${{ product.price }}</span>
-                        <span class="text-danger ms-2" style="text-decoration: line-through;">${{ product.discount_price }}</span>
+                        <span class="text-muted" >{{ product.price }}Ks</span>
+                        <span class="text-danger ms-2" style="text-decoration: line-through;">{{ product.discount_price }}Ks</span>
                     </div>
                     <div v-else>
-                        <span class="text-dark">${{ product.price }}</span>
+                        <span class="text-dark">{{ product.price }}Ks</span>
                     </div>
 
                     <!-- Product Status -->
