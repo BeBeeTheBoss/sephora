@@ -126,12 +126,14 @@
   import { ref } from "vue";
   import { useForm } from "@inertiajs/vue3";
   import Layout from '../Layouts/Layout.vue'
-
+  import { useToast } from 'vue-toastification';
   const props = defineProps({
     categories: Object,
     product: Object
   });
-console.log((props.product.discount_price - props.product.price)/ props.product.price * 100);
+
+  const toast = useToast();
+
   const formImageUrl = ref([]);
   const deleteImages = ref([]);
 
@@ -205,10 +207,10 @@ console.log((props.product.discount_price - props.product.price)/ props.product.
     form.transform(() => formData) // This will send the FormData directly.
       .post(route('products.update', props.product.id), {
         onSuccess: () => {
-          // Handle success, e.g., redirect or show a success message
+          toast.success("It's Successfully Updated!");
         },
         onError: (errors) => {
-          // Handle validation or server errors
+          toast.error("Can't Updated");
         }
       });
   };
