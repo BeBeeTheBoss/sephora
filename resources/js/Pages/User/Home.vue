@@ -77,7 +77,7 @@
                                 <div>
 
                                     <Carousel :from="'productCarousel' + product.id" :images="product.images"
-                                     height="300px" />
+                                     height="300px" width="200px" />
                                     <div class="" style="position:relative;cursor:pointer">
                                         <div class="card-body px-3 pt-3" style="max-height: 150px; overflow-y: auto;">
                                             <div class="flex justify-between items-center">

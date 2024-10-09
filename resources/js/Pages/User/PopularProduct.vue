@@ -2,11 +2,11 @@
     <Navbar />
     <div class="container row py-4 gap-3">
         <h3 ref="titleRef" class="section-title"></h3>
-        <div class="col-md-4 product-card" v-for="product in popular_products" :key="product.id">
-            <Carousel :from="'productCarousel' + product.id" :images="product.images" height="300px" />
+        <div class="col-md-4 product-card border border-danger" style="height:400px;overflow-y:auto;" v-for="product in popular_products" :key="product.id">
+            <Carousel :from="'productCarousel' + product.id" :images="product.images" height="250px" width="250px" />
             <div class="card-body">
-                <h5 class="card-title">{{ product.name }}</h5>
-                <p class="card-text whitespace-pre-wrap">
+                <h6 class="card-title">{{ product.name }}</h6>
+                <p class="card-text text-muted whitespace-pre-wrap">
                     {{ product.description }}
                 </p>
                 <p class="card-price">{{ product.price }}Ks</p>

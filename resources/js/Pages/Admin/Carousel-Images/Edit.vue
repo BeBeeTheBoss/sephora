@@ -17,7 +17,7 @@
                     </v-col>
                 </v-row>
                 <div class="d-flex ">
-                    <button class="btn btn-primary w-100 rounded-lg my-2 me-2">Back</button>
+                    <Link class="btn btn-primary w-100 rounded-lg my-2 me-2" :href="$route('carousel_images.index')">Back</Link>
                     <button class="btn w-100 rounded-lg my-2 text-white"
                         style="background-color:#ff595e;">Update</button>
                 </div>

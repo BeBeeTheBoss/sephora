@@ -2,15 +2,15 @@
     <div :id="id" class="carousel slide" data-bs-ride="carousel" style="width: 100%">
         <div class="carousel-inner" @click=show>
             <div class="carousel-item" :class="isActive(index)" v-for="(image, index) in images" :key="index">
-                <img class="rounded-2 shadow mx-auto mt-1" :style="{ height }" style="width:300px;object-fit: cover;"
+                <img class="rounded-2 mx-auto mt-1 w-50" :style="[{ height }, {width}]" style="object-fit: cover;"
                     :src="image.image" alt="" />
             </div>
         </div>
-        <button v-if="images.length > 1"  class="carousel-control-prev" type="button" :data-bs-target="'#' + id" data-bs-slide="prev">
+        <button v-if="images.length > 1" class="carousel-control-prev" type="button" :data-bs-target="'#' + id" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button v-if="images.length > 1"  class="carousel-control-next" type="button" :data-bs-target="'#' + id" data-bs-slide="next">
+        <button v-if="images.length > 1" class="carousel-control-next" type="button" :data-bs-target="'#' + id" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
@@ -21,6 +21,7 @@
 import { ref, onMounted } from 'vue';
 const props = defineProps({
     height: String,
+    width: String,
     images: Object,
     from: String
 });
