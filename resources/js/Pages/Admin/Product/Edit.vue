@@ -136,12 +136,12 @@
 
   const formImageUrl = ref([]);
   const deleteImages = ref([]);
-  let discountPercentage = 0; // Default value in case of error
+  let discountPercentage = 0; 
 
 if (props.product.discount_price !== undefined &&
     props.product.price !== undefined &&
     props.product.price > 0) {
-    discountPercentage = (((props.product.discount_price - props.product.price) / props.product.price) * 100);
+    discountPercentage = (((props.product.discount_price - props.product.price) / props.product.discount_price) * 100);
 }
   const form = useForm({
     category_id: props.product.category_id,
@@ -151,7 +151,8 @@ if (props.product.discount_price !== undefined &&
     discount_price: Math.floor(discountPercentage),
     images: props.product.images,
   });
-console.log(discountPercentage);
+
+
   const imagesBoxes = ref([{}]);
 
   // Add new image box
@@ -159,7 +160,6 @@ console.log(discountPercentage);
     imagesBoxes.value.push({});
   };
 
-  // Handle new file input change
   const onFileChange = (e, index) => {
     const file = e.target.files[0];
     if (file) {
@@ -167,7 +167,7 @@ console.log(discountPercentage);
       imagesBoxes.value[index].images = file;
     }
   };
-
+  
   // Clear new image input
   const clearNewImage = (index) => {
     formImageUrl.value.splice(index, 1);

@@ -12,7 +12,7 @@
 
           <div v-for="product in filteredProducts" :key="product.id" class="col-md-3 p-2">
               <div class="">
-                    <img class="mx-auto w-50" :src="product.images[0]?.image" style="height: 150px" />
+                    <img class="mx-auto w-100 h-100" :src="product.images[0]?.image" style="object-fit: cover;" />
                   <div>
                       <h6 class="mt-3 w-100 text-center font-semibold" style="font-size:14px;color:#fe919d;">{{ product.name }}</h6>
                       <h6 class="whitespace-pre" style="font-size:14px;">- {{ truncatedDescription(product) }}</h6>

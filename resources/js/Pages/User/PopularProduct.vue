@@ -1,6 +1,6 @@
 <template>
     <Navbar />
-    <div class="container row py-4 gap-3">
+    <div class="container row px-4 py-3">
         <h3 ref="titleRef" class="section-title"></h3>
         <div class="col-lg-3 col-md-4 mb-3" v-for="product, index in all_products" :key="product">
 
