@@ -34,7 +34,7 @@
                                 </td>
                                 <td>{{ formatDate(order.created_at) }}</td>
                                 <td style="z-index:100">
-                                    <div v-if="order.status != 'completed'" class="dropdown">
+                                    <div v-if="order.status != 'completed' && order.status != 'rejected'" class="dropdown">
                                         <IconBtn icon="fa-solid fa-ellipsis" style="margin-top:-5px"
                                             data-bs-toggle="dropdown" />
                                         <ul class="dropdown-menu">
@@ -43,7 +43,8 @@
                                                     Refund
                                                 </div>
                                             </li>
-                                            <li v-if="order.status != 'completed'" class="dropdown-item" style="cursor: pointer;">
+
+                                            <li v-if="order.status == 'delivered'" class="dropdown-item" style="cursor: pointer;">
                                                 <div @click="received(order.id)">
                                                     Received
                                                 </div>
@@ -86,7 +87,7 @@
                                                         {{ item.quantity }}
                                                     </div>
                                                     <div class="col-3 text-end">
-                                                        {{ item.product.price * item.quantity }}
+                                                        {{ item.product.price * item.quantity }}Ks
                                                     </div>
                                                 </div>
                                                 <div class="row mt-2 pt-1" style="border-top: 2px dashed #5F5F5F">
@@ -94,13 +95,13 @@
                                                         Subtotal
                                                     </div>
                                                     <div class="col-3 text-end">
-                                                        {{ order.total_price }}
+                                                        {{ order.total_price }}Ks
                                                     </div>
                                                     <div class="col-9 text-end">
                                                         Shipping Fee
                                                     </div>
                                                     <div class="col-3 text-end">
-                                                        500
+                                                        500Ks
                                                     </div>
                                                     <div class="col-7 pt-2 offset-5"
                                                         style="border-bottom: 2px dashed #5F5F5F;">
@@ -109,7 +110,7 @@
                                                         Total
                                                     </div>
                                                     <div class="col-3 text-end">
-                                                        {{ order.total_price + 500 }}
+                                                        {{ order.total_price + 500 }}Ks
                                                     </div>
                                                 </div>
                                                 <div class="row mt-4 py-2 flex justify-center"

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
-use App\Models\OrderProduct;
+use Carbon\Carbon;
+use App\Models\Cart;
 use Inertia\Inertia;
+use App\Models\Order;
 use App\Models\Product;
+use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,19 +36,34 @@ class ProductController extends Controller
 
     public function trending()
     {
-        $trendingProducts = $this->model->orderBy('view_count', 'desc')->with('images')->get(); // By View
+        $trendingProducts = $this->model->orderBy('view_count', 'desc')->with('category')
+        ->when(Auth::user(), function ($query) {
+            $query->withCount(['wish_lists as is_favorite' => function ($query) {
+                $query->where('user_id', Auth::user()->id);
+            }]);
+        })
+        ->with('images')->get();
+
         foreach ($trendingProducts as $product) {
             foreach ($product->images as $image) {
                 $image->image = asset('storage/images/' . $image->image);
             }
         }
 
+
         return inertia('User/TrendingProduct', ['trending_products' => $trendingProducts]);
     }
 
     public function popular()
     {
-        $popularProducts = $this->model->orderBy('order_count', 'desc')->get(); // By Order
+        $popularProducts = $this->model->orderBy('order_count', 'desc')->with('category')
+        ->when(Auth::user(), function ($query) {
+            $query->withCount(['wish_lists as is_favorite' => function ($query) {
+                $query->where('user_id', Auth::user()->id);
+            }]);
+        })
+        ->with('images')->get();
+
         foreach ($popularProducts as $product) {
             foreach ($product->images as $image) {
                 $image->image = asset('storage/images/' . $image->image);
@@ -58,10 +75,6 @@ class ProductController extends Controller
 
     public function recommend()
     {
-        if (!Auth::check()) {
-            session(['failed' => 'Please login first']);
-            return back();
-        }
 
         $categoryIds = Order::where('user_id', Auth::id())
             ->whereHas('order_products', function ($query) {
@@ -77,24 +90,41 @@ class ProductController extends Controller
             ->flatten()
             ->unique();
 
-        $products = Product::whereIn('category_id', $categoryIds)
-            ->get();
+        $products = Product::whereIn('category_id', $categoryIds)->with('category')
+        ->when(Auth::user(), function ($query) {
+            $query->withCount(['wish_lists as is_favorite' => function ($query) {
+                $query->where('user_id', Auth::user()->id);
+            }]);
+        })
+        ->with('images')->get();
+
         foreach ($products as $product) {
             foreach ($product->images as $image) {
                 $image->image = asset('storage/images/' . $image->image);
             }
         }
+
         return inertia('User/RecommendProduct', ['recommend_products' => $products]);
     }
 
     public function new_arrival()
     {
-        $newArrivalProducts = $this->model->orderBy('created_at', 'desc')->get(); // By Date
+        $lastWeekDate = Carbon::now()->subWeek();
+        $newArrivalProducts = $this->model->whereDate('created_at', '>=', $lastWeekDate)->with('category')->orderBy('created_at', 'desc')
+
+        ->when(Auth::user(), function ($query) {
+            $query->withCount(['wish_lists as is_favorite' => function ($query) {
+                $query->where('user_id', Auth::user()->id);
+            }]);
+        })
+        ->with('images')->get();
+
         foreach ($newArrivalProducts as $product) {
             foreach ($product->images as $image) {
                 $image->image = asset('storage/images/' . $image->image);
             }
         }
+
 
         return inertia('User/NewArrivalProduct', ['new_arrival_products' => $newArrivalProducts]);
     }

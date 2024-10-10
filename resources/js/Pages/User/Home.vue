@@ -3,7 +3,7 @@
         <div class="row w-100 d-flex justify-content-center mt-lg-4 mt-md-4 mt-sm-3 mt-3">
             <div class="col-lg-8 col-md-10 col-sm-12 col-12">
                 <Carousel from="ads" :images="carouselImages" class="d-lg-block d-md-block d-sm-none d-none ps-5"
-                    height="450px" />
+                    height="450px" width='600px' />
                 <Carousel from="phone" :images="carouselImages" class="d-lg-none d-md-none d-sm-block d-block"
                     height="200px" style="margin-left: 15px" />
             </div>
@@ -169,7 +169,6 @@ import SpeedDial from "./Components/SpeedDial.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import axios from 'axios';
 
-
 const toast = useToast();
 const page = usePage();
 const searchKey = ref('');
@@ -197,17 +196,10 @@ const showData = (data) => {
             window.location.href = "#products";
         }
     })
-
 }
-
-
-// const searchInputValue = inject('searchInputValue');
-// console.log(searchInputValue);
 
 const dialogArray = ref([]);
 const quantity = ref([]);
-
-
 const incrementViewCount = (productId) => {
     axios.post(`/product/${productId}/increment-view`)
         .then(response => {
