@@ -86,13 +86,12 @@ class ProductService
             'is_active' => $request->is_active ?? true,
         ];
 
-        if($request->discount_price){
+        if ($request->discount_price && $request->discount_price > 0) {
             $data['price'] = $request->price - ($request->price * $request->discount_price) / 100;
             $data['discount_price'] = $request->price;
         }
 
         return $data;
-
     }
 
     private function handleImages($request, $product)

@@ -132,23 +132,25 @@
     product: Object
   });
 
+  console.log(props.product);
+
   const toast = useToast();
 
   const formImageUrl = ref([]);
   const deleteImages = ref([]);
   let discountPercentage = 0; 
 
-if (props.product.discount_price !== undefined &&
-    props.product.price !== undefined &&
-    props.product.price > 0) {
+
+if (props.product.price > 0) {
     discountPercentage = (((props.product.discount_price - props.product.price) / props.product.discount_price) * 100);
 }
+
   const form = useForm({
     category_id: props.product.category_id,
     name: props.product.name,
     description: props.product.description,
-    price: props.product.discount_price,
-    discount_price: Math.floor(discountPercentage),
+    price: props.product.discount_price ?? props.product.price,
+    discount_price: props.product.discount_price ? Math.floor(discountPercentage) : 0,
     images: props.product.images,
   });
 

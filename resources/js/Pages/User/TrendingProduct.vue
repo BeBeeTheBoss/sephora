@@ -16,8 +16,8 @@
                                     class="me-2 text-white fs-5"
                                     style="background-color: black;padding:6px;border-radius:50%;width:16px;height:16px;cursor:pointer" />
                             </div>
-                            <div>
 
+                            <div>
                                 <Carousel :from="'productCarousel' + product.id" :images="product.images" height="300px"
                                     width="200px" />
                                 <div class="" style="position:relative;cursor:pointer">
