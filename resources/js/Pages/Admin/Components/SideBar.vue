@@ -42,6 +42,12 @@
             <i class="fas fa-users"></i> <h6 class="text-black">Ads Images</h6>
           </Link>
         </li>
+
+        <li class="nav-item">
+          <Link :class="isActive('/admin/users')" :href="$route('users.index')">
+            <i class="fas fa-users"></i> <h6 class="text-black">Users</h6>
+          </Link>
+        </li>
       </ul>
     </div>
   </template>

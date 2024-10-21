@@ -2,8 +2,8 @@
     <div :id="id" class="carousel slide" data-bs-ride="carousel" style="width: 100%">
         <div class="carousel-inner" @click=show>
             <div class="carousel-item" :class="isActive(index)" v-for="(image, index) in images" :key="index">
-                <img class="rounded-2 mx-auto mt-1 w-50" :style="[{ height }, {width}]" style="object-fit: cover;"
-                    :src="image.image" alt="" />
+                <img class="rounded-2 mx-auto mt-1 w-50"
+                    :src="image.image" alt="" style="height:300px;" />
             </div>
         </div>
         <button v-if="images.length > 1" class="carousel-control-prev" type="button" :data-bs-target="'#' + id" data-bs-slide="prev">

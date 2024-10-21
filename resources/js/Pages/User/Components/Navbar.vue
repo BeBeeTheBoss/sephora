@@ -3,13 +3,12 @@
         <div class="d-flex justify-content-between align-items-center pt-3">
             <div class="logo col-2 ps-4 flex align-items-center d-lg-flex d-md-flex d-sm-none d-none"
                 style="font-size:25px">
-                <img src="https://iconape.com/wp-content/png_logo_vector/shopping-and-ecommerce-28.png"
-                    style="width: 40px" />
-                <div style="color: #fe919d">Sep</div>
-                hora
+                <img src="../../../images/sephoralogo.jpg" style="width: 200px;height:50px;" />
+                <!-- <div style="color: #fe919d">Sep</div>
+                hora -->
             </div>
             <div class="logo col-2 ps-4 flex align-items-center d-lg-none d-md-none d-sm-flex d-flex"
-                style="font-size:20px">
+                style="font-size:20px">/
                 <img src="https://iconape.com/wp-content/png_logo_vector/shopping-and-ecommerce-28.png"
                     style="width: 30px" />
                 <div style="color: #fe919d">Sep</div>
@@ -22,6 +21,20 @@
                     <IconBtn icon="fa-solid fa-home" />
                     </Link>
                     <!-- <span>Orders</span> -->
+                </div>
+                {{ categories }}
+
+                <div class="me-3 d-flex align-items-center navIcon" :class="isActive('/')" style="cursor:pointer">
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownShop" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Shop
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownShop">
+                            <a class="dropdown-item" href="shop.php">All Products</a>
+                            <a class="dropdown-item" v-for="category in categories" :key="category.id">{{category}}</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="me-3 d-flex align-items-center navIcon" :class="isActive('/cart')" style="cursor:pointer">
                     <Link href="/cart" style="color:black">
@@ -46,7 +59,7 @@
                     <!-- <span>Wishlists</span> -->
                 </div>
             </div>
-            <div 
+            <div
                 class="search col-lg-5 col-md-6 d-lg-flex d-md-flex align-items-center d-sm-none d-none pe-4 justify-content-end">
                 <Search v-if="isHomePage" @seachInput="sendToLayout" />
                 <!-- <div class="d-flex align-items-center" style="cursor:pointer">
@@ -86,11 +99,16 @@
 import IconBtn from "./IconBtn.vue";
 import ProfileIcon from "./ProfileIcon.vue";
 import Search from "./Search.vue";
-import { router, Link,usePage } from "@inertiajs/vue3";
+import { router, Link, usePage } from "@inertiajs/vue3";
 import axios from "axios";
-import { ref, onMounted, provide,computed } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 
 const emit = defineEmits(['searchInput']);
+
+const props = defineProps({
+    categories : Array
+})
+
 
 const data = ref('');
 const sendToLayout = (input) => {

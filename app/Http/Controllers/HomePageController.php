@@ -25,7 +25,7 @@ class HomePageController extends Controller
             })
             ->with('images')->get();
 
-        if(Auth::check()){
+        if (Auth::check()) {
             $cartData = Cart::where('user_id', Auth::user()->id)->with(['product' => function ($query) {
                 $query->with('images');
             }])->get();
@@ -50,6 +50,8 @@ class HomePageController extends Controller
         foreach ($carousel_images as $carousel_image) {
             $carousel_image->image = asset('storage/images/' . $carousel_image->image);
         }
+
+
 
         return Inertia::render('User/Home', [
             'categories' => $categories,

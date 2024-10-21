@@ -4,38 +4,42 @@
             <div v-for="card in cards" :key="card.id" class="col-md-3">
                 <div class="card bg-gradient-to-r from-pink-200 via-purple-200 to-indigo-200 p-6 rounded-md shadow-md">
                     <div class="border-none text-purple-700 text-lg font-semibold">
-                        
+
                         {{ card.title }}
                     </div>
                     <div class="card-body ">
-                    <h6 class="text-purple-700">{{ card.count }}</h6>
+                        <h6 class="text-purple-700">{{ card.count }}</h6>
                     </div>
                 </div>
             </div>
 
         </div>
         <div class="row flex justify-center">
-            <div class="col-md-6">
-                <h5 class="text-center">Daily New Order</h5>
-                <canvas id="daily_new_order"></canvas>
+
+            <div class="col-md-9">
+                <h5 class="text-center">Daily Sales</h5>
+                <canvas id="daily_sales"></canvas>
             </div>
+
         </div>
     </Layout>
 </template>
 
 <script setup>
 import Layout from './Layouts/Layout.vue'
-import { ref,onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import Chart from "chart.js/auto";
 
 const props = defineProps({
-    orders: Array,
-    dashboardCards : Array
+    dashboardCards: Array,
+    orderProducts: Array,
+    tokens : Array
 })
-const cards = ref(props.dashboardCards);
 
 onMounted(() => {
-    const ctx = document.getElementById('daily_new_order');
+
+    // Daily Sales
+    const ctx = document.getElementById('daily_sales');
 
     const labelsByDay = [
         "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th",
@@ -44,33 +48,33 @@ onMounted(() => {
         "29th", "30th", "31st"
     ];
 
-    function getOrdersCountByDay(orders) {
+    function getSalesByDay(orderProducts) {
         const now = new Date();
         const currentMonth = now.getMonth();
         const currentYear = now.getFullYear();
         const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-        const counts = Array(daysInMonth).fill(0);
+        const revenueByDay = Array(daysInMonth).fill(0);
 
-        orders.forEach((order) => {
+        orderProducts.forEach((order) => {
             const createdAt = new Date(order.created_at);
             if (createdAt.getMonth() === currentMonth && createdAt.getFullYear() === currentYear) {
                 const dayIndex = createdAt.getDate() - 1;
-                counts[dayIndex]++;
+                revenueByDay[dayIndex] += parseFloat(order.total_price); // Sum up the total_amount for the day
             }
         });
 
-        return counts;
+        return revenueByDay;
     }
 
-    const ordersByDay = props.orders;
-    const orderCountsByDay = getOrdersCountByDay(ordersByDay);
+    const salesByDay = props.orderProducts;
+    const dailySalesByDay = getSalesByDay(salesByDay);
 
-    const dynamicDataByDay = {
-        labels: labelsByDay.slice(0, orderCountsByDay.length),
+    const dynamicSalesData = {
+        labels: labelsByDay.slice(0, dailySalesByDay.length),
         datasets: [
             {
-                label: "Daily New orders",
-                data: orderCountsByDay,
+                label: "Daily Sales",
+                data: dailySalesByDay,
                 fill: false,
                 borderColor: 'rgb(255,102,204)',
                 tension: 0.1
@@ -78,11 +82,92 @@ onMounted(() => {
         ],
     };
 
+if (ctx) {
     const myChart = new Chart(ctx, {
-        type: "line",
-        data: dynamicDataByDay,
+        type: "bar",
+        data: {
+            ...dynamicSalesData,
+            datasets: dynamicSalesData.datasets.map(dataset => ({
+                ...dataset,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)', 
+                borderColor: 'rgba(75, 192, 192, 1)', 
+                borderWidth: 1
+            }))
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        },
     });
-})
+}
+
+
+//User Activity
+const ctx2 = document.getElementById('user_activity');
+
+
+function getActivityByDay(tokens) {
+    const now = new Date();
+    const currentMonth = now.getMonth();
+    const currentYear = now.getFullYear();
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const activityByDay = Array(daysInMonth).fill(0);
+
+    tokens.forEach((token) => {
+        const createdAt = new Date(token.created_at);
+        if (createdAt.getMonth() === currentMonth && createdAt.getFullYear() === currentYear) {
+            const dayIndex = createdAt.getDate() - 1;
+            activityByDay[dayIndex]++;
+        }
+    });
+
+    return activityByDay;
+}
+
+const activityByDay = props.orderProducts;
+const userActivityByDay = getActivityByDay(activityByDay);
+
+const dynamicActivityData = {
+    labels: labelsByDay.slice(0, userActivityByDay.length),
+    datasets: [
+        {
+            label: "Daily Sales",
+            data: dailySalesByDay,
+            fill: false,
+            borderColor: 'rgb(255,102,204)',
+            tension: 0.1
+        },
+    ],
+};
+
+if (ctx2) {
+const myChart = new Chart(ctx2, {
+    type: "bar",
+    data: {
+        ...dynamicActivityData,
+        datasets: dynamicActivityData.datasets.map(dataset => ({
+            ...dataset,
+            backgroundColor: 'rgba(75, 192, 192, 0.2)', 
+            borderColor: 'rgba(75, 192, 192, 1)', 
+            borderWidth: 1
+        }))
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    },
+});
+}
+
+
+
+});
 
 </script>
 

@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FeedbackController;
 use App\Http\Controllers\Admin\CarouselImageController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\OrderController as UserOrderController;
 use App\Http\Controllers\ProductController as UserProductController;
 
@@ -70,8 +71,13 @@ Route::get('/search', function (Request $request) {
             $query->where('category_id', $request->category_id);
         })
         ->when($request->name, function ($query) use ($request) {
-            $query->where('name', 'like', '%' . $request->name . '%');
+            $query->where('name', 'like', '%' . $request->name . '%')
+                ->orWhere('price', 'like', '%' . $request->name . '%')
+                ->orWhereHas('category', function ($query) use ($request) {
+                    $query->where('categories.name', 'like', '%' . $request->name . '%');
+                });
         })
+
         ->when(Auth::user(), function ($query) {
             $query->withCount(['wish_lists as is_favorite' => function ($query) {
                 $query->where('user_id', Auth::user()->id);
@@ -192,14 +198,20 @@ Route::middleware('auth')->group(function () {
         });
 
         //Feedbacks
-        Route::controller(FeedBackController::class)->group(function () {
-            Route::get('/feedback', 'feedback')->name('feedback');
-        });
+        // Route::controller(FeedBackController::class)->group(function () {
+        //     Route::get('/feedback', 'feedback')->name('feedback');
+        // });
 
         //Profile
         Route::controller(ProfileController::class)->group(function () {
             Route::get('/profile', 'profile')->name('profile');
             Route::post('/updateProfile', 'update')->name('updateProfile');
+        });
+
+        //Users
+        Route::group(['prefix' => 'users', 'controller' => UserController::class, 'as' => 'users.'], function () {
+            Route::get('/', 'index')->name('index');
+            Route::delete('/{id}/delete', 'destroy')->name('destroy');
         });
     });
 });
