@@ -25,31 +25,34 @@ class AdminController extends Controller
         $orderCount = $this->order->count();
         $orderProducts = OrderProduct::select('total_price', 'created_at')->get();
         $customerCount = User::where('role', 'user')->count();
-        $tokens = PersonalAccessToken::select('created_at')->get();
+        $tokens = PersonalAccessToken::select('personal_access_tokens.tokenable_id','personal_access_tokens.created_at')
+        ->join('users', 'personal_access_tokens.tokenable_id','=', 'users.id')
+        ->where('users.role', '!=', 'admin')
+        ->get();
         $dashboardCards = [
             [
                 "id" => 1,
                 "title" => "Total Categories",
                 "count" => $categoryCount,
-                "icon" => ""
+                "icon" => "fa-solid fa-list"
             ],
             [
                 "id" => 2,
                 "title" => "Total Products",
                 "count" => $productCount,
-                "icon" => ""
+                "icon" => "fa-solid fa-box"
             ],
             [
                 "id" => 3,
                 "title" => "Total Orders",
                 "count" => $orderCount,
-                "icon" => ""
+                "icon" => "fa-solid fa-cart-shopping"
             ],
             [
                 "id" => 4,
                 "title" => "Total Customers",
                 "count" => $customerCount,
-                "icon" => ""
+                "icon" => "fa-regular fa-user"
             ]
         ];
         return Inertia::render('Admin/Dashboard', ['orders' => $orders, 'dashboardCards' => $dashboardCards, 'orderProducts' => $orderProducts, 'tokens' => $tokens]);

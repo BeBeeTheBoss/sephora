@@ -24,7 +24,7 @@
             <i class="fas fa-users"></i> <h6 class="text-black">Orders</h6>
           </Link>
         </li>
-<!-- 
+<!--
         <li class="nav-item">
           <Link :class="isActive('/admin/feedbacks')" :href="$route('feedback')">
             <i class="fas fa-users"></i> <h6 class="text-black">FeedBacks</h6>
@@ -45,7 +45,7 @@
 
         <li class="nav-item">
           <Link :class="isActive('/admin/users')" :href="$route('users.index')">
-            <i class="fas fa-users"></i> <h6 class="text-black">Users</h6>
+            <i class="fas fa-users"></i> <h6 class="text-black">All Users</h6>
           </Link>
         </li>
       </ul>

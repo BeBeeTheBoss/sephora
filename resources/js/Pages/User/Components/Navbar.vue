@@ -22,19 +22,19 @@
                     </Link>
                     <!-- <span>Orders</span> -->
                 </div>
-                {{ categories }}
 
                 <div class="me-3 d-flex align-items-center navIcon" :class="isActive('/')" style="cursor:pointer">
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownShop" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Shop
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownShop">
                             <a class="dropdown-item" href="shop.php">All Products</a>
-                            <a class="dropdown-item" v-for="category in categories" :key="category.id">{{category}}</a>
+                            <a class="dropdown-item" v-for="category in categories" :key="category.id"     @click="select_category = select_category == category.id ? '' : category.id">{{category.name}}</a>
                         </div>
                     </div>
+
                 </div>
                 <div class="me-3 d-flex align-items-center navIcon" :class="isActive('/cart')" style="cursor:pointer">
                     <Link href="/cart" style="color:black">
@@ -45,7 +45,7 @@
                 </div>
                 <div class="me-3 d-flex align-items-center navIcon" :class="isActive('/orders')" style="cursor:pointer">
                     <Link href="/orders" style="color:black">
-                    <IconBtn icon="fa-solid fa-bag-shopping" v-if="orderCount" :count="orderCount" />
+                    <IconBtn icon="fa-solid fa-bag-shopping" v-if="ordersCount" :count="ordersCount" />
                     <IconBtn icon="fa-solid fa-bag-shopping" v-else />
                     </Link>
                     <!-- <span>Orders</span> -->
@@ -104,12 +104,8 @@ import axios from "axios";
 import { ref, onMounted, computed } from 'vue'
 
 const emit = defineEmits(['searchInput']);
-
-const props = defineProps({
-    categories : Array
-})
-
-
+const page = usePage();
+const categories = page.props.categories;
 const data = ref('');
 const sendToLayout = (input) => {
     emit('searchInput', input)

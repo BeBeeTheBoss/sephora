@@ -1,7 +1,7 @@
 <template>
     <Layout>
-        <div class="container">
-            <h5 v-if="orders.length != 0" class="fw-bold mt-4 mb-3 col-10 offset-1">My orders</h5>
+        <div class="container" style="min-height: 70vh;">
+            <h5 v-if="orders.length != 0" class="fw-bold mt-4 mb-3 col-10 offset-1">My Orders</h5>
             <div v-if="orders.length != 0" class="row flex justify-center">
                 <div class="col-10">
                     <table class="table table-striped border">

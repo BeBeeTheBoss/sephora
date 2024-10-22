@@ -20,6 +20,7 @@
                     <td>{{ formatDate(user.created_at) }}</td>
                     <td>
                         <form @submit.prevent="userDelete(user.id)">
+                            <button @click.prevent="changeRole(user.id)" class="btn btn-sm me-1" style="border:1px solid red;">Change Role</button>
                             <button class="btn btn-sm" style="border:1px solid #ff0054;">
                                 Delete
                             </button>
@@ -35,8 +36,9 @@
 import Layout from '../Layouts/Layout.vue';
 import { ref } from 'vue';
 import {del} from '../../Composables/httpMethod.js'
-import { toast } from 'vue3-toastify';
+import { router } from '@inertiajs/vue3';
 import 'vue3-toastify/dist/index.css';
+import { toast } from 'vue3-toastify';
 
 const props = defineProps({
     users : Array,
@@ -52,6 +54,15 @@ const formatDate = (dateString) => {
     return formattedDate;
 }
 
+const changeRole = (id) => {
+    let options = {
+        preserveScroll: true,
+        onSuccess: () => {
+            toast.success("Congrats, changed role successfully!", {autoClose: 6000})
+        }
+    }
+    router.post(route('users.changeRole', id),{},options);
+}
 
 const userDelete = (id) => {
     del(route('users.destroy', id));

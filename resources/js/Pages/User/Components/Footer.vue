@@ -3,19 +3,17 @@
    <section class="row">
       <div class="col-md-3 box flex flex-column">
          <h3 class="font-semibold">quick links</h3>
-         <a href="home.php"><font-awesome-icon icon="fa-solid fa-chevron-right" /> Home</a>
-         <a href="about.php"><font-awesome-icon icon="fa-solid fa-chevron-right" /> About</a>
-         <a href="shop.php"><font-awesome-icon icon="fa-solid fa-chevron-right" /> Shop</a>
-         <a href="contact.php"><font-awesome-icon icon="fa-solid fa-chevron-right" /> Contact</a>
-         <a href="wishlist.php"><font-awesome-icon icon="fa-solid fa-chevron-right" /> Wishlist</a>
+         <Link :href="$route('home')"><font-awesome-icon icon="fa-solid fa-chevron-right" /> Home</Link>
+         <Link href="about.php"><font-awesome-icon icon="fa-solid fa-chevron-right" /> About</Link>
+         <Link href="contact.php"><font-awesome-icon icon="fa-solid fa-chevron-right" /> Contact</Link>
+         <Link :href="$route('feedbackPage')"><font-awesome-icon icon="fa-solid fa-chevron-right" /> Feedback</Link>
       </div>
       <div class="col-md-3 box flex flex-column">
          <h3 class="font-semibold">extra links</h3>
-         <a href="user_login.php"><font-awesome-icon icon="fa-solid fa-chevron-right" /> Login</a>
-         <a href="user_register.php"><font-awesome-icon icon="fa-solid fa-chevron-right" /> Register</a>
-         <a href="cart.php"><font-awesome-icon icon="fa-solid fa-chevron-right" /> Cart</a>
-         <a href="orders.php"><font-awesome-icon icon="fa-solid fa-chevron-right" /> Orders</a>
-         <a href="admin/admin_login.php"><font-awesome-icon icon="fa-solid fa-chevron-right" /> Admin Login</a>
+         <Link :href="$route('loginPage')"><font-awesome-icon icon="fa-solid fa-chevron-right" /> Login</Link>
+         <Link :href="$route('signUpPage')"><font-awesome-icon icon="fa-solid fa-chevron-right" /> Register</Link>
+         <Link :href="$route('cart.cart')"><font-awesome-icon icon="fa-solid fa-chevron-right" /> Cart</Link>
+         <Link :href="$route('orders.orderPage')"><font-awesome-icon icon="fa-solid fa-chevron-right" /> Orders</Link>
       </div>
       <div class="col-md-3 box flex flex-column">
          <h3 class="font-semibold">contact us</h3>
@@ -27,10 +25,10 @@
       <div class="col-md-3 box flex flex-column">
          <h3 class="font-semibold">follow us</h3>
          <a href="https://www.facebook.com/" target="_blank"><font-awesome-icon icon="fa-brands fa-facebook" /> Facebook</a>
-         <a href="https://twitter.com/i/flow/login" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
-         <a href="https://www.instagram.com/accounts/login/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-         <a href="https://www.linkedin.com/login" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-         <a href="https://www.tiktok.com/login" target="_blank"><i class="fab fa-tiktok"></i>Tiktok</a>
+         <a href="https://twitter.com/i/flow/login" target="_blank"><font-awesome-icon icon="fa-brands fa-twitter" /> Twitter</a>
+         <a href="https://www.instagram.com/accounts/login/" target="_blank"><font-awesome-icon icon="fa-brands fa-instagram" /> Instagram</a>
+         <a href="https://www.linkedin.com/login" target="_blank"><font-awesome-icon icon="fa-brands fa-linkedin" /> LinkedIn</a>
+         <a href="https://www.tiktok.com/login" target="_blank"><font-awesome-icon icon="fa-brands fa-tiktok" />Tiktok</a>
       </div>
    </section>
 </footer>

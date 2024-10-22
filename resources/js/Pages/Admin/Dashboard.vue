@@ -1,24 +1,28 @@
 <template>
     <Layout>
-        <div class="row my-3">
-            <div v-for="card in cards" :key="card.id" class="col-md-3">
+        <div class="row mt-4 mb-5">
+            <div v-for="card in dashboardCards" :key="card.id" class="col-md-3">
                 <div class="card bg-gradient-to-r from-pink-200 via-purple-200 to-indigo-200 p-6 rounded-md shadow-md">
                     <div class="border-none text-purple-700 text-lg font-semibold">
-
+                        <font-awesome-icon :icon="card.icon" class="me-2" />
                         {{ card.title }}
                     </div>
-                    <div class="card-body ">
+                    <div class="card-body ms-4">
                         <h6 class="text-purple-700">{{ card.count }}</h6>
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="row flex justify-center">
 
-            <div class="col-md-9">
+            <div class="col-md-6">
                 <h5 class="text-center">Daily Sales</h5>
                 <canvas id="daily_sales"></canvas>
+            </div>
+
+            <div class="col-md-6">
+                <h5 class="text-center">User Activity</h5>
+                <canvas id="user_activity"></canvas>
             </div>
 
         </div>
@@ -89,8 +93,8 @@ if (ctx) {
             ...dynamicSalesData,
             datasets: dynamicSalesData.datasets.map(dataset => ({
                 ...dataset,
-                backgroundColor: 'rgba(75, 192, 192, 0.2)', 
-                borderColor: 'rgba(75, 192, 192, 1)', 
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1
             }))
         },
@@ -107,7 +111,6 @@ if (ctx) {
 
 //User Activity
 const ctx2 = document.getElementById('user_activity');
-
 
 function getActivityByDay(tokens) {
     const now = new Date();
@@ -127,15 +130,15 @@ function getActivityByDay(tokens) {
     return activityByDay;
 }
 
-const activityByDay = props.orderProducts;
-const userActivityByDay = getActivityByDay(activityByDay);
+const tokens = props.tokens;
+const userActivityByDay = getActivityByDay(tokens);
 
 const dynamicActivityData = {
-    labels: labelsByDay.slice(0, userActivityByDay.length),
+    labels: labelsByDay,
     datasets: [
         {
-            label: "Daily Sales",
-            data: dailySalesByDay,
+            label: "User Activity",
+            data: userActivityByDay,
             fill: false,
             borderColor: 'rgb(255,102,204)',
             tension: 0.1
@@ -144,14 +147,14 @@ const dynamicActivityData = {
 };
 
 if (ctx2) {
-const myChart = new Chart(ctx2, {
+const myChart2 = new Chart(ctx2, {
     type: "bar",
     data: {
         ...dynamicActivityData,
         datasets: dynamicActivityData.datasets.map(dataset => ({
             ...dataset,
-            backgroundColor: 'rgba(75, 192, 192, 0.2)', 
-            borderColor: 'rgba(75, 192, 192, 1)', 
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1
         }))
     },
@@ -164,8 +167,6 @@ const myChart = new Chart(ctx2, {
     },
 });
 }
-
-
 
 });
 

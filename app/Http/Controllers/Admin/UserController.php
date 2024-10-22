@@ -15,8 +15,19 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::where('role', 'user')->get();
+        $users = User::get();
         return Inertia::render('Admin/User/Index', ['users' => $users]);
+    }
+
+    public function changeRole(Request $request){
+        $user = $this->user->find($request->id);
+        if($user->role == 'admin'){
+            $user->role = 'user';
+        }else{
+            $user->role = 'admin';
+        }
+        $user->save();
+        return back();
     }
 
     public function destroy($id)

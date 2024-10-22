@@ -10,8 +10,10 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\FeedBackController as UserFeedbackController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\WishListController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PaymentController;
@@ -20,7 +22,6 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FeedbackController;
 use App\Http\Controllers\Admin\CarouselImageController;
-use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\OrderController as UserOrderController;
 use App\Http\Controllers\ProductController as UserProductController;
 
@@ -39,7 +40,6 @@ Route::get('/profile', function () {
     if (Auth::check()) {
         return response()->json(Auth::user());
     }
-
     return response()->json(null);
 });
 
@@ -111,8 +111,13 @@ Route::post('/destroy-session', function () {
 //home
 Route::controller(HomePageController::class)->group(function () {
     Route::get('/', 'homePage')->name('home');
+    Route::get('/categories', 'index')->name('index');
 });
 
+Route::controller(UserFeedBackController::class)->group(function () {
+    Route::get('/feedback', 'feedbackPage')->name('feedbackPage');
+    Route::post('/feedback/create', 'feedback')->name('feedback');
+});
 //cart
 Route::group(['prefix' => '/cart', 'controller' => CartController::class, 'as' => 'cart.'], function () {
     Route::get('/', 'index')->name('cart');
@@ -173,7 +178,7 @@ Route::middleware('auth')->group(function () {
         //Orders
         Route::group(['prefix' => 'orders', 'controller' => OrderController::class, 'as' => 'orders.'], function () {
             Route::get('/', 'index')->name('index');
-            Route::post('/decision/', 'decision')->name('decision');
+            Route::post('/decision', 'decision')->name('decision');
         });
 
         //Payments
@@ -211,6 +216,7 @@ Route::middleware('auth')->group(function () {
         //Users
         Route::group(['prefix' => 'users', 'controller' => UserController::class, 'as' => 'users.'], function () {
             Route::get('/', 'index')->name('index');
+            Route::post('/{id}/changeRole', 'changeRole')->name('changeRole');
             Route::delete('/{id}/delete', 'destroy')->name('destroy');
         });
     });

@@ -39,11 +39,11 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faUser,faEye,faBell,faHeart,faPenToSquare } from '@fortawesome/free-regular-svg-icons';
-import { faCartShopping,faAnglesRight,faArrowUpRightDots,faHome,faFire,faBasketShopping,faBoxOpen,faMagnifyingGlass,faChevronRight,faBars,faBagShopping,faPlus,faTrash,faCircleXmark,faCircleMinus,faCirclePlus,faTrashCan,faXmark,faArrowLeft,faHeart as faSolidHeart,faArrowRightFromBracket,faEllipsis,faCircleCheck,faPhone,faEnvelope,faLocationDot} from '@fortawesome/free-solid-svg-icons';
-library.add(faHeart,faUser,faCartShopping,faEye,faAnglesRight,faArrowUpRightDots,faFire,faBasketShopping,faBoxOpen,faMagnifyingGlass,faChevronRight,faBars,faBagShopping,faBell,faHome,faPlus,faPenToSquare,faTrash,faCircleXmark,faCircleMinus,faCirclePlus,faTrashCan,faXmark,faArrowLeft,faSolidHeart,faArrowRightFromBracket,faEllipsis,faCircleCheck,faPhone,faEnvelope,faLocationDot);
+import { faCartShopping,faAnglesRight,faArrowUpRightDots,faHome,faFire,faBasketShopping,faBoxOpen,faMagnifyingGlass,faChevronRight,faBars,faBagShopping,faPlus,faTrash,faCircleXmark,faCircleMinus,faCirclePlus,faTrashCan,faXmark,faArrowLeft,faHeart as faSolidHeart,faArrowRightFromBracket,faEllipsis,faCircleCheck,faPhone,faEnvelope,faLocationDot, faLink,faBox,faList} from '@fortawesome/free-solid-svg-icons';
+library.add(faHeart,faUser,faCartShopping,faEye,faAnglesRight,faArrowUpRightDots,faFire,faBasketShopping,faBoxOpen,faMagnifyingGlass,faChevronRight,faBars,faBagShopping,faBell,faHome,faPlus,faPenToSquare,faTrash,faCircleXmark,faCircleMinus,faCirclePlus,faTrashCan,faXmark,faArrowLeft,faSolidHeart,faArrowRightFromBracket,faEllipsis,faCircleCheck,faPhone,faEnvelope,faLocationDot,faBox,faList);
 
-import { faFacebook } from '@fortawesome/free-brands-svg-icons';
-library.add(faFacebook);
+import { faFacebook,faTwitter,faInstagram,faLinkedin,faTiktok } from '@fortawesome/free-brands-svg-icons';
+library.add(faFacebook,faTwitter,faInstagram,faLinkedin,faTiktok);
 
 const vuetify = createVuetify({
   components,

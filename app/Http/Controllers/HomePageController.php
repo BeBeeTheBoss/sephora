@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\Auth;
 
 class HomePageController extends Controller
 {
+
+
+    public function index()
+    {
+        $categories = Category::all()->toArray();
+        return Inertia::render('User/Components/Navbar', [
+            'categories' => $categories
+        ]);
+    }
+
     public function homePage()
     {
         $carousel_images = CarouselImage::select('id', 'name as image')->get();
