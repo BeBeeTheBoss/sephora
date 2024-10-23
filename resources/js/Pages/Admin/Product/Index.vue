@@ -29,9 +29,10 @@
                                     ${{ product.discount_price }}
                                 </p>
                             </div>
+                            <p class="d-none">{{ product.is_active = product.is_active ? true : false }}</p>
                             <div class="flex justify-center mt-3">
                                 <v-switch @change="changeSwitchValue(product.is_active, product.id)"
-                                    v-model="product.is_active" color="primary"></v-switch>
+                                    v-model="product.is_active" color="primary" focused="true"></v-switch>
                             </div>
                             <div class="flex justify-center mt-3">
                                 <form @submit.prevent="deleteProduct(product.id)" class="flex flex-col items-center">

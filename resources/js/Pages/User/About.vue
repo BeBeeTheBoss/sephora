@@ -1,14 +1,12 @@
 <template>
     <Navbar />
     <div class="container">
+        <!-- About Section -->
         <section class="about">
-
             <div class="row">
-
                 <div class="col-md-6 image">
                     <img src="../../images/about-img.webp" alt="">
                 </div>
-
                 <div class="col-md-6 content">
                     <h3>Why you should choose Us?</h3>
                     <p>Sephora offers an extensive range of beauty products, including makeup, skincare, haircare,
@@ -17,19 +15,15 @@
                     <p>Sephora's website stands out as a reliable and efficient platform for beauty shopping, offering a
                         wide selection of products, a supportive community, and exceptional customer service. Whether
                         you're a beauty enthusiast or a casual shopper, Sephora provides a seamless and enjoyable beauty
-                        shopping journey.
-                    </p>
+                        shopping journey.</p>
                     <Link :href="$route('contact')" class="btn">Contact Us</Link>
                 </div>
-
             </div>
-
         </section>
 
-
+        <!-- Categories Section -->
         <section class="my-5">
             <h2 class="text-center">Types of Categories</h2>
-
             <div class="row">
                 <div class="col-md-2" v-for="category in categories" :key="category.id">
                     <div class="card card-body text-center font-semibold" style="color:#e91e63;">{{ category.name }}</div>
@@ -37,34 +31,24 @@
             </div>
         </section>
 
-
+        <!-- Reviews Section -->
         <section class="reviews">
-
             <h1 class="heading">Client's Reviews</h1>
-
             <div class="swiper reviews-slider">
-
                 <div class="swiper-wrapper">
-
                     <div class="swiper-slide slide flex justify-center" v-for="feedback in feedbacks" :key="feedback.id">
-                        <img class="mx-auto" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR11lMafo-ZYohC2qYI1BJN80gzcC-7IpohIeUQT1RT0WgBttaZX7J1yEea92wMCcTXa9A&usqp=CAU" alt="">
-                        <p>
-                           {{ feedback.message }}
-                        </p>
+                        <img class="mx-auto border border-danger" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR11lMafo-ZYohC2qYI1BJN80gzcC-7IpohIeUQT1RT0WgBttaZX7J1yEea92wMCcTXa9A&usqp=CAU" alt="">
+                        <p>{{ feedback.message }}</p>
                         <v-rating :length="5" :size="32" :model-value="feedback.star" readonly
                             active-color="primary" />
                         <h3>{{ feedback.user.name }}</h3>
                     </div>
-
-
                 </div>
-
                 <div class="swiper-pagination"></div>
-
             </div>
-
         </section>
 
+        <!-- Image Section -->
         <section class="img-photo-section my-4">
             <div class="img-container1">
                 <a href="shop.php">
@@ -74,7 +58,6 @@
         </section>
 
         <Footer />
-
     </div>
 </template>
 
