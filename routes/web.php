@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
@@ -22,8 +23,10 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FeedbackController;
 use App\Http\Controllers\Admin\CarouselImageController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrderController as UserOrderController;
 use App\Http\Controllers\ProductController as UserProductController;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -114,10 +117,24 @@ Route::controller(HomePageController::class)->group(function () {
     Route::get('/categories', 'index')->name('index');
 });
 
+//about
+
+Route::controller(AboutController::class)->group(function () {
+    Route::get('/about', 'index')->name('about');
+});
+
+//contact
+
+Route::controller(ContactController::class)->group(function () {
+    Route::get('/contact', 'index')->name('contact');
+    Route::post('/contact/create', 'create')->name('createContact');
+});
+
 Route::controller(UserFeedBackController::class)->group(function () {
     Route::get('/feedback', 'feedbackPage')->name('feedbackPage');
     Route::post('/feedback/create', 'feedback')->name('feedback');
 });
+
 //cart
 Route::group(['prefix' => '/cart', 'controller' => CartController::class, 'as' => 'cart.'], function () {
     Route::get('/', 'index')->name('cart');
@@ -202,10 +219,12 @@ Route::middleware('auth')->group(function () {
             Route::delete('/{id}/delete', 'destroy')->name('destroy');
         });
 
-        //Feedbacks
-        // Route::controller(FeedBackController::class)->group(function () {
-        //     Route::get('/feedback', 'feedback')->name('feedback');
-        // });
+        // Feedbacks
+        Route::controller(FeedBackController::class)->group(function () {
+            Route::get('/feedback', 'feedback')->name('getFeedback');
+        });
+
+
 
         //Profile
         Route::controller(ProfileController::class)->group(function () {

@@ -9,11 +9,11 @@ use App\Http\Controllers\Controller;
 
 class FeedbackController extends Controller
 {
-    public function __construct(protected Feedback $feedback){
+    public function __construct(protected Feedback $feedback) {}
 
-    }
-
-    public function feedback(){
-        return Inertia::render('Admin/Feedback');
+    public function feedback()
+    {
+        $feedbacks = Feedback::with('user')->get();
+        return Inertia::render('Admin/Feedback', ['feedbacks' => $feedbacks]);
     }
 }

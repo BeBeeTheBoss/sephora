@@ -60,7 +60,7 @@
             <div class="text-muted">See all</div>
         </div>
         <div class="row w-100 px-5 mb-5 d-lg-flex d-md-flex d-sm-none d-none">
-            <div class="col-lg-3 col-md-4 mb-3" v-for="product, index in all_products" :key="product">
+            <div class="col-lg-3 col-md-4 mb-3" v-for="product, index in all_products" :key="product.id">
 
                 <Product @click="openProductModal(index, product.id)" :name="product.name"
                     :categoryName="product.category.name" :image="product.images[0]?.image" :price="product.price"
@@ -186,17 +186,19 @@ const select_category = ref('');
 const all_products = ref(props.products);
 
 const showData = (data) => {
-
     searchKey.value = data;
 
-    axios.get('/search?name=' + data + '&category_id=' + select_category.value).then(response => {
-        all_products.value = response.data;
-        console.log(all_products.value);
-        if (data) {
-            window.location.href = "#products";
-        }
-    })
-}
+    axios.get(`/search?name=${data}&category_id=${select_category.value}`)
+        .then(response => {
+            all_products.value = response.data;
+            if (data || select_category.value) {
+                window.location.href = "#products";
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching products:', error);
+        });
+};
 
 const dialogArray = ref([]);
 const quantity = ref([]);

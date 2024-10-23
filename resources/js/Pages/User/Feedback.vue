@@ -4,7 +4,7 @@
     <div class="container row py-3">
         <div class="container p-5">
             <h3>Do you Like Website?</h3>
-            <v-rating hover :length="5" :size="32" :model-value="3" active-color="primary" />
+            <v-rating hover :length="5" :size="32" v-model="form.star" active-color="primary" />
             <hr>
             <h4 class="my-4">Write Your FeedBack</h4>
             <v-row>
@@ -23,12 +23,14 @@ import { useForm } from '@inertiajs/vue3';
 import Navbar from './Components/Navbar.vue';
 import { post } from '../Composables/httpMethod.js';
 const form = useForm({
-    message : ''
+    message : '',
+    star : 0
 })
 
 const submit = () => {
     post(form,route('feedback'));
     form.message = '';
+    form.star = 0;
 }
 </script>
 <style scoped></style>
