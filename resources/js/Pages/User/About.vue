@@ -461,7 +461,7 @@ body {
     padding: 20px 0; /* Add some vertical padding for aesthetics */
     border-radius: 8px; /* Add rounded corners */
   }
-  
+
   /* Container for the image */
   .img-container1 {
     max-width: 100%; /* Ensure the container spans the full viewport width */
@@ -470,7 +470,7 @@ body {
     border-radius: 8px; /* Add rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
   }
-  
+
   /* Image inside the container */
   .img-container1 img {
     width: 100%; /* Make the image fill its container */
