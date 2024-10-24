@@ -1,4 +1,5 @@
 <template>
+
     <Navbar />
     <div class="container">
         <!-- About Section -->
@@ -68,6 +69,8 @@ import { onMounted } from 'vue';
 import Swiper from 'swiper';
 import { Pagination } from 'swiper/modules'; // Import from the modules
 import 'swiper/css';
+import 'swiper/swiper-bundle.css';
+
 
 
 const props = defineProps({

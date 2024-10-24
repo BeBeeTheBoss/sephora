@@ -64,7 +64,7 @@
 
                 <Product @click="openProductModal(index, product.id)" :name="product.name"
                     :categoryName="product.category.name" :image="product.images[0]?.image" :price="product.price"
-                    :discount_price="product.discount_price" :description="product.description" :popular="product.view_count" />
+                    :discount_price="product.discount_price" :description="product.description" :popular="product.view_count" :product_id="product.id" />
                 <template>
                     <div class="text-center pa-4">
                         <v-dialog v-model="dialogArray[index]" width="auto">
@@ -142,11 +142,9 @@
         </div>
         <div class="d-lg-none d-md-none d-sm-flex d-flex ps-3 pb-3 mb-5" style="overflow-x: scroll;">
             <div class="me-3" v-for="product in all_products" :key="product">
-                <Link :href="'/product/details/' + product.id" style="text-decoration:none">
                 <Product :name="product.name" :categoryName="product.category.name" :image="product.images[0]?.image"
                     :price="product.price" :discount_price="product.discount_price" :description="product.description"
                     size="phone" />
-                </Link>
             </div>
         </div>
         <SpeedDial :payments="payments" :cartData="cartData" v-if="is_auth" />

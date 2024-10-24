@@ -34,7 +34,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:categories',
-            'image' => 'nullable|mimes:jpeg,png,jpg,webp'
+            'image' => 'nullable|mimes:jpeg,png,jpg,webp,avif'
         ]);
 
         $this->categoryService->create($request);

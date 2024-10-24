@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FeedbackController;
 use App\Http\Controllers\Admin\CarouselImageController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DetailController;
 use App\Http\Controllers\OrderController as UserOrderController;
 use App\Http\Controllers\ProductController as UserProductController;
 use Inertia\Inertia;
@@ -117,6 +118,7 @@ Route::controller(HomePageController::class)->group(function () {
     Route::get('/categories', 'index')->name('index');
 });
 
+
 //about
 
 Route::controller(AboutController::class)->group(function () {
@@ -150,6 +152,7 @@ Route::group(['prefix' => '/wish-lists', 'controller' => WishListController::cla
 
 //products
 Route::group(['prefix' => '/product', 'controller' => UserProductController::class, 'as' => 'products.'], function () {
+    Route::get('/detail/{id}', 'detail')->name('detail');
     Route::get('/details/{id}', 'show')->name('productDetails');
     Route::post('/{id}/increment-view', 'viewCount')->name('view-count');
     Route::get('/trending', 'trending')->name('trending');

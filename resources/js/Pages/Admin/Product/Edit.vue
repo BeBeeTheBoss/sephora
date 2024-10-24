@@ -73,7 +73,7 @@
                 />
                 <div style="position:absolute;top:10px;right:10px">
                   <button type="button" @click="deleteExistingImage(imgIndex)">
-                    <font-awesome-icon icon="fa-solid fa-circle-xmark" class="fs-2 text-white" />
+                    <font-awesome-icon icon="fa-solid fa-circle-xmark" class="fs-2 text-danger" />
                   </button>
                 </div>
               </div>

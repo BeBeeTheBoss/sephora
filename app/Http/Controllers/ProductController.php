@@ -15,6 +15,12 @@ class ProductController extends Controller
 {
     public function __construct(protected Product $model) {}
 
+    public function detail($id)
+    {
+        $product = Product::findOrFail($id);
+        return Inertia::render('User/Detail', ['product' => $product]);
+    }
+
     public function show($id)
     {
         $product = $this->model->with('category:id,name')->with('images')
@@ -37,12 +43,12 @@ class ProductController extends Controller
     public function trending()
     {
         $trendingProducts = $this->model->orderBy('view_count', 'desc')->with('category')
-        ->when(Auth::user(), function ($query) {
-            $query->withCount(['wish_lists as is_favorite' => function ($query) {
-                $query->where('user_id', Auth::user()->id);
-            }]);
-        })
-        ->with('images')->get();
+            ->when(Auth::user(), function ($query) {
+                $query->withCount(['wish_lists as is_favorite' => function ($query) {
+                    $query->where('user_id', Auth::user()->id);
+                }]);
+            })
+            ->with('images')->get();
 
         foreach ($trendingProducts as $product) {
             foreach ($product->images as $image) {
@@ -57,12 +63,12 @@ class ProductController extends Controller
     public function popular()
     {
         $popularProducts = $this->model->orderBy('order_count', 'desc')->with('category')
-        ->when(Auth::user(), function ($query) {
-            $query->withCount(['wish_lists as is_favorite' => function ($query) {
-                $query->where('user_id', Auth::user()->id);
-            }]);
-        })
-        ->with('images')->get();
+            ->when(Auth::user(), function ($query) {
+                $query->withCount(['wish_lists as is_favorite' => function ($query) {
+                    $query->where('user_id', Auth::user()->id);
+                }]);
+            })
+            ->with('images')->get();
 
         foreach ($popularProducts as $product) {
             foreach ($product->images as $image) {
@@ -91,12 +97,12 @@ class ProductController extends Controller
             ->unique();
 
         $products = Product::whereIn('category_id', $categoryIds)->with('category')
-        ->when(Auth::user(), function ($query) {
-            $query->withCount(['wish_lists as is_favorite' => function ($query) {
-                $query->where('user_id', Auth::user()->id);
-            }]);
-        })
-        ->with('images')->get();
+            ->when(Auth::user(), function ($query) {
+                $query->withCount(['wish_lists as is_favorite' => function ($query) {
+                    $query->where('user_id', Auth::user()->id);
+                }]);
+            })
+            ->with('images')->get();
 
         foreach ($products as $product) {
             foreach ($product->images as $image) {
@@ -112,12 +118,12 @@ class ProductController extends Controller
         $lastWeekDate = Carbon::now()->subWeek();
         $newArrivalProducts = $this->model->whereDate('created_at', '>=', $lastWeekDate)->with('category')->orderBy('created_at', 'desc')
 
-        ->when(Auth::user(), function ($query) {
-            $query->withCount(['wish_lists as is_favorite' => function ($query) {
-                $query->where('user_id', Auth::user()->id);
-            }]);
-        })
-        ->with('images')->get();
+            ->when(Auth::user(), function ($query) {
+                $query->withCount(['wish_lists as is_favorite' => function ($query) {
+                    $query->where('user_id', Auth::user()->id);
+                }]);
+            })
+            ->with('images')->get();
 
         foreach ($newArrivalProducts as $product) {
             foreach ($product->images as $image) {
