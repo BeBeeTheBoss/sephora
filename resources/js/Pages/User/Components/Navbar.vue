@@ -21,7 +21,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownShop">
                             <a class="dropdown-item" href="">All Categories</a>
-                            <a class="dropdown-item" v-for="category in categories" :key="category.id" @click="select_category = select_category === category.id ? '' : category.id; showData(searchKey)">
+                            <a class="dropdown-item" v-for="category in categories" :key="category.id"  @click="updateCategory(category.id)">
                                 {{ category.name }}
                             </a>
                         </div>
@@ -91,6 +91,12 @@ const select_category = ref('');
 const sendToLayout = (input) => {
     emit('searchInput', input);
 };
+
+const updateCategory = (categoryId) => {
+    select_category.value = select_category.value === categoryId ? '' : categoryId;
+    emit('categorySelected', select_category.value);
+};
+
 
 const isActive = (path) => {
     return router.page.url === path ? 'navIconActive' : '';
