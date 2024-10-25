@@ -4,18 +4,18 @@
             <div class="row">
                 <div class="col-md-6">
                     <!-- Main Image -->
-                    <v-img :src="selectedImage" style="width: 100%; height: 400px;" class="mb-4" />
+                    <v-img :src="selectedImage" style="width: 100%; height: 300px;" class="mb-4" />
 
                     <!-- Thumbnail Gallery -->
 
-                    <div class="d-flex justify-content-center">
+                    <div class="flex">
                         <v-img
                             v-for="(image, index) in product.images"
                             :key="index"
                             :src="image.image"
-                            style="cursor: pointer;"
+                            style="cursor: pointer;width:80px;height:80px;border-radius: 10px;"
                             @click="selectedImage = image.image"
-                            class="border"
+                            class="mx-2 border shadow-md"
                         />
                     </div>
                 </div>

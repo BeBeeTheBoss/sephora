@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -15,15 +16,17 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::get();
+        $userId = Auth::user()->id;
+        $users = User::where('id', '!=', $userId)->get();
         return Inertia::render('Admin/User/Index', ['users' => $users]);
     }
 
-    public function changeRole(Request $request){
+    public function changeRole(Request $request)
+    {
         $user = $this->user->find($request->id);
-        if($user->role == 'admin'){
+        if($user->role == 'admin') {
             $user->role = 'user';
-        }else{
+        } else {
             $user->role = 'admin';
         }
         $user->save();

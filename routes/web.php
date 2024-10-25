@@ -27,6 +27,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\OrderController as UserOrderController;
 use App\Http\Controllers\ProductController as UserProductController;
+use App\Http\Controllers\UserUpdateController;
 use Inertia\Inertia;
 
 /*
@@ -116,6 +117,12 @@ Route::post('/destroy-session', function () {
 Route::controller(HomePageController::class)->group(function () {
     Route::get('/', 'homePage')->name('home');
     Route::get('/categories', 'index')->name('index');
+});
+
+//user update profile
+Route::controller(UserUpdateController::class)->group(function () {
+    Route::get('/user/profile', 'index')->name('profile.page');
+    Route::post('/user/updateProfile', 'update')->name('profile.update');
 });
 
 

@@ -31,16 +31,20 @@
                 <!-- Password Field -->
                 <div>
                     <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                    <input type="password" id="password" name="password" v-model="form.password"
+                    <input :type="showPassword ? 'text' : 'password'"  id="password" name="password" v-model="form.password"
                         class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <input type="checkbox" v-model="showPassword" id="showPassword">
+                        <label for="showPassword">Show Password</label>
                 </div>
 
                 <!-- Update Password Field -->
                 <div>
                     <label for="update-password" class="block text-sm font-medium text-gray-700">Confirm
                         Password</label>
-                    <input type="password" id="update-password" name="update-password" v-model="confirmPassword"
+                    <input :type="showConfirmPassword ? 'text' : 'password'" id="update-password" name="update-password" v-model="confirmPassword"
                         class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <input type="checkbox" v-model="showConfirmPassword" id="showPassword">
+                        <label for="showConfirmPassword">Show Password</label>
                 </div>
 
                 <!-- Submit Button -->
@@ -55,17 +59,18 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
- import { useForm } from '@inertiajs/vue3';
+import { ref,onMounted,onUpdated } from 'vue';
+ import { useForm,usePage } from '@inertiajs/vue3';
 import Layout from './Layouts/Layout.vue'
-import { update } from '../Composables/httpMethod.js'
 import { useToast } from 'vue-toastification';
 
 const props = defineProps({
     admin: Object
 })
-
+const page = usePage();
 const confirmPassword = ref('')
+const showPassword = ref(false);
+const showConfirmPassword = ref(false);
 const toast = useToast()
 
 const form = useForm({
@@ -74,15 +79,56 @@ const form = useForm({
     password : ''
 })
 
+onMounted(() => {
+
+if (page.props.flash) {
+    if (page.props.flash.success) {
+        toast.success(page.props.flash.success);
+        page.props.flash.success = '';
+    } else if (page.props.flash.failed) {
+        toast.error(page.props.flash.failed);
+        page.props.flash.failed = '';
+    }
+}
+
+})
+
+onUpdated(() => {
+
+if (page.props.flash) {
+    if (page.props.flash.success) {
+        toast.success(page.props.flash.success);
+        page.props.flash.success = '';
+    } else if (page.props.flash.failed) {
+        toast.error(page.props.flash.failed);
+        page.props.flash.failed = '';
+    }
+}
+
+})
+
+
+
 const updateProfile = () => {
     if(form.email === ''){
         toast.warning('The email field is required');
     }
 
+    if(!form.email.includes('@gmail.com')){
+        toast.warning('Invalid email');
+        return;
+    }
+
+    if (page.props.flash && page.props.flash.failed) {
+        toast.error(page.props.flash.failed);
+        return;
+    }
+
+
     if (form.password !== confirmPassword.value) {
         toast.warning("Password and Confirm Password do not match.");
     } else {
-        update(form, route("updateProfile", props.admin.id));
+        form.post(route("updateProfile", props.admin.id));
     }
 };
 

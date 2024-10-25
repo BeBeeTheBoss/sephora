@@ -3,12 +3,12 @@
         <div class="container-fluid">
             <div class="row mt-3" v-if="products.length != 0">
                 <div class="col-12">
-                    <h5 class="fw-bold my-3">My wishlists</h5>
-                    <div class="row">
+                    <h4 class="fw-bold my-4 text-center">My Wishlists</h4>
+                    <div class="container row mt-5">
                         <div class="col-lg-3 col-md-4 mb-3" v-for="product, index in products" :key="product">
                             <Product :name="product.name" :categoryName="product.category.name"
-                                :image="product.images[0].image" :price="product.price"
-                                :discount_price="product.discount_price" :description="product.description"
+                                :image="product.images[0]?.image" :price="product.price"
+                                :discount_price="product.discount_price" :description="product.description" :product_id=product.id
                                 @click="dialogArray[index] = true" />
                                 <template>
                     <div class="text-center pa-4">
