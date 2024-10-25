@@ -3,7 +3,7 @@
     <div class="container">
         <h3 class="text-center mt-3 text-[#ff006e]">FeedBacks</h3>
         <div class="row mt-5">
-            <div class="col-md-6" v-for="feedback in feedbacks" :key="feedback.id">
+            <div class="col-md-6 gap-2 my-2" v-for="feedback in feedbacks" :key="feedback.id">
                 <div class="card" style="border:2px solid #ff006e;">
                     <div class="card-header bg-white border-none d-flex">
                         <img class="rounded-circle me-3" src="../../images/feedback.png" alt="" style="width:70px;">

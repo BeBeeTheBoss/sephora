@@ -1,15 +1,13 @@
 <template>
-    <div :class="cardClass" style="position:relative;cursor:pointer">
+    <div :class="cardClass" style="position:relative;cursor:pointer;height:400px;">
         <!-- <IconBtn icon="fa-regular fa-heart" class=""
             style="background-color:rgba(255, 255, 255, 0.8);color:#fe919d;position:absolute;top:3px;right:3px" /> -->
-        <Link :href="'/product/details/' + product_id" style="text-decoration:none">
-        <img :class="imageClass" style="object-fit:cover;object-position:center;background-color:#F5F3F3" :src="image"
+        <img :class="imageClass" style="width:80%;height:80%;object-fit:cover;object-position:center;background-color:#F5F3F3" :src="image"
             alt="">
-        </Link>
         <div class="card-body" style="max-height: 150px; overflow-y: auto;">
             <span class="text-muted" style="font-size:12px">{{ categoryName }}<font-awesome-icon class="ms-2 me-1"
                     icon="fa-solid fa-fire" style="font-size: 13px;color:#fe919d" />{{ popular }}</span>
-            <h5 class="card-title fw-bold">{{ name }}</h5>
+            <h6 class="card-title fw-bold">{{ name }}</h6>
             <p class="card-text text-muted w-100" style="font-size:10px;white-space: pre;">
                 {{ truncatedDescription(description) }}
             </p>

@@ -1,6 +1,6 @@
 <template>
-    <footer class="container footer" style="margin-bottom:70px;">
-   <section class="row">
+    <footer class="container footer">
+   <section class="row" style="margin:50px 0px;">
       <div class="col-md-3 box flex flex-column">
          <h3 class="font-semibold">quick links</h3>
          <Link :href="$route('home')"><font-awesome-icon icon="fa-solid fa-chevron-right" /> Home</Link>

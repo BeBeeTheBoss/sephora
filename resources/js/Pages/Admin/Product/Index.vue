@@ -23,10 +23,10 @@
                             <h6 class="whitespace-pre text-justify" style="font-size: 14px; color: #666;">- {{
                                 truncatedDescription(product) }}</h6>
                             <div class="flex justify-center mt-2">
-                                <span class="font-bold text-lg text-pink-600">${{ product.price }}</span>
+                                <span class="font-bold text-lg text-pink-600">{{ product.price }}Ks</span>
                                 <p class="ms-2 font-semibold mt-0.5 text-red-600" v-if="product.discount_price > 0"
                                     style="text-decoration: line-through; font-size: 14px;">
-                                    ${{ product.discount_price }}
+                                    {{ product.discount_price }}Ks
                                 </p>
                             </div>
                             <p class="d-none">{{ product.is_active = product.is_active ? true : false }}</p>
@@ -70,8 +70,8 @@ const props = defineProps({
 
 const truncatedDescription = (product) => {
     const words = product.description ? product.description.trim().split(/\s+/) : [];
-    if (words.length > 10) {
-        return words.slice(0, 5).join(' ') + '...';
+    if (words.length > 5) {
+        return words.slice(0, 4).join(' ') + '...';
     } else {
         return product.description;
     }

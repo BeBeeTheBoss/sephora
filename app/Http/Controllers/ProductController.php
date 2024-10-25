@@ -17,7 +17,10 @@ class ProductController extends Controller
 
     public function detail($id)
     {
-        $product = Product::findOrFail($id);
+        $product = Product::with('images')->findorFail($id);
+        foreach ($product->images as $image) {
+            $image->image = asset('storage/images/' . $image->image);
+        }
         return Inertia::render('User/Detail', ['product' => $product]);
     }
 
@@ -48,7 +51,7 @@ class ProductController extends Controller
                     $query->where('user_id', Auth::user()->id);
                 }]);
             })
-            ->with('images')->get();
+            ->with('images')->limit(4)->get();
 
         foreach ($trendingProducts as $product) {
             foreach ($product->images as $image) {
@@ -68,7 +71,7 @@ class ProductController extends Controller
                     $query->where('user_id', Auth::user()->id);
                 }]);
             })
-            ->with('images')->get();
+            ->with('images')->limit(4)->get();
 
         foreach ($popularProducts as $product) {
             foreach ($product->images as $image) {
@@ -91,6 +94,7 @@ class ProductController extends Controller
             ->with(['order_products.product' => function ($query) {
                 $query->select('id', 'category_id');
             }])
+            ->limit(4)
             ->get()
             ->pluck('order_products.*.product.category_id')
             ->flatten()
@@ -123,7 +127,7 @@ class ProductController extends Controller
                     $query->where('user_id', Auth::user()->id);
                 }]);
             })
-            ->with('images')->get();
+            ->with('images')->limit(4)->get();
 
         foreach ($newArrivalProducts as $product) {
             foreach ($product->images as $image) {

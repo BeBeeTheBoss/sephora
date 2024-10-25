@@ -113,9 +113,12 @@
               </button>
             </v-col>
           </v-row>
-          <button class="btn btn-success w-100 rounded-lg text-white my-2">
+          <div class="flex justify-between">
+            <Link :href="$route('products.index')" class="btn btn-primary w-100 me-2">Back</Link>
+          <button class="btn btn-success w-100 rounded-lg text-white">
             Update
           </button>
+        </div>
         </form>
       </div>
     </div>
@@ -138,7 +141,7 @@
 
   const formImageUrl = ref([]);
   const deleteImages = ref([]);
-  let discountPercentage = 0; 
+  let discountPercentage = 0;
 
 
 if (props.product.price > 0) {
@@ -169,7 +172,7 @@ if (props.product.price > 0) {
       imagesBoxes.value[index].images = file;
     }
   };
-  
+
   // Clear new image input
   const clearNewImage = (index) => {
     formImageUrl.value.splice(index, 1);

@@ -41,10 +41,11 @@
 <script setup>
 import Navbar from './Components/Navbar.vue';
 import Footer from './Components/Footer.vue'
+import {ref} from 'vue';
 const props = defineProps({
     product : Object
 })
-
+console.log(props.product);
 let selectedImage = ref(props.product.images[0].image); // Set the default selected image
 </script>
 

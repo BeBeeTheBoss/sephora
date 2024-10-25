@@ -13,7 +13,7 @@ class DetailController extends Controller
     {
         $product = Product::findOrFail($id)->with('images');
         foreach ($product->images as $image) {
-            $image->image = asset('storage/product-images/' . $image->image);
+            $image->image = asset('storage/images/' . $image->image);
         }
         return Inertia::render('User/Detail', ['product' => $product]);
     }
