@@ -23,7 +23,7 @@
                     <!-- <span>Orders</span> -->
                 </div>
 
-                <div class="me-3 d-flex align-items-center navIcon" :class="isActive('/')" style="cursor:pointer">
+                <!-- <div class="me-3 d-flex align-items-center navIcon" :class="isActive('/')" style="cursor:pointer">
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownShop" role="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -35,7 +35,7 @@
                         </div>
                     </div>
 
-                </div>
+                </div> -->
                 <div class="me-3 d-flex align-items-center navIcon" :class="isActive('/cart')" style="cursor:pointer">
                     <Link href="/cart" style="color:black">
                     <IconBtn icon="fa-solid fa-cart-shopping" v-if="cartCount" :count="cartCount" />
