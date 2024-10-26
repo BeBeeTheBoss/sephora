@@ -65,6 +65,11 @@ class OrderController extends Controller
             'ss_image' => 'mimes:png,jpg,jpeg,webp,svg'
         ]);
 
+        if (!preg_match('/^\+?[0-9]{10,15}$/', $request->phone)) {
+            session(['failed' => "Invalid phone number format"]);
+            return back()->withErrors(['phone' => 'Invalid phone number format.']);
+        }
+
         $data = $this->formatData($request);
 
         $imageFile = $request->file('ss_image');

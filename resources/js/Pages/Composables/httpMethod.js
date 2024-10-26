@@ -50,7 +50,7 @@ const update = (form, url, tasksOnSuccess = () => {}) => {
         onSuccess: () => {
             tasksOnSuccess()
             toast.success("Congrats, it's successfully updated!", {autoClose: 6000})
-        }
+        },
     }
     form.post(url, options)
 }

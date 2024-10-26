@@ -22,12 +22,14 @@
                 </label>
 
                 <label>
-                    <input v-model="form.password" class="input" type="password" placeholder="" required="">
+                    <input :type="showPassword ? 'text' : 'password'" v-model="form.password" class="input" placeholder="" required="">
                     <span>Password</span>
+                    <input type="checkbox" v-model="showPassword" id="showPassword">
                 </label>
                 <label>
-                    <input v-model="form.confirm_password" class="input" type="password" placeholder="" required="">
+                    <input :type="showConfirmPassword ? 'text' : 'password'" v-model="form.confirm_password" class="input" placeholder="" required="">
                     <span>Confirm password</span>
+                    <input type="checkbox" v-model="showConfirmPassword" id="showPassword">
                 </label>
                 <button type="button" @click="submit" class="submit">Submit</button>
                 <p class="signin">Already have an acount ?
@@ -44,7 +46,7 @@
 import { Link, useForm,usePage } from '@inertiajs/vue3';
 import { useToast } from "vue-toastification";
 import {route} from 'ziggy-js';
-import {onMounted,onUpdated} from 'vue'
+import {ref,onMounted,onUpdated} from 'vue'
 
 const form = useForm({
     name: '',
@@ -55,6 +57,8 @@ const form = useForm({
 
 const toast = useToast();
 const page = usePage();
+const showPassword = ref(false);
+const showConfirmPassword = ref(false);
 
 onMounted(() => {
 

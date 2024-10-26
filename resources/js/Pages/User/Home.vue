@@ -37,7 +37,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-between align-items-center px-lg-5 px-md-3 px-sm-2 px-2 mb-3">
-        <h5 class="mt-lg-5 mt-md-4 mt-sm-2 mt-2 fw-bold">Categories</h5>
+        <h3 class="mt-lg-5 mt-md-4 mt-sm-2 mt-2 mb-4 fw-bold mx-auto" style="color:#FE919D;">Categories</h3>
         <!-- <div class="text-muted">See all</div> -->
     </div>
     <div class="row w-100 px-5 d-lg-flex d-md-flex d-sm-none d-none">
@@ -56,7 +56,7 @@
     </div>
     <div class="d-lg-flex d-md-flex d-sm-none d-none justify-content-between align-items-center px-lg-5 px-md-3 px-sm-2 px-2 mb-3"
         style="margin-top:-10px">
-        <h5 class="mt-lg-5 mt-md-4 mt-sm-2 mt-2 fw-bold" id="products">Products</h5>
+        <h3 class="mt-lg-5 mt-md-4 mt-sm-2 mt-2 mb-4 fw-bold mx-auto" id="products" style="color:#FE919D;">Products</h3>
         <div class="text-muted">See all</div>
     </div>
     <div class="row w-100 px-5 mb-5 d-lg-flex d-md-flex d-sm-none d-none">
@@ -67,7 +67,7 @@
             <template>
                 <div class="text-center pa-4">
                     <v-dialog v-model="dialogArray[index]" width="auto">
-                        <v-card max-width="600" class="pb-3" style="position:relative;min-height:500px;">
+                        <v-card max-width="800" class="pb-3" style="position:relative;min-height:500px;">
                             <div style="position:absolute;top:10px;right:10px;z-index:3">
                                 <font-awesome-icon @click="dialogArray[index] = false" icon="fa-solid fa-xmark"
                                     class="me-2 text-white fs-5"
@@ -76,7 +76,7 @@
                             <div>
 
                                 <Carousel :from="'productCarousel' + product.id" :images="product.images"
-                                    height="300px" width="200px" />
+                                    height="300px" width="300px" />
                                 <div class="" style="position:relative;cursor:pointer">
                                     <div class="card-body px-3 pt-3" style="max-height: 150px; overflow-y: auto;">
                                         <div class="flex justify-between items-center">

@@ -45,7 +45,8 @@ class ProductController extends Controller
 
     public function trending()
     {
-        $trendingProducts = $this->model->orderBy('view_count', 'desc')->with('category')
+        $trendingProducts = $this->model->where('view_count', '>', 0)
+            ->orderBy('view_count', 'desc')->with('category')
             ->when(Auth::user(), function ($query) {
                 $query->withCount(['wish_lists as is_favorite' => function ($query) {
                     $query->where('user_id', Auth::user()->id);

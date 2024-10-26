@@ -17,10 +17,14 @@
                     </div> -->
                 </div>
             </div>
-            <!-- <a :href="route('logout')" >Logout</a> -->
-            <Link @click="logout">
-            Logout
-            </Link>
+            <div class="flex flex-col">
+                <Link :href="route('profile.page')">
+                Update
+                </Link>
+                <Link @click="logout">
+                Logout
+                </Link>
+            </div>
         </div>
         <div v-else class="d-flex justify-center">
             <div class="mt-3">
@@ -39,7 +43,7 @@
 
 <script setup>
 import IconBtn from './IconBtn.vue';
-import { Link,router } from '@inertiajs/vue3';
+import { Link, router } from '@inertiajs/vue3';
 import { route } from 'ziggy-js';
 import { ref, onMounted } from 'vue'
 

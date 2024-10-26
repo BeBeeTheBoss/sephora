@@ -1,23 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Models\User;
-use Inertia\Inertia;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Inertia\Inertia;
 
-class ProfileController extends Controller
+class UserUpdateController extends Controller
 {
-    public function __construct(protected User $user) {}
-
-    public function profile()
+    //
+    public function index()
     {
-        $admin = User::where('role', 'admin')
-            ->first();
-        return Inertia::render('Admin/Profile', ['admin' => $admin]);
+        $user = Auth::user();
+        return Inertia::render('User/UpdateUserProfile', ['user' => $user]);
     }
 
     public function update(Request $request)
@@ -28,12 +24,6 @@ class ProfileController extends Controller
             'email' => 'required',
             'password' => 'nullable',
         ]);
-
-        $email = User::where('email', $request->email)->pluck('email')->first();
-        if ($email) {
-            session(['failed' => "This email is already taken"]);
-            return back();
-        }
 
         $data = $this->formatData($request, $user);
         $user->update($data);

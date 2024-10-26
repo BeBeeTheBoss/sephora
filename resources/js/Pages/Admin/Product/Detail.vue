@@ -13,7 +13,7 @@
                             v-for="(image, index) in product.images"
                             :key="index"
                             :src="image.image"
-                            style="cursor: pointer;"
+                            style="cursor: pointer;width:100px;height:100px;"
                             @click="selectedImage = image.image"
                             class="border"
                         />

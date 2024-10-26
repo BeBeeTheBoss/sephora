@@ -8,7 +8,7 @@
 
                 <Product @click="openProductModal(index, product.id)" :name="product.name"
                     :categoryName="product.category.name" :image="product.images[0]?.image" :price="product.price"
-                    :discount_price="product.discount_price" :description="product.description"
+                    :discount_price="product.discount_price" :description="product.description" :product_id="product.id"
                     :popular="product.view_count" />
                 <template>
                     <div class="text-center pa-4">
