@@ -13,7 +13,7 @@
             </div>
 
             <div class="row my-3">
-                <div v-for="product in filteredProducts" :key="product.id" class="col-6 col-md-3 mb-4">
+                <div v-for="product in paginatedProducts" :key="product.id" class="col-6 col-md-3 mb-4">
                     <div class="border rounded-lg shadow-sm p-3 bg-white" style="transition: transform 0.2s;">
                         <img class="mx-auto rounded-lg w-100 h-48" :src="product.images[0]?.image"
                             style="object-fit: cover;" />
@@ -51,6 +51,12 @@
                 </div>
             </div>
 
+             <!-- Pagination Controls -->
+             <div class="d-flex justify-content-center">
+                <button class="btn btn-secondary me-2" @click="previousPage" :disabled="currentPage === 1">Previous</button>
+                <button class="btn btn-success" @click="nextPage" :disabled="currentPage >= totalPages">Next</button>
+            </div>
+
         </div>
 
     </Layout>
@@ -67,6 +73,10 @@ const props = defineProps({
     products: Object,
 });
 
+
+const currentPage = ref(1);
+const itemsPerPage = 20;
+const totalPages = computed(() => Math.ceil(filteredProducts.value.length / itemsPerPage));
 
 const truncatedDescription = (product) => {
     const words = product.description ? product.description.trim().split(/\s+/) : [];
@@ -111,6 +121,28 @@ const filteredProducts = computed(() => {
         );
     });
 });
+
+
+// Paginated products computed property
+const paginatedProducts = computed(() => {
+    const start = (currentPage.value - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    return filteredProducts.value.slice(start, end);
+});
+
+
+// Pagination methods
+const previousPage = () => {
+    if (currentPage.value > 1) {
+        currentPage.value--;
+    }
+};
+
+const nextPage = () => {
+    if (currentPage.value < totalPages.value) {
+        currentPage.value++;
+    }
+}
 
 const form = useForm({});
 

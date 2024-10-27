@@ -26,7 +26,7 @@ class HomePageController extends Controller
     public function homePage()
     {
         $carousel_images = CarouselImage::select('id', 'name as image')->get();
-        $categories = Category::withCount('products')->get();
+        $categories = Category::get();
         $products = Product::where('is_active', 1)->with('category')
             ->when(Auth::user(), function ($query) {
                 $query->withCount(['wish_lists as is_favorite' => function ($query) {

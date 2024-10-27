@@ -30,6 +30,11 @@
                     <ListHeader name="New Arrivals" icon="fa-solid fa-box-open" />
                     </Link>
                 </div>
+                <div class="col-lg-6 col-md-4 col-md-3 col-6 h-100" style="cursor:pointer">
+                    <Link class="text-decoration-none text-black" :href="$route('products.discount')">
+                    <ListHeader name="Discount" icon="fa-solid fa-percent" />
+                    </Link>
+                </div>
                 <!-- <div class="col-lg-6 col-md-4 col-md-3 col-6 h-100" style="cursor:pointer">
                     <ListHeader name="Explore" icon="fa-solid fa-magnifying-glass" />
                 </div> -->
@@ -44,7 +49,7 @@
         <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-3" v-for="category in categories" :key="category">
             <Category
                 @click="select_category = select_category == category.id ? '' : category.id, showData(searchKey)"
-                :name="category.name" :count="category.products_count" :image="category.image"
+                :name="category.name" :image="category.image"
                 :is_active="select_category == category.id" />
         </div>
     </div>
@@ -67,7 +72,7 @@
             <template>
                 <div class="text-center pa-4">
                     <v-dialog v-model="dialogArray[index]" width="auto">
-                        <v-card max-width="800" class="pb-3" style="position:relative;min-height:500px;">
+                        <v-card max-width="600" class="pb-3" style="position:relative;min-height:400px;">
                             <div style="position:absolute;top:10px;right:10px;z-index:3">
                                 <font-awesome-icon @click="dialogArray[index] = false" icon="fa-solid fa-xmark"
                                     class="me-2 text-white fs-5"
@@ -76,14 +81,14 @@
                             <div>
 
                                 <Carousel :from="'productCarousel' + product.id" :images="product.images"
-                                    height="300px" width="300px" />
+                                    height="200px" width="200px" />
                                 <div class="" style="position:relative;cursor:pointer">
                                     <div class="card-body px-3 pt-3" style="max-height: 150px; overflow-y: auto;">
                                         <div class="flex justify-between items-center">
                                             <span class="text-muted" style="font-size:12px">{{ product.category.name
-                                                }} <font-awesome-icon class="ms-2 me-1" icon="fa-solid fa-fire"
+                                                }} <font-awesome-icon class="ms-2 me-1 fs-5" icon="fa-solid fa-fire"
                                                     style="font-size: 13px;color:#fe919d" />{{ product.view_count }}</span>
-                                            <IconBtn v-if="product.is_favorite" @click="addToWishlist(product.id)"
+                                            <IconBtn class="fs-5" v-if="product.is_favorite" @click="addToWishlist(product.id)"
                                                 icon="fa-solid fa-heart"
                                                 style="background-color:rgba(255, 255, 255, 0.8);color:#fe919d" />
                                             <IconBtn v-else @click="addToWishlist(product.id)"

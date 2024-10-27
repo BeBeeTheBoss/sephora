@@ -9,9 +9,9 @@
                 <div class="text-uppercase fw-bold">
                     {{ name }}
                 </div>
-                <div class="text-muted" style="font-size: 12px">
+                <!-- <div class="text-muted" style="font-size: 12px">
                     {{ count }}
-                </div>
+                </div> -->
             </div>
             <span style="position:absolute;right:10px" v-if="is_active">
                 <FontAwesomeIcon icon=" fa-solid fa-circle-check" style="color:#fe919d"></FontAwesomeIcon>
@@ -30,7 +30,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 const props = defineProps({
     image: String,
     name: String,
-    count: Number,
+    // count: Number,
     is_active: Boolean
 });
 </script>

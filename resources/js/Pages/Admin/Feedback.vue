@@ -6,7 +6,7 @@
             <div class="col-md-6 gap-2 my-2" v-for="feedback in feedbacks" :key="feedback.id">
                 <div class="card" style="border:2px solid #ff006e;">
                     <div class="card-header bg-white border-none d-flex">
-                        <img class="rounded-circle me-3" src="../../images/feedback.png" alt="" style="width:70px;">
+                        <img class="rounded-circle me-3 border border-danger" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&s" alt="" style="width:70px;">
                         <div class="">
                             <h3 class="fs-6">{{ feedback.user.name }}</h3>
                             <span style="font-size:14px;">{{ formatDate(feedback.created_at) }}</span>

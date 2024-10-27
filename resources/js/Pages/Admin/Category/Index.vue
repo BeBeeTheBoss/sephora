@@ -13,9 +13,9 @@
          </tr>
        </thead>
        <tbody>
-         <tr v-for="(category,index) in categories" :key="category.id">
-           <td>{{index+1}}</td>
-           <td>
+         <tr v-for="(category,index) in paginatedCategories" :key="category.id">
+          <td>{{ (currentPage - 1) * itemsPerPage + index + 1 }}</td>
+          <td>
             <img v-if="category.image" :src="category.image" alt="" style="width:100px;height:100px;object-fit:cover;border-radius:50%;">
             <div v-else>-</div>
            </td>
@@ -30,17 +30,50 @@
          </tr>
        </tbody>
      </table>
+       <!-- Pagination Controls -->
+       <div class="d-flex justify-content-center">
+                <button class="btn btn-secondary me-2" @click="previousPage" :disabled="currentPage === 1">Previous</button>
+                <button class="btn btn-success" @click="nextPage" :disabled="currentPage >= totalPages">Next</button>
+            </div>
     </Layout>
 
  </template>
 
  <script setup>
+ import {ref,computed} from 'vue';
  import Layout from '../Layouts/Layout.vue'
  import {useForm} from '@inertiajs/vue3'
  import {del} from '../../Composables/httpMethod.js'
  const props = defineProps({
     categories : Array
  });
+
+ const currentPage = ref(1);
+const itemsPerPage = 10;
+const totalPages = computed(() => Math.ceil(props.categories.length / itemsPerPage));
+
+// Paginated products computed property
+const paginatedCategories = computed(() => {
+    const start = (currentPage.value - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    return props.categories.slice(start, end);
+});
+
+
+// Pagination methods
+const previousPage = () => {
+    if (currentPage.value > 1) {
+        currentPage.value--;
+    }
+};
+
+const nextPage = () => {
+    if (currentPage.value < totalPages.value) {
+        currentPage.value++;
+    }
+}
+
+
 const form = useForm({})
 
  const deleteCategory = (id) => {

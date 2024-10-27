@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\HubSpotWebhookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,8 @@ Route::group(['prefix' => 'products', 'controller' => ProductController::class],
         Route::delete('/', 'destroy');
     });
 });
+
+
+//CRM 
+
+Route::post('/hubspot/webhook', [HubSpotWebhookController::class, 'handleWebhook']);

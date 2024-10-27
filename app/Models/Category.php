@@ -9,11 +9,16 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','image'];
+    protected $fillable = ['name', 'image'];
 
     //connect with products
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function activeProducts()
+    {
+        return $this->hasMany(Product::class)->where('is_active', 1);
     }
 }

@@ -140,6 +140,20 @@ class ProductController extends Controller
         return inertia('User/NewArrivalProduct', ['new_arrival_products' => $newArrivalProducts]);
     }
 
+    //discount product
+    public function discount()
+    {
+        $discountProducts = Product::whereNotNull('discount_price')
+            ->where('discount_price', '>', 0)
+            ->with('category')
+            ->with('images')
+            ->get();
+        foreach ($discountProducts as $product) {
+            $product->image = asset('storage/images/' . $product->image);
+        }
+        return inertia('User/DiscountProduct', ['discount_products' => $discountProducts]);
+    }
+
     //product view count
     public function viewCount($id)
     {

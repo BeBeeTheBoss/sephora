@@ -1,8 +1,8 @@
 <template>
     <div class="dropdown">
         <div class="dropdown-toggle me-12" type="button" data-bs-toggle="dropdown">
-        <img
-            src="https://images.pexels.com/photos/1040881/pexels-photo-1040881.jpeg?auto=compress&cs=tinysrgb&w=600"
+        <img class="border border-danger"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&s"
             alt="" aria-expanded="false" style="width:50px;height:50px;object-fit:cover;border-radius:50%;">
 
             <span class="mt-3">{{ profile?.name }}</span>

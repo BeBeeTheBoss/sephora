@@ -11,19 +11,18 @@
                     </div>
                     <div class="input-group">
                         <label for="password" style="color:#FE919D">Password</label>
-                        <input @keyup.enter="submit" v-model="form.password" type="password" name="password" id="password" placeholder="">
-                        <div class="forgot">
-                            <a rel="noopener noreferrer" href="#">Forgot Password ?</a>
-                        </div>
+                        <input @keyup.enter="submit" v-model="form.password" :type="showPassword ? 'text' : 'password'" name="password" id="password" placeholder="">
+
                     </div>
+                    <input type="checkbox" v-model="showPassword" id="showPassword">
                     <button @click="submit" type="button" class="sign">Sign in</button>
                 </form>
-                <div class="social-message">
+                <!-- <div class="social-message">
                     <div class="line"></div>
                     <p class="message">Login with social accounts</p>
                     <div class="line"></div>
-                </div>
-                <div class="social-icons">
+                </div> -->
+                <!-- <div class="social-icons">
                     <button aria-label="Log in with Google" class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="w-5 h-5 fill-current">
                             <path
@@ -45,7 +44,7 @@
                             </path>
                         </svg>
                     </button>
-                </div>
+                </div> -->
                 <p class="signup">Don't have an account?
                     <!-- <a rel="noopener noreferrer" href="#" class="">Sign up</a> -->
                     <Link :href="route('signUpPage')">Sign up</Link>
@@ -70,6 +69,8 @@ const form = useForm({
     email: '',
     password: '',
 });
+const showPassword = ref(false);
+
 
 const submit = () => {
 

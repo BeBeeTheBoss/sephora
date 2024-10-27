@@ -15,8 +15,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(order, index) in orders" :key="order.id">
-                    <td>{{ index + 1 }}</td>
+                <tr v-for="(order, index) in paginatedOrders" :key="order.id">
+                    <td>{{ (currentPage - 1) * itemsPerPage + index + 1 }}</td>
                     <td>{{ order.user.name }}</td>
                     <td>{{ order.payment.name }}</td>
                     <td> <span @click="showDialogArray[index] = true"
@@ -26,7 +26,8 @@
                     <td>{{ order.phone }}</td>
                     <td>{{ order.address }}</td>
                     <td>
-                        <v-img :src="order.ss_image" style="width:80px;height:80px;object-fit:cover;" alt=""></v-img>
+                        <v-img :src="order.ss_image" style="width:80px;height:80px;object-fit:cover;cursor:pointer"
+                            @click="showScreenshotDialogArray[index] = true" alt="Screenshot"></v-img>
                     </td>
                     <td>{{ order.status }}</td>
                     <td v-if="order.status != 'completed'">
@@ -121,17 +122,32 @@
                                     </div>
                                 </v-card>
                             </v-dialog>
+                            <v-dialog v-model="showScreenshotDialogArray[index]" width="auto">
+                                <v-card width="500px">
+                                    <v-img :src="order.ss_image" style="width:100%; height:auto; object-fit:contain;"
+                                        alt="Screenshot"></v-img>
+                                </v-card>
+                            </v-dialog>
+                          
                         </div>
+                    
                     </template>
                 </tr>
             </tbody>
+
         </table>
+
+        <!-- Pagination Controls -->
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-secondary me-2" @click="previousPage" :disabled="currentPage === 1">Previous</button>
+            <button class="btn btn-success" @click="nextPage" :disabled="currentPage >= totalPages">Next</button>
+        </div>
     </Layout>
 
 </template>
 
 <script setup>
-import { ref,onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import Layout from '../Layouts/Layout.vue'
 import { toast } from 'vue3-toastify';
@@ -139,13 +155,42 @@ import 'vue3-toastify/dist/index.css';
 const props = defineProps({
     orders: Array
 });
+
+const currentPage = ref(1);
+const itemsPerPage = 5;
+const totalPages = computed(() => Math.ceil(props.orders.length / itemsPerPage));
+
+
+// Paginated products computed property
+const paginatedOrders = computed(() => {
+    const start = (currentPage.value - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    return props.orders.slice(start, end);
+});
+
+
+// Pagination methods
+const previousPage = () => {
+    if (currentPage.value > 1) {
+        currentPage.value--;
+    }
+};
+
+const nextPage = () => {
+    if (currentPage.value < totalPages.value) {
+        currentPage.value++;
+    }
+}
+
+
+
 const form = useForm({
     id: '',
     status: ''
 })
 
 const showDialogArray = ref([]);
-
+const showScreenshotDialogArray = ref([]);
 onMounted(() => {
     props.orders.forEach(() => {
         showDialogArray.value.push(false)

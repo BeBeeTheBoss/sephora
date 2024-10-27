@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\FeedbackController;
 use App\Http\Controllers\Admin\CarouselImageController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DetailController;
+use App\Http\Controllers\HubSpotWebhookController;
 use App\Http\Controllers\OrderController as UserOrderController;
 use App\Http\Controllers\ProductController as UserProductController;
 use App\Http\Controllers\UserUpdateController;
@@ -40,6 +41,8 @@ use Inertia\Inertia;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
 
 Route::get('/profile', function () {
     if (Auth::check()) {
@@ -69,6 +72,7 @@ Route::get('/orders-count', function () {
     }
     return 0;
 });
+
 
 Route::get('/search', function (Request $request) {
     $products = Product::where('is_active', 1)->with('category')
@@ -119,6 +123,8 @@ Route::controller(HomePageController::class)->group(function () {
     Route::get('/categories', 'index')->name('index');
 });
 
+
+
 //user update profile
 Route::controller(UserUpdateController::class)->group(function () {
     Route::get('/user/profile', 'index')->name('profile.page');
@@ -157,6 +163,7 @@ Route::group(['prefix' => '/wish-lists', 'controller' => WishListController::cla
     Route::post('/', 'store')->name('create');
 });
 
+
 //products
 Route::group(['prefix' => '/product', 'controller' => UserProductController::class, 'as' => 'products.'], function () {
     Route::get('/detail/{id}', 'detail')->name('detail');
@@ -166,6 +173,7 @@ Route::group(['prefix' => '/product', 'controller' => UserProductController::cla
     Route::get('/popular', 'popular')->name('popular');
     Route::get('/recommend', 'recommend')->name('recommend');
     Route::get('/new_arrival', 'new_arrival')->name('new-arrival');
+    Route::get('/discount', 'discount')->name('discount');
 });
 
 //orders
