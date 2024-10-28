@@ -156,7 +156,9 @@ class ProductController extends Controller
             ->with('images')
             ->get();
         foreach ($discountProducts as $product) {
-            $product->image = asset('storage/images/' . $product->image);
+            foreach ($product->images as $image) {
+                $image->image = asset('storage/images/' . $image->image);
+            }
         }
         return inertia('User/DiscountProduct', ['discount_products' => $discountProducts]);
     }

@@ -79,8 +79,8 @@ const showConfirmPassword = ref(false);
 const toast = useToast()
 
 const form = useForm({
-    name: props.user.name,
-    email: props.user.email,
+    name: props.user?.name,
+    email: props.user?.email,
     password : ''
 })
 
