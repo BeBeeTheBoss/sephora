@@ -30,11 +30,11 @@
                             @click="showScreenshotDialogArray[index] = true" alt="Screenshot"></v-img>
                     </td>
                     <td>{{ order.status }}</td>
-                    <td v-if="order.status != 'completed'">
-                        <form @submit.prevent>
-                            <button @click="AcceptOrReject(order.id, 'accept')"
+                    <td>
+                        <form v-if="order.status != 'delivered'" @submit.prevent>
+                            <button v-if="order.status == 'pending'" @click="AcceptOrReject(order.id, 'accept')"
                                 class="btn border border-success btn-sm me-2">Accept</button>
-                            <button @click="AcceptOrReject(order.id, 'reject')"
+                            <button v-if="order.status == 'pending'" @click="AcceptOrReject(order.id, 'reject')"
                                 class="btn btn-sm broder border-danger">Reject</button>
                         </form>
                     </td>

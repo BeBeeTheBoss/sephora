@@ -9,16 +9,12 @@
                 <div class="text-uppercase fw-bold">
                     {{ name }}
                 </div>
-                <!-- <div class="text-muted" style="font-size: 12px">
-                    {{ count }}
-                </div> -->
+            
             </div>
             <span style="position:absolute;right:10px" v-if="is_active">
                 <FontAwesomeIcon icon=" fa-solid fa-circle-check" style="color:#fe919d"></FontAwesomeIcon>
             </span>
-            <!-- <div class="pt-1 fw-bold" style="color: #fe919d; font-size: 13px">
-                Show all <font-awesome-icon icon="fa-regular fa-eye" style="font-size: 13px" />
-            </div> -->
+
         </div>
     </div>
 </template>

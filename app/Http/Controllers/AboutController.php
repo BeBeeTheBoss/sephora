@@ -14,6 +14,9 @@ class AboutController extends Controller
     {
         $feedbacks = Feedback::with('user')->get();
         $categories = Category::all();
+        foreach ($categories as $category) {
+            $category->image = asset('storage/images/' . $category->image);
+        }
         return Inertia::render('User/About', ['feedbacks' => $feedbacks, 'categories' => $categories]);
     }
 }

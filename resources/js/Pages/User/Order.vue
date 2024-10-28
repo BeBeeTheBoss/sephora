@@ -87,7 +87,7 @@
                                                         {{ item.quantity }}
                                                     </div>
                                                     <div class="col-3 text-end">
-                                                        {{ item.product.price * item.quantity }}Ks
+                                                        {{ item.product.price }}Ks
                                                     </div>
                                                 </div>
                                                 <div class="row mt-2 pt-1" style="border-top: 2px dashed #5F5F5F">

@@ -23,9 +23,9 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FeedbackController;
 use App\Http\Controllers\Admin\CarouselImageController;
-use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\ContactController as UserContactController;
 use App\Http\Controllers\DetailController;
-use App\Http\Controllers\HubSpotWebhookController;
 use App\Http\Controllers\OrderController as UserOrderController;
 use App\Http\Controllers\ProductController as UserProductController;
 use App\Http\Controllers\UserUpdateController;
@@ -117,8 +117,10 @@ Route::post('/destroy-session', function () {
 });
 
 
-//forgot password
-
+//privacy-policy
+Route::get('/privacy-policy', function () {
+    return Inertia::render('User/PrivacyPolicy');
+})->name('privacy-policy');
 
 //home
 Route::controller(HomePageController::class)->group(function () {
@@ -143,9 +145,9 @@ Route::controller(AboutController::class)->group(function () {
 
 //contact
 
-Route::controller(ContactController::class)->group(function () {
+Route::controller(UserContactController::class)->group(function () {
     Route::get('/contact', 'index')->name('contact');
-    Route::post('/contact/create', 'create')->name('createContact');
+    Route::post('/contact/create', 'store')->name('contact.store');
 });
 
 Route::controller(UserFeedBackController::class)->group(function () {
@@ -258,6 +260,11 @@ Route::middleware('auth')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::post('/{id}/changeRole', 'changeRole')->name('changeRole');
             Route::delete('/{id}/delete', 'destroy')->name('destroy');
+        });
+
+        //Contacts
+        Route::group(['prefix' => 'contacts', 'controller' => ContactController::class, 'as' => 'contacts.'], function () {
+            Route::get('/', 'index')->name('get');
         });
     });
 });

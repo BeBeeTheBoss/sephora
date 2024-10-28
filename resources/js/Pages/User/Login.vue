@@ -12,9 +12,9 @@
                     <div class="input-group">
                         <label for="password" style="color:#FE919D">Password</label>
                         <input @keyup.enter="submit" v-model="form.password" :type="showPassword ? 'text' : 'password'" name="password" id="password" placeholder="">
-                          <div class="forgot">
+                          <!-- <div class="forgot">
                             <a rel="noopener noreferrer" href="#">Forgot Password ?</a>
-                        </div>
+                        </div> -->
                     </div>
                     <input type="checkbox" v-model="showPassword" id="showPassword">
                     <button @click="submit" type="button" class="sign">Sign in</button>

@@ -24,11 +24,12 @@
 
         <!-- Categories Section -->
         <section class="my-5">
-            <h2 class="text-center">Types of Categories</h2>
+            <h2 class="text-center mt-3 mb-5" style="color:#e91e63;">Types of Categories</h2>
             <div class="row">
-                <div class="col-md-2" v-for="category in categories" :key="category.id">
-                    <div class="card card-body text-center font-semibold" style="color:#e91e63;">{{ category.name }}</div>
-                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-3" v-for="category in categories" :key="category">
+            <Category
+                :name="category.name" :image="category.image" />
+        </div>
             </div>
         </section>
 
@@ -65,9 +66,10 @@
 <script setup>
 import Navbar from './Components/Navbar.vue';
 import Footer from './Components/Footer.vue';
+import Category from './Components/Category.vue';
 import { onMounted } from 'vue';
 import Swiper from 'swiper';
-import { Pagination } from 'swiper/modules'; // Import from the modules
+import { Pagination } from 'swiper/modules'; 
 import 'swiper/css';
 import 'swiper/swiper-bundle.css';
 

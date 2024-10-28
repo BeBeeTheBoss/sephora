@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -13,7 +14,15 @@ class ContactController extends Controller
         return Inertia::render('User/Contact');
     }
 
-    public function create(){
+    public function store(Request $request)
+    {
+
+        Contact::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'message' => $request->message
+        ]);
         return back();
     }
 }

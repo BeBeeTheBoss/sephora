@@ -32,6 +32,12 @@
         </li>
 
         <li class="nav-item">
+          <Link :class="isActive('/admin/contacts')" :href="$route('contacts.get')">
+            <i class="fas fa-users"></i> <h6 class="text-black">Contacts</h6>
+          </Link>
+        </li>
+
+        <li class="nav-item">
           <Link :class="isActive('/admin/payments')" :href="$route('payments.index')">
             <i class="fas fa-users"></i> <h6 class="text-black">Payments</h6>
           </Link>
@@ -48,6 +54,7 @@
             <i class="fas fa-users"></i> <h6 class="text-black">All Users</h6>
           </Link>
         </li>
+
       </ul>
     </div>
   </template>
