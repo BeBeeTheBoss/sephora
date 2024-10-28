@@ -51,6 +51,15 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.carousel-control-prev-icon{
+    margin-left:120px;
+    margin-bottom:5px;
+}
+
+.carousel-control-next-icon{
+    margin-right:25px;
+}
+
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {

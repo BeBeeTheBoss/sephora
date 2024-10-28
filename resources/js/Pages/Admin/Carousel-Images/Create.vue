@@ -32,7 +32,7 @@ import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import Layout from '../Layouts/Layout.vue';
 import { useToast } from 'vue-toastification';
-
+import { post } from '../../Composables/httpMethod';
 
 const form = useForm({
     image : null,
@@ -54,7 +54,7 @@ const submit = () => {
     if(form.image == null){
         toast.warning('The image field is required');
     }
-    form.post(route('carousel_images.store'));
+    post(form,route('carousel_images.store'));
 };
 </script>
 
