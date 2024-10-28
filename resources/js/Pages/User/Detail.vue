@@ -39,7 +39,7 @@
                         <font-awesome-icon icon="fa-regular fa-heart" class="me-2"></font-awesome-icon>
                         Wish List
                     </button>
-                    <Link :href="route('home')" class="btn btn-primary w-100">Back</Link>
+                    <button @click="goBack" class="btn w-100" style="background-color:#fe919d;color:white"><font-awesome-icon icon="fa-solid fa-backward" /> Back</button>
                 </div>
             </div>
         </div>
@@ -60,8 +60,11 @@ const toast = useToast();
 const props = defineProps({
     product: Object
 })
-console.log(props.product);
-let selectedImage = ref(props.product.images[0].image); // Set the default selected image
+
+const goBack = () => {
+    window.history.back();
+}
+let selectedImage = ref(props.product.images[0]?.image); // Set the default selected image
 const page = usePage();
 onMounted(() => {
 if (page.props.flash) {

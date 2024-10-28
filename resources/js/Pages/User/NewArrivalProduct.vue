@@ -3,7 +3,7 @@
     <div class="container py-3">
         <div class="flex justify-center items-center">
             <h3 ref="titleRef" class="section-title mx-auto"></h3>
-            <Link :href="route('home')" class="btn btn-success">Back</Link>
+            <BackButton/>
         </div>
         <div class="row">
             <div class="col-lg-3 col-md-4 mb-3" v-for="(product, index) in all_products" :key="product">
@@ -133,6 +133,7 @@ import { ref, onMounted, onUpdated } from 'vue';
 import Carousel from "./Components/Carousel.vue";
 import Navbar from './Components/Navbar.vue';
 import Product from "./Components/Product.vue";
+import BackButton from './Components/BackButton.vue';
 import { Link, usePage, router } from '@inertiajs/vue3'
 import IconBtn from "./Components/IconBtn.vue";
 import { useToast } from "vue-toastification";

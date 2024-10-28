@@ -95,7 +95,6 @@ class ProductController extends Controller
             ->with(['order_products.product' => function ($query) {
                 $query->select('id', 'category_id');
             }])
-            ->limit(4)
             ->get()
             ->pluck('order_products.*.product.category_id')
             ->flatten()
@@ -107,7 +106,7 @@ class ProductController extends Controller
                     $query->where('user_id', Auth::user()->id);
                 }]);
             })
-            ->with('images')->get();
+            ->with('images')->limit(4)->get();
 
         foreach ($products as $product) {
             foreach ($product->images as $image) {

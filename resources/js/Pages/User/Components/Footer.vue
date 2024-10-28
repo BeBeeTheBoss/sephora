@@ -1,11 +1,11 @@
 <template>
-    <footer class="container footer">
-   <section class="row" style="margin:50px 0px;">
+    <footer class="container-fluid footer px-5">
+   <section class="row" style="margin-top:80px">
       <div class="col-md-3 box flex flex-column">
          <h3 class="font-semibold">quick links</h3>
          <Link :href="$route('home')"><font-awesome-icon icon="fa-solid fa-chevron-right" /> Home</Link>
          <Link :href="$route('about')"><font-awesome-icon icon="fa-solid fa-chevron-right" /> About</Link>
-         <Link :href="$route('contact')"><font-awesome-icon icon="fa-solid fa-chevron-right" /> Contact</Link>
+         <!-- <Link :href="$route('contact')"><font-awesome-icon icon="fa-solid fa-chevron-right" /> Contact</Link> -->
          <Link :href="$route('feedbackPage')"><font-awesome-icon icon="fa-solid fa-chevron-right" /> Feedback</Link>
       </div>
       <div class="col-md-3 box flex flex-column">

@@ -2,7 +2,7 @@
     <div :id="id" class="carousel slide" data-bs-ride="carousel" style="width: 100%">
         <div class="carousel-inner" @click=show>
             <div class="carousel-item" :class="isActive(index)" v-for="(image, index) in images" :key="index">
-                <img class="mx-auto"
+                <img class="mx-auto" style="object-fit:cover;"
                     :src="image.image" alt="" :style="{height:height,width:width}" />
             </div>
         </div>

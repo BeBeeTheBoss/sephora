@@ -117,6 +117,9 @@ Route::post('/destroy-session', function () {
 });
 
 
+//forgot password
+
+
 //home
 Route::controller(HomePageController::class)->group(function () {
     Route::get('/', 'homePage')->name('home');

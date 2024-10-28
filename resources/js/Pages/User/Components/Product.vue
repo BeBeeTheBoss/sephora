@@ -17,7 +17,7 @@
                     style="font-size:12px">{{ discount_price
                     }}</span>
             </div>
-            <Link :href="'/product/detail/' + product_id"><button class="btn btn-success" @click.stop>Detail</button></Link>
+            <Link :href="'/product/detail/' + product_id"><button class="btn btn-secondary" @click.stop>Detail</button></Link>
         </div>
         </div>
     </div>
