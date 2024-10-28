@@ -46,13 +46,14 @@ class ProductController extends Controller
     public function trending()
     {
         $trendingProducts = $this->model->where('view_count', '>', 0)
+            ->where('is_active', 1)
             ->orderBy('view_count', 'desc')->with('category')
             ->when(Auth::user(), function ($query) {
                 $query->withCount(['wish_lists as is_favorite' => function ($query) {
                     $query->where('user_id', Auth::user()->id);
                 }]);
             })
-            ->with('images')->limit(4)->get();
+            ->with('images')->limit(12)->get();
 
         foreach ($trendingProducts as $product) {
             foreach ($product->images as $image) {
@@ -66,13 +67,16 @@ class ProductController extends Controller
 
     public function popular()
     {
-        $popularProducts = $this->model->orderBy('order_count', 'desc')->with('category')
+        $popularProducts = $this->model->orderBy('order_count', 'desc')
+            ->where('is_active', 1)
+
+            ->with('category')
             ->when(Auth::user(), function ($query) {
                 $query->withCount(['wish_lists as is_favorite' => function ($query) {
                     $query->where('user_id', Auth::user()->id);
                 }]);
             })
-            ->with('images')->limit(4)->get();
+            ->with('images')->limit(12)->get();
 
         foreach ($popularProducts as $product) {
             foreach ($product->images as $image) {
@@ -100,13 +104,15 @@ class ProductController extends Controller
             ->flatten()
             ->unique();
 
-        $products = Product::whereIn('category_id', $categoryIds)->with('category')
+        $products = Product::whereIn('category_id', $categoryIds)
+            ->where('is_active', 1)
+            ->with('category')
             ->when(Auth::user(), function ($query) {
                 $query->withCount(['wish_lists as is_favorite' => function ($query) {
                     $query->where('user_id', Auth::user()->id);
                 }]);
             })
-            ->with('images')->limit(4)->get();
+            ->with('images')->limit(12)->get();
 
         foreach ($products as $product) {
             foreach ($product->images as $image) {
@@ -120,14 +126,16 @@ class ProductController extends Controller
     public function new_arrival()
     {
         $lastWeekDate = Carbon::now()->subWeek();
-        $newArrivalProducts = $this->model->whereDate('created_at', '>=', $lastWeekDate)->with('category')->orderBy('created_at', 'desc')
+        $newArrivalProducts = $this->model->whereDate('created_at', '>=', $lastWeekDate)
+            ->where('is_active', 1)
+            ->with('category')->orderBy('created_at', 'desc')
 
             ->when(Auth::user(), function ($query) {
                 $query->withCount(['wish_lists as is_favorite' => function ($query) {
                     $query->where('user_id', Auth::user()->id);
                 }]);
             })
-            ->with('images')->limit(4)->get();
+            ->with('images')->limit(12)->get();
 
         foreach ($newArrivalProducts as $product) {
             foreach ($product->images as $image) {
