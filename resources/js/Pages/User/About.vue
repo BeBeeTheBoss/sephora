@@ -67,13 +67,17 @@
 import Navbar from './Components/Navbar.vue';
 import Footer from './Components/Footer.vue';
 import Category from './Components/Category.vue';
-import { onMounted } from 'vue';
+import { onMounted,onUpdated } from 'vue';
 import Swiper from 'swiper';
 import { Pagination } from 'swiper/modules'; 
 import 'swiper/css';
 import 'swiper/swiper-bundle.css';
+import { useToast } from "vue-toastification";
+import { usePage } from '@inertiajs/vue3'
 
 
+const toast = useToast();
+const page = usePage();
 
 const props = defineProps({
    feedbacks: Array,
@@ -103,6 +107,34 @@ onMounted(() => {
       },
    });
 });
+
+onMounted(() => {
+
+if (page.props.flash) {
+    if (page.props.flash.success) {
+        toast.success(page.props.flash.success);
+        page.props.flash.success = null;
+    } else if (page.props.flash.failed) {
+        toast.error(page.props.flash.failed);
+        page.props.flash.failed = null;
+    }
+}
+})
+
+onUpdated(() => {
+
+if (page.props.flash) {
+    if (page.props.flash.success) {
+        toast.success(page.props.flash.success);
+        page.props.flash.success = null;
+    } else if (page.props.flash.failed) {
+        toast.error(page.props.flash.failed);
+        page.props.flash.failed = null;
+    }
+}
+
+})
+
 </script>
 
 <style scoped>

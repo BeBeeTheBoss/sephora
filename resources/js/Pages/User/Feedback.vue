@@ -27,6 +27,41 @@ import { useForm } from '@inertiajs/vue3';
 import Navbar from './Components/Navbar.vue';
 import Footer from './Components/Footer.vue';
 import { post } from '../Composables/httpMethod.js';
+import { onMounted,onUpdated } from 'vue';
+import { usePage } from '@inertiajs/vue3';
+import { useToast } from "vue-toastification";
+
+
+const toast = useToast();
+const page = usePage();
+
+onMounted(() => {
+
+if (page.props.flash) {
+    if (page.props.flash.success) {
+        toast.success(page.props.flash.success);
+        page.props.flash.success = null;
+    } else if (page.props.flash.failed) {
+        toast.error(page.props.flash.failed);
+        page.props.flash.failed = null;
+    }
+}
+})
+
+onUpdated(() => {
+
+if (page.props.flash) {
+    if (page.props.flash.success) {
+        toast.success(page.props.flash.success);
+        page.props.flash.success = null;
+    } else if (page.props.flash.failed) {
+        toast.error(page.props.flash.failed);
+        page.props.flash.failed = null;
+    }
+}
+
+})
+
 const form = useForm({
     message: '',
     star: 0

@@ -16,7 +16,7 @@ class CartController extends Controller
     {
         if (!Auth::check()) {
             session(['failed' => 'Please login first']);
-            return back();
+            return redirect()->back()->with('failed', 'Please login first');
         }
         $products = $this->model->where('user_id', Auth::user()->id)->with(['product' => function ($query) {
             $query->with('images');

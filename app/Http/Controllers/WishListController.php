@@ -26,7 +26,6 @@ class WishListController extends Controller
         $products = $allWishlistProducts->where('is_active', 1)->values();
 
         $inactiveProducts = $allWishlistProducts->where('is_active', 0)->values();
-
         foreach ($products as $product) {
             foreach ($product->images as $image) {
                 $image->image = asset('storage/images/' . $image->image);
@@ -34,8 +33,6 @@ class WishListController extends Controller
         }
 
         if ($inactiveProducts->isNotEmpty()) {
-            $notificationMessage = "Some items in your wishlist are no longer available.";
-        }else{
             $notificationMessage = "Products are stock";
         }
 

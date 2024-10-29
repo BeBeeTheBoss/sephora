@@ -148,7 +148,7 @@
             <div v-else class="row flex justify-center align-items-center" style="height:90vh">
                 <div class="col-2 text-center">
                     <img src="../../images/nodata.svg" class="">
-                    There's no data in your wishlist.
+                    There's no data in your order page.
                 </div>
             </div>
         </div>

@@ -19,7 +19,7 @@ class OrderController extends Controller
 
         if (!Auth::check()) {
             session(['failed' => 'Please login first']);
-            return back();
+            return redirect()->back()->with('failed', 'Please login first');
         }
 
         $orders = $this->model->where('user_id', Auth::user()->id)->with('payment')->with(['order_products' => function ($query) {
