@@ -83,6 +83,7 @@ class ProductController extends Controller
         $product->update([
             'is_active' => $isActive
         ]);
+
         return back();
     }
 

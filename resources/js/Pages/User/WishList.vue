@@ -126,13 +126,13 @@ const addToCart = (index, id, quantity) => {
     router.post(route('cart.create'), { product_id: id, quantity: quantity });
 }
 
-if ((props.products).length > 0) {
-    toast.warning('Products are back');
-}
-
 
 onMounted(() => {
 
+    if (page.props.notification) {
+        toast.warning(page.props.notification);
+    }
+    
     props.products.forEach(() => {
         dialogArray.value.push(false)
         quantity.value.push(1)

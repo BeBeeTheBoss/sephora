@@ -109,6 +109,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login')->name('login');
     Route::post('/sign-up', 'signUp')->name('signUp');
     Route::post('/logout', 'logout')->name('logout');
+    Route::post('/admin/logout', 'adminLogout')->name('adminLogout');
 });
 
 Route::post('/destroy-session', function () {

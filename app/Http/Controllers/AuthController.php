@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function __construct(protected UserService $userService) {}
+    public function __construct(protected UserService $userService)
+    {
+    }
 
     public function getUsers()
     {
@@ -80,14 +82,20 @@ class AuthController extends Controller
 
     public function logout()
     {
-        if (Auth::user()->role == 'admin') {
-            Auth::logout();
-            session(['success' => 'Logout success']);
-            return redirect()->route('loginPage');
-        }else{
-            Auth::logout();
-            session(['success' => 'Logout success']);
-            return redirect()->route('home');
-        }
+
+        Auth::logout();
+        session(['success' => 'Logout success']);
+        return redirect()->route('home');
+
+
+    }
+
+    public function adminLogout()
+    {
+
+        Auth::logout();
+        session(['success' => 'Logout success']);
+        return redirect()->route('loginPage');
+
     }
 }

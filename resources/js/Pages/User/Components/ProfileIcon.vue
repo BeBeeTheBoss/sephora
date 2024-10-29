@@ -52,8 +52,11 @@ const props = defineProps({
 })
 
 const logout = () => {
-    window.location.reload();
-    router.post(route('logout'));
+    router.post(route('logout'), {}, {
+        onSuccess: () => {
+            router.visit(route('home'));
+        }
+    });
 }
 
 </script>

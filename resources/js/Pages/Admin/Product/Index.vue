@@ -92,16 +92,21 @@ const changeSwitchValue = (is_active, id) => {
     const formForSwitch = useForm({
         id: id,
         is_active: is_active
-    })
+    });
     let options = {
         preserveScroll: true,
         onSuccess: () => {
-            toast.success("Congrats, it's successful!", { autoClose: 6000 })
+            toast.success("Status updated successfully!", { autoClose: 6000 });
+            // Emit a flash message to notify the wishlist page
+            router.visit(route('wishlist.page'), { 
+                preserveState: true, 
+                replace: true,
+                data: { notification: 'Products are back' } 
+            });
         }
-    }
+    };
     formForSwitch.post(route('products.toggle'), options);
 };
-
 
 const searchQuery = ref('');
 

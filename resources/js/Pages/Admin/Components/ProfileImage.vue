@@ -27,7 +27,7 @@ const props = defineProps({
 })
 
 const logout = () => {
-    router.post(route('logout'), {}, {
+    router.post(route('adminLogout'), {}, {
         onSuccess: () => {
             router.visit(route('loginPage'));
         }
