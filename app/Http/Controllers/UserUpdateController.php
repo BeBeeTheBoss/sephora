@@ -6,12 +6,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
+use App\Models\User;
 
 class UserUpdateController extends Controller
 {
     //
     public function index()
     {
+        if (!Auth::check()) {
+            session(['failed' => 'Please login first']);
+            return back();
+        }
         $user = Auth::user();
         return Inertia::render('User/UpdateUserProfile', ['user' => $user]);
     }

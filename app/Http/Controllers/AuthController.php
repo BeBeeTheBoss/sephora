@@ -80,8 +80,14 @@ class AuthController extends Controller
 
     public function logout()
     {
-        Auth::logout();
-        session(['success' => 'Logout success']);
-        return redirect()->route('home');
+        if (Auth::user()->role == 'admin') {
+            Auth::logout();
+            session(['success' => 'Logout success']);
+            return redirect()->route('loginPage');
+        }else{
+            Auth::logout();
+            session(['success' => 'Logout success']);
+            return redirect()->route('home');
+        }
     }
 }

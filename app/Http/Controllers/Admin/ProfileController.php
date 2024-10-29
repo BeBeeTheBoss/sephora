@@ -29,7 +29,8 @@ class ProfileController extends Controller
             'password' => 'nullable',
         ]);
 
-        $email = User::where('email', $request->email)->pluck('email')->first();
+        $email = User::where('email', $request->email)
+        ->where('id', '!=', $user->id)->pluck('email')->first();
         if ($email) {
             session(['failed' => "This email is already taken"]);
             return back();
@@ -37,7 +38,8 @@ class ProfileController extends Controller
 
         $data = $this->formatData($request, $user);
         $user->update($data);
-        return back();
+        session(['success' => 'Update Profile Success']);
+        return redirect()->route('dashboard');
     }
 
     private function formatData($request, $user)
