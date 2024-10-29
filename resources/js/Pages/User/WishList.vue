@@ -4,9 +4,9 @@
             <div class="row mt-3" v-if="products.length != 0">
                 <div class="col-12">
                     <h4 class="fw-bold my-4 text-center">My Wishlists</h4>
-                    <div v-if="notificationMessage" class="notification w-100 p-3">
+                    <!-- <div v-if="notificationMessage" class="notification w-100 p-3">
                         <span class="bg-success w-100 p-3 float-end rounded-md">{{ notificationMessage }}</span>
-                    </div>
+                    </div> -->
                     <div class="container row mt-5">
                         <div class="col-lg-3 col-md-4 mb-3" v-for="product, index in products" :key="product">
                             <Product :name="product.name" :categoryName="product.category.name"
@@ -109,9 +109,9 @@ const page = usePage();
 const toast = useToast();
 const props = defineProps({
     products: Object,
+    inactiveProducts : Object,
     notificationMessage: String,
 })
-
 
 const dialogArray = ref([]);
 
@@ -126,9 +126,12 @@ const addToCart = (index, id, quantity) => {
     router.post(route('cart.create'), { product_id: id, quantity: quantity });
 }
 
+if ((props.products).length > 0) {
+    toast.warning('Products are back');
+}
+
 
 onMounted(() => {
- 
 
     props.products.forEach(() => {
         dialogArray.value.push(false)
