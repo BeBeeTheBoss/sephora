@@ -52,7 +52,7 @@ const props = defineProps({
 })
 
 const logout = () => {
-    // window.location.reload();
+    window.location.reload();
     router.post(route('logout'));
 }
 

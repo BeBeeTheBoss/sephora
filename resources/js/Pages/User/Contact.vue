@@ -37,15 +37,53 @@
 <script setup>
 import Navbar from './Components/Navbar.vue';
 import Footer from './Components/Footer.vue';
+import { onMounted,onUpdated } from 'vue';
 import { route } from "ziggy-js";
 import { useForm } from '@inertiajs/vue3';
 import { post } from '../Composables/httpMethod';
+import { useToast } from "vue-toastification";
+import { usePage } from '@inertiajs/vue3'
+
+
+const toast = useToast();
+const page = usePage();
+
 const form = useForm({
     name : '',
     email : '',
     phone : '',
     message : ''
 })
+
+onMounted(() => {
+
+if (page.props.flash) {
+    if (page.props.flash.success) {
+        toast.success(page.props.flash.success);
+        page.props.flash.success = null;
+    } else if (page.props.flash.failed) {
+        toast.error(page.props.flash.failed);
+        page.props.flash.failed = null;
+    }
+}
+})
+
+onUpdated(() => {
+
+if (page.props.flash) {
+    if (page.props.flash.success) {
+        toast.success(page.props.flash.success);
+        page.props.flash.success = null;
+    } else if (page.props.flash.failed) {
+        toast.error(page.props.flash.failed);
+        page.props.flash.failed = null;
+    }
+}
+
+})
+
+
+
 const submit = () => {
     post(form,route('contact.store'));
     form.name = '',
