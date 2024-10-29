@@ -4,6 +4,9 @@
             <div class="row mt-3" v-if="products.length != 0">
                 <div class="col-12">
                     <h4 class="fw-bold my-4 text-center">My Wishlists</h4>
+                    <div v-if="notificationMessage" class="notification">
+      {{ notificationMessage }}
+    </div>
                     <div class="container row mt-5">
                         <div class="col-lg-3 col-md-4 mb-3" v-for="product, index in products" :key="product">
                             <Product :name="product.name" :categoryName="product.category.name"
@@ -105,7 +108,8 @@ import { useToast } from "vue-toastification";
 const page = usePage();
 const toast = useToast();
 const props = defineProps({
-    products: Object
+    products: Object,
+    notificationMessage: String,
 })
 const dialogArray = ref([]);
 
