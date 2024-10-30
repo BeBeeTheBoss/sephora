@@ -80,7 +80,7 @@ const totalPages = computed(() => Math.ceil(filteredProducts.value.length / item
 const truncatedDescription = (product) => {
     const words = product.description ? product.description.trim().split(/\s+/) : [];
     if (words.length > 5) {
-        return words.slice(0, 4).join(' ') + '...';
+        return words.slice(0, 2).join(' ') + '...';
     } else {
         return product.description;
     }
