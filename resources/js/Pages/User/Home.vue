@@ -64,7 +64,7 @@
         <h3 class="mt-lg-5 mt-md-4 mt-sm-2 mt-2 mb-4 fw-bold mx-auto" id="products" style="color:#FE919D;">Products</h3>
         <div class="text-muted">See all</div>
     </div>
-    <div class="row w-100 px-5 mb-5 d-lg-flex d-md-flex d-sm-none d-none">
+    <div class="row w-100 px-5 mb-5 d-lg-flex d-md-flex d-sm-none d-none mx-auto">
         <div class="col-lg-2 col-md-3 mb-3" v-for="product, index in all_products" :key="product.id">
             <Product @click="openProductModal(index, product.id)" :name="product.name"
                 :categoryName="product.category.name" :image="product.images[0]?.image" :price="product.price"
