@@ -11,7 +11,7 @@
                     class="form-control ms-2 w-25 border border-success">
             </div>
 
-            <div class="row my-3">
+            <div class="row my-3 mx-auto">
                 <div v-for="product in paginatedProducts" :key="product.id" class="col-6 col-md-3 mb-4">
                     <div class="border rounded-lg shadow-sm p-3 bg-white" style="transition: transform 0.2s;">
                         <img class="mx-auto rounded-lg w-100 h-48" :src="product.images[0]?.image"
