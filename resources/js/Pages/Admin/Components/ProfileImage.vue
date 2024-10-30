@@ -1,7 +1,7 @@
 <template>
     <div class="dropdown">
         <div class="dropdown-toggle me-12" type="button" data-bs-toggle="dropdown">
-        <img class="border border-danger"
+        <img class="border border-2 border-primary shadow-md"
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7WjONaOfilXR3bebrfe_zcjl58ZdAzJHYw&s"
             alt="" aria-expanded="false" style="width:50px;height:50px;object-fit:cover;border-radius:50%;">
 
