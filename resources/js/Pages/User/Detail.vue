@@ -20,12 +20,12 @@
                 <p class="whitespace-pre-wrap">{{ product.description }}</p>
 
                 <div v-if="product.discount_price > 0">
-                    <span class="text-muted">{{ product.price }}Ks</span>
-                    <span class="text-danger ms-2" style="text-decoration: line-through;">{{ product.discount_price
+                    <span class="font-semibold" style="color:#fe919d">{{ product.price }}Ks</span>
+                    <span class="ms-2" style="text-decoration: line-through;">{{ product.discount_price
                         }}Ks</span>
                 </div>
                 <div v-else>
-                    <span class="font-semibold" style="color:#fe919d">{{ product.price }}Ks</span>
+                    <span class="font-semibold">{{ product.price }}Ks</span>
                 </div>
 
                 <div class="flex mt-3">

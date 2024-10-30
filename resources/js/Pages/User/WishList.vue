@@ -1,13 +1,11 @@
 <template>
     <layout>
-        <div class="container-fluid">
+        <div class="container">
             <div class="row mt-3" v-if="products.length != 0">
                 <div class="col-12">
                     <h4 class="fw-bold my-4 text-center">My Wishlists</h4>
-                    <!-- <div v-if="notificationMessage" class="notification w-100 p-3">
-                        <span class="bg-success w-100 p-3 float-end rounded-md">{{ notificationMessage }}</span>
-                    </div> -->
-                    <div class="container row mt-5">
+
+                    <div class="row mt-5">
                         <div class="col-lg-3 col-md-4 mb-3" v-for="product, index in products" :key="product">
                             <Product :name="product.name" :categoryName="product.category.name"
                                 :image="product.images[0]?.image" :price="product.price"
@@ -26,7 +24,7 @@
                                             <div>
 
                                                 <Carousel :from="'productCarousel' + product.id"
-                                                    :images="product.images" height="300px" />
+                                                    :images="product.images" height="300px" width="200px" />
                                                 <div class="" style="position:relative;cursor:pointer">
                                                     <div class="card-body px-3 pt-3"
                                                         style="max-height: 150px; overflow-y: auto;">
@@ -36,7 +34,8 @@
                                                                 }} <font-awesome-icon class="ms-2 me-1"
                                                                     icon="fa-solid fa-fire"
                                                                     style="font-size: 13px;color:#fe919d" />{{
-                                                                product.view_count }}</span>
+                                                                        product.view_count
+                                                                }}</span>
                                                             <IconBtn v-if="product.is_favorite"
                                                                 @click="addToWishlist(product.id)"
                                                                 icon="fa-solid fa-heart"
@@ -55,7 +54,7 @@
                                                             <div>
                                                                 {{ product.price }}Ks
                                                                 <!-- <span class="text-decoration-line-through text-muted ms-1"
-                                                        style="font-size:12px">{{ product.discount_price }}</span> -->
+                                        style="font-size:12px">{{ product.discount_price }}</span> -->
                                                                 <span class="ms-2">
                                                                     x {{ quantity[index] }}
                                                                 </span>
@@ -158,10 +157,10 @@ onMounted(() => {
                         console.error('Error sending notification status:', error);
                     });
 
-                }
+            }
 
-            });
-            
+        });
+
     }
 
     props.products.forEach(() => {
