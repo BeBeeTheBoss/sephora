@@ -12,7 +12,7 @@
             </div>
 
             <div class="row my-3">
-                <div v-for="product in paginatedProducts" :key="product.id" class="col-6 col-md-4 mb-4">
+                <div v-for="product in paginatedProducts" :key="product.id" class="col-6 col-md-3 mb-4">
                     <div class="border rounded-lg shadow-sm p-3 bg-white" style="transition: transform 0.2s;">
                         <img class="mx-auto rounded-lg w-100 h-48" :src="product.images[0]?.image"
                             style="object-fit: cover;" />
