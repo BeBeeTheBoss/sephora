@@ -5,15 +5,14 @@
             style="border: 1px solid #ff006e">
             + Create New
         </button></Link>
-        <div class="row">
+        <div class="row container mx-auto">
             <div class="mb-3">
-                <!-- <font-awesome-icon icon="fa-solid fa-magnifying-glass" class="mt-2 flex" /> -->
                 <input type="text" placeholder="Search" v-model="searchQuery"
                     class="form-control ms-2 w-25 border border-success">
             </div>
 
             <div class="row my-3">
-                <div v-for="product in paginatedProducts" :key="product.id" class="col-6 col-md-3 mb-4">
+                <div v-for="product in paginatedProducts" :key="product.id" class="col-6 col-md-4 mb-4">
                     <div class="border rounded-lg shadow-sm p-3 bg-white" style="transition: transform 0.2s;">
                         <img class="mx-auto rounded-lg w-100 h-48" :src="product.images[0]?.image"
                             style="object-fit: cover;" />
