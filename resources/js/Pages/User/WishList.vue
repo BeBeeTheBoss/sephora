@@ -104,7 +104,7 @@ import { ref, onMounted } from 'vue'
 import { usePage,router } from '@inertiajs/vue3';
 import { route } from 'ziggy-js';
 import { useToast } from "vue-toastification";
-
+import axios from 'axios';
 const page = usePage();
 const toast = useToast();
 const props = defineProps({
@@ -136,7 +136,20 @@ onMounted(() => {
           if (product.userWishList?.is_notified === 1) {
             isNoti.value = true;
             toast.warning(`Product ${product.name} is back!`);
-          }
+
+            setTimeout(() => {
+                axios.post('/noti-off', {
+                    user_id: product.user_id,
+                    product_id: product.id,
+                })
+                .then(response => {
+                    console.log('Notification status sent:', response.data);
+                })
+                .catch(error => {
+                    console.error('Error sending notification status:', error);
+                });
+            }, 3000); // Adjust the time as needed
+            }
         });
     }
 

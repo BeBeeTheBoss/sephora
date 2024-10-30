@@ -45,6 +45,7 @@ class WishListController extends Controller
 
             return $product;
         });
+        
         return Inertia::render('User/WishList', [
             'products' => $products,
         ]);

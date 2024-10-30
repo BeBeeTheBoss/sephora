@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\WishListController;
 use App\Http\Controllers\HubSpotWebhookController;
 
 /*
@@ -36,6 +37,7 @@ Route::group(['prefix' => 'products', 'controller' => ProductController::class],
 });
 
 
-//CRM 
-
-Route::post('/hubspot/webhook', [HubSpotWebhookController::class, 'handleWebhook']);
+//Noti
+Route::controller(WishListController::class)->group(function(){
+    Route::post('/noti-off', 'notiOff');
+});
