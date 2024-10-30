@@ -38,6 +38,4 @@ Route::group(['prefix' => 'products', 'controller' => ProductController::class],
 
 
 //Noti
-Route::controller(WishListController::class)->group(function(){
-    Route::post('/noti-off', 'notiOff');
-});
+Route::post('/noti-off', [WishListController::class, 'notiOff']);

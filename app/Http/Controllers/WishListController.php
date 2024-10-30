@@ -19,33 +19,30 @@ class WishListController extends Controller
             session(['failed' => 'Please login first']);
             return redirect()->back();
         }
-
         $userId = Auth::id();
 
-        // Get the IDs of all wishlist products for this user
-        $wishListProductIds = $this->model->where('user_id', $userId)->pluck('product_id')->toArray();
+        $wishListItems = $this->model
+            ->where('user_id', $userId)
+            ->get();
 
-        // Fetch all active wishlist products along with their categories and images
+        $wishListProductIds = $wishListItems->pluck('product_id')->toArray();
+
         $allWishlistProducts = Product::whereIn('id', $wishListProductIds)
             ->where('is_active', 1)
             ->with(['category', 'images'])
             ->get();
 
-        // Attach image URLs and wishlist-specific information
-        $products = $allWishlistProducts->map(function ($product) use ($userId) {
+        $products = $allWishlistProducts->map(function ($product) use ($userId, $wishListItems) {
             $product->images->each(function ($image) {
                 $image->image = asset('storage/images/' . $image->image);
             });
 
-            // Fetch user-specific wishlist information for each product
-            $product->userWishList = $this->model
-                ->where('user_id', $userId)
-                ->where('product_id', $product->id)
-                ->first(['is_notified']);
+            $product->userWishList = $wishListItems->firstWhere('product_id', $product->id);
 
             return $product;
         });
-        
+
+
         return Inertia::render('User/WishList', [
             'products' => $products,
         ]);
