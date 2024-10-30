@@ -109,9 +109,11 @@ const page = usePage();
 const toast = useToast();
 const props = defineProps({
     products: Object,
-    inactiveProducts : Object,
-    notificationMessage: String,
+    userWishList : Object
 })
+
+console.log(props.products);
+const isNoti = ref(false);
 
 const dialogArray = ref([]);
 
@@ -129,10 +131,15 @@ const addToCart = (index, id, quantity) => {
 
 onMounted(() => {
 
-    if (page.props.notification) {
-        toast.warning(page.props.notification);
+    if (props.products && props.products.length > 0) {
+        props.products.forEach((product) => {
+          if (product.userWishList?.is_notified === 1) {
+            isNoti.value = true;
+            toast.warning(`Product ${product.name} is back!`);
+          }
+        });
     }
-    
+
     props.products.forEach(() => {
         dialogArray.value.push(false)
         quantity.value.push(1)

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Inertia\Inertia;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\WishList;
 use Illuminate\Http\Request;
 use App\Services\ProductService;
 use App\Http\Controllers\Controller;
@@ -84,6 +85,13 @@ class ProductController extends Controller
             'is_active' => $isActive
         ]);
 
+        if ($product->is_active == 1) {
+            $wishlists = WishList::where('product_id', $product->id)->get();
+            foreach ($wishlists as $wishList) {
+                $wishList->is_notified = 1;
+                $wishList->save();
+            }
+        }
         return back();
     }
 

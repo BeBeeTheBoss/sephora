@@ -54,10 +54,10 @@ const props = defineProps({
 const logout = () => {
     router.post(route('logout'), {}, {
         onSuccess: () => {
-            router.visit(route('home'));
+            window.location.reload();  // Refresh the page on successful logout
         }
     });
-}
+};
 
 </script>
 

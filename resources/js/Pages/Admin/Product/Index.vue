@@ -97,12 +97,6 @@ const changeSwitchValue = (is_active, id) => {
         preserveScroll: true,
         onSuccess: () => {
             toast.success("Status updated successfully!", { autoClose: 6000 });
-            // Emit a flash message to notify the wishlist page
-            router.visit(route('wishlist.page'), { 
-                preserveState: true, 
-                replace: true,
-                data: { notification: 'Products are back' } 
-            });
         }
     };
     formForSwitch.post(route('products.toggle'), options);
