@@ -91,6 +91,12 @@ const submit = () => {
         toast.warning('All fields are required');
         return;
     }
+
+    if(!form.email.includes('@gmail.com')){
+        toast.warning('Invalid email');
+        return;
+    }
+
         post(form, route('contact.store'));
         form.name = '',
             form.email = '',

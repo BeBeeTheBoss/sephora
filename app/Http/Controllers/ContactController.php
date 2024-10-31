@@ -30,6 +30,11 @@ class ContactController extends Controller
             'message' => 'required'
         ]);
 
+        if (!preg_match('/^\+?[0-9]{10,15}$/', $request->phone)) {
+            session(['failed' => "Invalid phone number format"]);
+            return back()->withErrors(['phone' => 'Invalid phone number format.']);
+        }
+
         Contact::create([
             'name' => $request->name,
             'email' => $request->email,
