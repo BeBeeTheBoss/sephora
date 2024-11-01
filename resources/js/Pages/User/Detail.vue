@@ -25,7 +25,7 @@
                         }}Ks</span>
                 </div>
                 <div v-else>
-                    <span class="font-semibold">{{ product.price }}Ks</span>
+                    <span class="font-semibold" style="color:#fe919d">{{ product.price }}Ks</span>
                 </div>
 
                 <div class="flex mt-3">
