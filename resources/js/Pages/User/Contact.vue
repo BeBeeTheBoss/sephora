@@ -18,7 +18,7 @@
                                 required maxlength="50" class="box">
                         </div>
                         <div class="mb-3">
-                            <input type="number" v-model="form.phone" name="phone" min="0" max="9999999999"
+                            <input type="text" v-model="form.phone" name="phone" min="0" max="9999999999"
                                 placeholder="Enter your number" required
                                 onkeypress="if(this.value.length == 11) return false;" class="box">
                         </div>
@@ -92,17 +92,16 @@ const submit = () => {
         return;
     }
 
-    if(!form.email.includes('@gmail.com')){
+    if (!form.email.includes('@gmail.com')) {
         toast.warning('Invalid email');
         return;
     }
 
-        post(form, route('contact.store'));
-        form.name = '',
-            form.email = '',
-            form.phone = '',
-            form.message = ''
-    
+    form.post(route('contact.store'));
+    form.name = '',
+    form.email = '',
+    form.phone = '',
+    form.message = ''
 }
 
 
