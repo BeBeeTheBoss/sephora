@@ -85,8 +85,9 @@ const form = useForm({
 })
 
 const updateProfile = () => {
-    if(form.email === ''){
-        toast.warning('The email field is required');
+    if(form.email == '' || form.password == '' || confirmPassword.value == ''){
+        toast.warning('All fields are required');
+        return;
     }
 
     if(!form.email.includes('@gmail.com')){
@@ -97,7 +98,7 @@ const updateProfile = () => {
     if (form.password !== confirmPassword.value) {
         toast.warning("Password and Confirm Password do not match.");
     } else {
-        update(form, route("profile.update", props.user.id));
+        form.post(route("profile.update", props.user.id));
 
         form.password = '';
         confirmPassword.value = '';

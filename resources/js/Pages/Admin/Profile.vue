@@ -110,8 +110,9 @@ if (page.props.flash) {
 
 
 const updateProfile = () => {
-    if(form.email === ''){
-        toast.warning('The email field is required');
+    if(form.name == '' || form.email == '' || form.password == '' || confirmPassword.value == ''){
+        toast.warning('All fields are required');
+        return;
     }
 
     if(!form.email.includes('@gmail.com')){
@@ -129,7 +130,6 @@ const updateProfile = () => {
         toast.warning("Password and Confirm Password do not match.");
     } else {
         form.post(route("updateProfile", props.admin.id));
-        form.password = '';
     }
 };
 
