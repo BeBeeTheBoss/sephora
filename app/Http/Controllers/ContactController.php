@@ -36,7 +36,9 @@ class ContactController extends Controller
             'phone' => $request->phone,
             'message' => $request->message
         ]);
+
         session(['success' => 'Message Sent Successfully']);
+
         return back();
     }
 }

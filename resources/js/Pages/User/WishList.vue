@@ -36,12 +36,12 @@
                                                                     style="font-size: 13px;color:#fe919d" />{{
                                                                         product.view_count
                                                                 }}</span>
-                                                            <IconBtn v-if="product.is_favorite"
+                                                            <!-- <IconBtn v-if="product.is_favorite"
                                                                 @click="addToWishlist(product.id)"
                                                                 icon="fa-solid fa-heart"
-                                                                style="background-color:rgba(255, 255, 255, 0.8);color:#fe919d" />
-                                                            <IconBtn v-else @click="addToWishlist(product.id)"
-                                                                icon="fa-regular fa-heart"
+                                                                style="background-color:rgba(255, 255, 255, 0.8);color:#fe919d" /> -->
+                                                            <IconBtn @click="addToWishlist(product.id)"
+                                                                icon="fa-solide fa-heart"
                                                                 style="background-color:rgba(255, 255, 255, 0.8);color:#fe919d" />
                                                         </div>
                                                         <h5 class="card-title fw-bold">{{ product.name }}</h5>

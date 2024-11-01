@@ -33,8 +33,8 @@ class UserUpdateController extends Controller
         $data = $this->formatData($request, $user);
         $user->update($data);
         session(['success' => 'Update Successfully']);
-
         return redirect()->route('home');
+
     }
 
     private function formatData($request, $user)
